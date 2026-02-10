@@ -19,8 +19,12 @@ If you're having trouble pushing code to a repository, please refer to our [Team
 
 ## Documentation
 
-- [Team Setup Guide](TEAM_SETUP.md) - Instructions for setting up repositories and team access
+- [Quick Fix Guide](QUICK_FIX.md) - Fast solution for the most common issue (can't push to repo)
+- [Team Setup Guide](TEAM_SETUP.md) - Complete instructions for setting up repositories and team access
+- [Troubleshooting Flowchart](TROUBLESHOOTING.md) - Visual guide to diagnose and fix access issues
 - [Contributing Guide](CONTRIBUTING.md) - Guidelines for contributing to team projects
+- [Admin Guide](ADMIN_GUIDE.md) - For organization administrators
+- [Admin Checklist](ADMIN_CHECKLIST.md) - Step-by-step troubleshooting checklist
 
 ## Getting Help
 
