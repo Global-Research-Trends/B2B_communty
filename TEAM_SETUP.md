@@ -150,7 +150,7 @@ If you're still having issues:
 1. Verify you're a member of the team in the organization
 2. Verify the team has write access to the repository
 3. Check with your organization admin
-4. Open an issue in this B2B_communty repository with details about the error
+4. Open an issue in this B2B_community repository with details about the error
 
 ---
 

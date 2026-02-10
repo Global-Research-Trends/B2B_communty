@@ -26,7 +26,7 @@ Paste the exact error message here
 
 ## Steps You've Tried
 
-- [ ] I've read the [Team Setup Guide](../TEAM_SETUP.md)
+- [ ] I've read the [Team Setup Guide](../../TEAM_SETUP.md)
 - [ ] I verified I'm a member of the team
 - [ ] I checked if the repository is under the organization (not personal account)
 - [ ] I checked if my team has write access to the repository
