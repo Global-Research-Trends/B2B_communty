@@ -3,5 +3,7 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "include": ["C:\\Users\\Maisum\\Documents\\GitHub\\B2B_communty\\B2B\\src\\pages\\Home.css"]
+  
 }

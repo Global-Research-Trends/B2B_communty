@@ -1,0 +1,31 @@
+/* Coolors Exported Palette - https://coolors.co/000000-fffffc-d80032-6e8387-646568 */
+
+- CSV
+
+000000,fffffc,d80032,6e8387,646568
+
+- With #
+
+#000000, #fffffc, #d80032, #6e8387, #646568
+
+- Array
+
+["000000","fffffc","d80032","6e8387","646568"]
+
+- Object
+
+{"Black":"000000","Porcelain":"fffffc","Classic Crimson":"d80032","Slate Grey":"6e8387","Dim Grey":"646568"}
+
+- Extended Array
+
+[{"name":"Black","hex":"000000","rgb":[0,0,0],"cmyk":[0,0,0,100],"hsb":[0,0,0],"hsl":[0,0,0],"lab":[0,0,0]},{"name":"Porcelain","hex":"fffffc","rgb":[255,255,252],"cmyk":[0,0,1,0],"hsb":[60,1,100],"hsl":[60,100,99],"lab":[100,-1,1]},{"name":"Classic Crimson","hex":"d80032","rgb":[216,0,50],"cmyk":[0,100,77,15],"hsb":[346,100,85],"hsl":[346,100,42],"lab":[45,72,37]},{"name":"Slate Grey","hex":"6e8387","rgb":[110,131,135],"cmyk":[19,3,0,47],"hsb":[190,19,53],"hsl":[190,10,48],"lab":[53,-7,-5]},{"name":"Dim Grey","hex":"646568","rgb":[100,101,104],"cmyk":[4,3,0,59],"hsb":[225,4,41],"hsl":[225,2,40],"lab":[43,0,-2]}]
+
+- XML
+
+<palette>
+  <color name="Black" hex="000000" r="0" g="0" b="0" />
+  <color name="Porcelain" hex="fffffc" r="255" g="255" b="252" />
+  <color name="Classic Crimson" hex="d80032" r="216" g="0" b="50" />
+  <color name="Slate Grey" hex="6e8387" r="110" g="131" b="135" />
+  <color name="Dim Grey" hex="646568" r="100" g="101" b="104" />
+</palette>
