@@ -733,6 +733,228 @@ section {
 }
 
 /* ========================================
+   VALUE PROPOSITION SECTION
+======================================== */
+.value-prop-section {
+  background: linear-gradient(135deg, #d80032 0%, #b50028 100%);
+  padding: 100px 4%;
+  position: relative;
+  overflow: hidden;
+}
+
+.value-prop-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 252, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(0, 0, 0, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.value-prop-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.value-prop-card {
+  background: var(--porcelain);
+  border-radius: 20px;
+  padding: 50px 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-prop-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+.value-prop-primary {
+  grid-row: 1 / 3;
+}
+
+.value-prop-secondary {
+  background: linear-gradient(135deg, #646568 0%, #6e8387 100%);
+  color: var(--porcelain);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 30px;
+}
+
+.value-prop-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #d80032, #b50028);
+  color: var(--porcelain);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.value-prop-title {
+  font-size: 2.8rem;
+  color: var(--pure-black);
+  font-weight: 900;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.value-prop-description {
+  font-size: 1.15rem;
+  color: var(--dim-grey);
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.value-prop-features {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.value-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.feature-icon-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--classic-crimson);
+  color: var(--porcelain);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(216, 0, 50, 0.3);
+}
+
+.feature-content h4 {
+  font-size: 1.15rem;
+  color: var(--pure-black);
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.feature-content p {
+  font-size: 0.95rem;
+  color: var(--dim-grey);
+  line-height: 1.5;
+}
+
+.value-prop-btn {
+  background: var(--classic-crimson);
+  color: var(--porcelain);
+  border: none;
+  padding: 16px 40px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(216, 0, 50, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.value-prop-btn:hover {
+  background: #b50028;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(216, 0, 50, 0.5);
+}
+
+.value-prop-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(255, 255, 252, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+}
+
+.value-prop-icon svg {
+  width: 36px;
+  height: 36px;
+  color: var(--porcelain);
+}
+
+.value-prop-secondary:hover .value-prop-icon {
+  background: rgba(255, 255, 252, 0.25);
+  transform: scale(1.1);
+}
+
+.value-secondary-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--porcelain);
+}
+
+.value-secondary-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+/* Responsive for Value Prop Section */
+@media (max-width: 1200px) {
+  .value-prop-container {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  
+  .value-prop-primary {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .value-prop-section {
+    padding: 80px 4%;
+  }
+  
+  .value-prop-card {
+    padding: 40px 30px;
+  }
+  
+  .value-prop-title {
+    font-size: 2.2rem;
+  }
+  
+  .value-prop-description {
+    font-size: 1.05rem;
+  }
+  
+  .value-prop-features {
+    gap: 20px;
+  }
+}
+
+/* ========================================
    CTA SECTION
 ======================================== */
 .cta-section {

@@ -322,6 +322,81 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Value Proposition Section */}
+      <section 
+        id="value-prop" 
+        ref={(el) => { sectionRefs.current['value-prop'] = el; }}
+        className={`value-prop-section ${isVisible['value-prop'] ? 'fade-in' : ''}`}
+      >
+        <div className="value-prop-container">
+          <div className="value-prop-card value-prop-primary">
+            <div className="value-prop-badge">For Businesses & Institutions</div>
+            <h2 className="value-prop-title">We Can Help For You</h2>
+            <p className="value-prop-description">
+              Need expert insights to conduct research, guide product development, or survey design to gain critical business intelligence.
+            </p>
+            <div className="value-prop-features">
+              <div className="value-feature-item">
+                <div className="feature-icon-circle">✓</div>
+                <div className="feature-content">
+                  <h4>End-to-End Survey Solutions</h4>
+                  <p>We design, distribute, and analyze for you</p>
+                </div>
+              </div>
+              <div className="value-feature-item">
+                <div className="feature-icon-circle">✓</div>
+                <div className="feature-content">
+                  <h4>Access to Verified Executives</h4>
+                  <p>Reach decision-makers in your target industry instantly</p>
+                </div>
+              </div>
+              <div className="value-feature-item">
+                <div className="feature-icon-circle">✓</div>
+                <div className="feature-content">
+                  <h4>Fast Turnaround</h4>
+                  <p>Get actionable insights within days, not weeks</p>
+                </div>
+              </div>
+              <div className="value-feature-item">
+                <div className="feature-icon-circle">✓</div>
+                <div className="feature-content">
+                  <h4>Comprehensive Reports</h4>
+                  <p>Receive detailed analysis with visualizations and recommendations</p>
+                </div>
+              </div>
+            </div>
+            <button className="value-prop-btn">Request Survey Services</button>
+          </div>
+          <div className="value-prop-card value-prop-secondary">
+            <div className="value-prop-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 3v18h18"></path>
+                <path d="M18 17V9"></path>
+                <path d="M13 17V5"></path>
+                <path d="M8 17v-3"></path>
+              </svg>
+            </div>
+            <h3 className="value-secondary-title">Data Analysis</h3>
+            <p className="value-secondary-text">
+              In-depth analysis with charts, trends, and insights
+            </p>
+          </div>
+          <div className="value-prop-card value-prop-secondary">
+            <div className="value-prop-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <h3 className="value-secondary-title">Executive Reports</h3>
+            <p className="value-secondary-text">
+              Presentation-ready deliverables for stakeholders
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA Section */}
       <section className="cta-section">
         <div className="cta-content">
