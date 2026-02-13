@@ -89,7 +89,7 @@ const Home: React.FC = () => {
           <ul className="nav-menu">
             <li><a href="#about">About</a></li>
             <li><a href="#features">Features</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
@@ -185,10 +185,7 @@ const Home: React.FC = () => {
         className={`benefits-section ${isVisible['benefits'] ? 'fade-in' : ''}`}
       >
         <div className="section-header">
-          <h2 className="section-title">Why Join Our Community</h2>
-          <p className="section-subtitle">
-            Unlock exclusive benefits designed to accelerate your business growth and expand your professional network
-          </p>
+          <h2 className="section-title">Why Join Our Community?</h2>
         </div>
         <div className="benefits-grid">
           <div className="benefit-card">
@@ -235,53 +232,74 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* About Section */}
       <section 
-        id="testimonials" 
-        ref={(el) => { sectionRefs.current['testimonials'] = el; }}
-        className={`testimonials-section ${isVisible['testimonials'] ? 'fade-in' : ''}`}
+        id="about" 
+        ref={(el) => { sectionRefs.current['about'] = el; }}
+        className={`about-section ${isVisible['about'] ? 'fade-in' : ''}`}
       >
-        <h2 className="section-title">What Our Members Say</h2>
-        <div className="testimonials-container">
-          <div className="testimonial-card">
-            <div className="stars">★★★★★</div>
-            <p className="testimonial-text">
-              "Joining this community was a game-changer for our business. The quality of connections and the depth of insights shared here are unparalleled. We've closed three major deals through relationships built in this network."
-            </p>
-            <div className="testimonial-author">
-              <div className="author-avatar">SC</div>
-              <div className="author-info">
-                <h4>Sarah Chen</h4>
-                <p>CEO, TechVentures Inc.</p>
-                <p className="company-tag">SaaS • $50M ARR</p>
-              </div>
-            </div>
+        <div className="about-container">
+          <div className="section-header">
+            <h2 className="section-title">About B2B Community</h2>
+            <p className="section-subtitle">Connecting business leaders with strategic opportunities</p>
           </div>
-          <div className="testimonial-card featured">
-            <div className="stars">★★★★★</div>
-            <p className="testimonial-text">
-              "The expert-led workshops alone are worth the membership. I've implemented strategies that increased our operational efficiency by 40%. This community genuinely cares about member success."
-            </p>
-            <div className="testimonial-author">
-              <div className="author-avatar">MR</div>
-              <div className="author-info">
-                <h4>Michael Rodriguez</h4>
-                <p>COO, Global Logistics Solutions</p>
-                <p className="company-tag">Supply Chain • 2000+ Employees</p>
-              </div>
+          
+          <div className="about-content">
+            <div className="about-text">
+              <p className="about-paragraph">
+                B2B Community is a premier networking platform that bridges the gap between strategic decision-makers and organizations seeking expert perspectives. We've built a curated community where senior executives can contribute their knowledge to shape industry trends and business strategies.
+              </p>
+              <p className="about-paragraph">
+                Our platform carefully matches you with opportunities that respect your time and leverage your specific areas of expertise. Unlike traditional networking platforms, we focus on quality over quantity, ensuring every connection you make is relevant to your professional background.
+              </p>
             </div>
-          </div>
-          <div className="testimonial-card">
-            <div className="stars">★★★★★</div>
-            <p className="testimonial-text">
-              "As a newcomer to the B2B space, this community provided the mentorship and connections I desperately needed. The verification process ensures you're networking with serious professionals."
-            </p>
-            <div className="testimonial-author">
-              <div className="author-avatar">ET</div>
-              <div className="author-info">
-                <h4>Emma Thompson</h4>
-                <p>Founder, Digital Commerce Partners</p>
-                <p className="company-tag">E-commerce • Series A</p>
+            <div className="about-card">
+              <h3 className="about-card-title">Why Leaders Choose Us</h3>
+              <div className="about-features">
+                <div className="about-feature-item">
+                  <div className="feature-check">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <div className="feature-text">
+                    <h4>Respected Time</h4>
+                    <p>Opportunities are concise and targeted to your expertise</p>
+                  </div>
+                </div>
+                <div className="about-feature-item">
+                  <div className="feature-check">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <div className="feature-text">
+                    <h4>Meaningful Impact</h4>
+                    <p>Your insights directly influence business strategy</p>
+                  </div>
+                </div>
+                <div className="about-feature-item">
+                  <div className="feature-check">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <div className="feature-text">
+                    <h4>Privacy First</h4>
+                    <p>Your data is protected and never sold to third parties</p>
+                  </div>
+                </div>
+                <div className="about-feature-item">
+                  <div className="feature-check">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <div className="feature-text">
+                    <h4>Valuable Network</h4>
+                    <p>Connect with peers across industries</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -294,30 +312,31 @@ const Home: React.FC = () => {
         ref={(el) => { sectionRefs.current['how-it-works'] = el; }}
         className={`how-it-works-section ${isVisible['how-it-works'] ? 'fade-in' : ''}`}
       >
-        <h2 className="section-title">Your Journey Starts Here</h2>
+        <div className="section-header">
+          <h2 className="section-title">How It Works</h2>
+          <p className="section-subtitle">A simple 3-step path to join, get matched, and start collaborating with the right people.</p>
+        </div>
         <div className="steps-container">
           <div className="step-item">
-            <div className="step-number">1</div>
-            <h3>Apply for Membership</h3>
-            <p>Submit your application with your business details and professional background.</p>
+            <div className="step-number">
+              <span>1</span>
+            </div>
+            <h3>Create Your Profile</h3>
+            <p>Share your professional background, expertise areas, and industry experience. Our AI matches you with relevant opportunities.</p>
           </div>
-          <div className="step-connector"></div>
           <div className="step-item">
-            <div className="step-number">2</div>
-            <h3>Verification Process</h3>
-            <p>Our team reviews your application to ensure community quality and alignment.</p>
+            <div className="step-number">
+              <span>2</span>
+            </div>
+            <h3>Get Matched</h3>
+            <p>Receive personalized invitations and networking opportunities based on your unique expertise. Only relevant connections, no spam.</p>
           </div>
-          <div className="step-connector"></div>
           <div className="step-item">
-            <div className="step-number">3</div>
-            <h3>Get Approved</h3>
-            <p>Receive your welcome package and access to our exclusive member portal.</p>
-          </div>
-          <div className="step-connector"></div>
-          <div className="step-item">
-            <div className="step-number">4</div>
-            <h3>Start Growing</h3>
-            <p>Connect with peers, attend events, and unlock your business potential.</p>
+            <div className="step-number">
+              <span>3</span>
+            </div>
+            <h3>Grow & Impact</h3>
+            <p>Connect with peers, attend exclusive events, and expand your network. Your insights help shape industry strategies.</p>
           </div>
         </div>
       </section>
@@ -368,31 +387,50 @@ const Home: React.FC = () => {
             <button className="value-prop-btn">Request Survey Services</button>
           </div>
           <div className="value-prop-card value-prop-secondary">
-            <div className="value-prop-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M3 3v18h18"></path>
-                <path d="M18 17V9"></path>
-                <path d="M13 17V5"></path>
-                <path d="M8 17v-3"></path>
-              </svg>
+            <h3 className="value-secondary-title">Our Survey Services Include</h3>
+            <div className="value-secondary-list">
+              <div className="value-secondary-item">
+                <div className="value-prop-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                  </svg>
+                </div>
+                <h4>Survey Design</h4>
+                <p className="value-secondary-text">Custom questionnaires tailored to your research objectives</p>
+              </div>
+              <div className="value-secondary-item">
+                <div className="value-prop-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                  </svg>
+                </div>
+                <h4>Respondent Recruiting</h4>
+                <p className="value-secondary-text">Target specific industries, roles, and demographics</p>
+              </div>
+              <div className="value-secondary-item">
+                <div className="value-prop-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 3v18h18"></path>
+                    <path d="M18 17V9"></path>
+                    <path d="M13 17V5"></path>
+                    <path d="M8 17v-3"></path>
+                  </svg>
+                </div>
+                <h4>Data Analysis</h4>
+                <p className="value-secondary-text">In-depth analysis with charts, trends, and insights</p>
+              </div>
+              <div className="value-secondary-item">
+                <div className="value-prop-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                  </svg>
+                </div>
+                <h4>Executive Reports</h4>
+                <p className="value-secondary-text">Presentation-ready deliverables for stakeholders</p>
+              </div>
             </div>
-            <h3 className="value-secondary-title">Data Analysis</h3>
-            <p className="value-secondary-text">
-              In-depth analysis with charts, trends, and insights
-            </p>
-          </div>
-          <div className="value-prop-card value-prop-secondary">
-            <div className="value-prop-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                <line x1="8" y1="21" x2="16" y2="21"></line>
-                <line x1="12" y1="17" x2="12" y2="21"></line>
-              </svg>
-            </div>
-            <h3 className="value-secondary-title">Executive Reports</h3>
-            <p className="value-secondary-text">
-              Presentation-ready deliverables for stakeholders
-            </p>
           </div>
         </div>
       </section>
@@ -427,7 +465,7 @@ const Home: React.FC = () => {
             <ul>
               <li><a href="#about">About Us</a></li>
               <li><a href="#features">Features</a></li>
-              <li><a href="#testimonials">Testimonials</a></li>
+              <li><a href="#how-it-works">How It Works</a></li>
               <li><a href="#pricing">Pricing</a></li>
               <li><a href="#">Blog</a></li>
             </ul>

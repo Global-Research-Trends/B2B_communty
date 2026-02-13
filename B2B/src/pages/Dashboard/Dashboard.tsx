@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import './Dashboard.css';
+import ProfilePage from '../profile/profile';
 
 const surveys = [
   {
@@ -57,6 +58,7 @@ const Dashboard = () => {
   });
   const [showWithdrawOptions, setShowWithdrawOptions] = useState(false);
   const [withdrawMethod, setWithdrawMethod] = useState('cash');
+  const [activeView, setActiveView] = useState('Dashboard');
 
   const profileCompletion = 65;
   const engagementScore = 78;
@@ -88,12 +90,26 @@ const Dashboard = () => {
           <h3 className="sidebar-title">Workspace</h3>
         </div>
 
+        {/* Profile Avatar in Sidebar */}
+        <div className="sidebar-profile-avatar" onClick={() => setActiveView('Profile')}>
+          <img
+            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+            alt="Alex Morgan"
+            className="sidebar-avatar-img"
+          />
+          <div className="sidebar-avatar-info">
+            <span className="sidebar-avatar-name">Alex Morgan</span>
+            <span className="sidebar-avatar-role">Marketing Director</span>
+          </div>
+        </div>
+
         <nav className="sidebar-nav" aria-label="Dashboard sections">
           {navigation.map((item) => (
             <button
               key={item}
-              className={`sidebar-link ${item === 'Dashboard' ? 'active' : ''}`}
+              className={`sidebar-link ${item === activeView ? 'active' : ''}`}
               type="button"
+              onClick={() => setActiveView(item)}
             >
               {item}
             </button>
@@ -101,6 +117,11 @@ const Dashboard = () => {
         </nav>
       </aside>
 
+      {activeView === 'Profile' ? (
+        <section className="dashboard">
+          <ProfilePage onBack={() => setActiveView('Dashboard')} />
+        </section>
+      ) : (
       <section className="dashboard">
         <section className="dashboard-hero">
           <div>
@@ -270,6 +291,7 @@ const Dashboard = () => {
           </div>
         </section>
       </section>
+      )}
     </main>
   );
 };

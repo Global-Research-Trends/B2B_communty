@@ -64,6 +64,58 @@ body {
   border-bottom: 1px solid rgba(110, 131, 135, 0.35);
 }
 
+/* Sidebar Profile Avatar */
+.sidebar-profile-avatar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  margin-bottom: 0.85rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: 1px solid rgba(110, 131, 135, 0.2);
+  background: rgba(110, 131, 135, 0.05);
+}
+
+.sidebar-profile-avatar:hover {
+  background: rgba(216, 0, 50, 0.06);
+  border-color: rgba(216, 0, 50, 0.25);
+  transform: translateX(2px);
+}
+
+.sidebar-avatar-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(216, 0, 50, 0.3);
+  flex-shrink: 0;
+}
+
+.sidebar-avatar-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sidebar-avatar-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-avatar-role {
+  font-size: 0.75rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .sidebar-kicker {
   margin: 0;
   font-size: 0.78rem;
@@ -734,8 +786,8 @@ body {
   }
 }
 
-/* Guard against global CSS bleed from other pages */
-.dashboard-shell section {
+/* Guard against global CSS bleed from other pages — scoped to dashboard view only */
+.dashboard-shell > section.dashboard > section {
   padding: 0 !important;
   max-width: none !important;
   scroll-margin-top: 0 !important;
