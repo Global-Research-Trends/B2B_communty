@@ -1,4 +1,6 @@
-import { useMemo, useState } from 'react';
+﻿import { useMemo, useState } from 'react';
+import { signOut } from 'aws-amplify/auth';
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import ProfilePage from '../profile/profile';
 
@@ -52,6 +54,7 @@ const surveys = [
 const navigation = ['Dashboard', 'Community', 'Profile', 'Reports', 'Settings'];
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [filters, setFilters] = useState({
     type: 'all',
     duration: 'all'
@@ -59,6 +62,7 @@ const Dashboard = () => {
   const [showWithdrawOptions, setShowWithdrawOptions] = useState(false);
   const [withdrawMethod, setWithdrawMethod] = useState('cash');
   const [activeView, setActiveView] = useState('Dashboard');
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const profileCompletion = 65;
   const engagementScore = 78;
@@ -82,11 +86,21 @@ const Dashboard = () => {
 
   const activeFilters = Object.values(filters).filter((value) => value !== 'all').length;
 
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+      await signOut();
+      navigate('/auth');
+    } catch {
+      setIsLoggingOut(false);
+    }
+  };
+
   return (
     <main className="dashboard-shell">
       <aside className="dashboard-sidebar">
         <div className="sidebar-brand">
-          <p className="sidebar-kicker">PanelHub</p>
+          <p className="sidebar-kicker">Global Research Trends</p>
           <h3 className="sidebar-title">Workspace</h3>
         </div>
 
@@ -115,6 +129,15 @@ const Dashboard = () => {
             </button>
           ))}
         </nav>
+
+        <button
+          type="button"
+          className="sidebar-logout"
+          onClick={handleLogout}
+          disabled={isLoggingOut}
+        >
+          {isLoggingOut ? 'Signing out...' : 'Sign out'}
+        </button>
       </aside>
 
       {activeView === 'Profile' ? (
@@ -128,7 +151,7 @@ const Dashboard = () => {
             <p className="dashboard-kicker">Research Operations</p>
             <h1 className="dashboard-title">Dashboard Overview</h1>
             <p className="dashboard-subtitle">
-              Monitor survey performance, response quality, and panel activity in one place.
+              Monitor survey performance, response quality, and panel activity from one workspace.
             </p>
           </div>
           <button className="primary-button">Export Report</button>
@@ -141,7 +164,7 @@ const Dashboard = () => {
             <div className="profile-progress-track" aria-hidden="true">
               <div className="profile-progress-fill" />
             </div>
-            <p className="stat-meta">Complete your profile to get more features</p>
+            <p className="stat-meta">Complete your profile to access additional features</p>
           </article>
 
           <article className="stat-card engagement-card">
@@ -154,8 +177,8 @@ const Dashboard = () => {
                 <span>{engagementScore}</span>
               </div>
               <div className="engagement-copy">
-                <h3>Excellent Health</h3>
-                <p>Based on survey completion and login frequency</p>
+                <h3>Strong Standing</h3>
+                <p>Based on survey completion and account activity</p>
               </div>
             </div>
           </article>
@@ -183,7 +206,7 @@ const Dashboard = () => {
 
           <article className="stat-card withdraw-card">
             <div className="withdraw-head">
-              <p className="stat-label">Payment Withdrawal</p>
+              <p className="stat-label">Withdrawal Options</p>
               <span className="withdraw-amount">${totalWithdrawable}</span>
             </div>
             <button
@@ -217,7 +240,7 @@ const Dashboard = () => {
             <div>
               <h3 className="panel-title">Available Surveys</h3>
               <p className="panel-subtitle">
-                Recommended for You
+                Recommended for you
               </p>
             </div>
             <div className="filters">
@@ -285,7 +308,7 @@ const Dashboard = () => {
 
             {filteredSurveys.length === 0 && (
               <div className="empty-state">
-                <p>No surveys match your filters.</p>
+                <p>No surveys match the selected filters.</p>
               </div>
             )}
           </div>
@@ -297,3 +320,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+

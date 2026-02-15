@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 
 const Home: React.FC = () => {
@@ -85,7 +86,7 @@ const Home: React.FC = () => {
       {/* Navigation Bar */}
       <nav className={`navbar ${isNavHidden ? 'nav-hidden' : ''}`}>
         <div className="nav-content">
-          <div className="nav-logo">B2B Community</div>
+          <div className="nav-logo">Global Research Trends</div>
           <ul className="nav-menu">
             <li><a href="#about">About</a></li>
             <li><a href="#features">Features</a></li>
@@ -94,8 +95,8 @@ const Home: React.FC = () => {
             <li><a href="#contact">Contact</a></li>
           </ul>
           <div className="nav-actions">
-            <button className="nav-btn nav-login">Sign In</button>
-            <button className="nav-btn nav-signup">Join Now</button>
+            <Link to="/auth" className="nav-btn nav-login">Sign In</Link>
+            <Link to="/auth" className="nav-btn nav-signup">Request Access</Link>
           </div>
         </div>
       </nav>
@@ -105,19 +106,19 @@ const Home: React.FC = () => {
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1 className="hero-title">
-            The Premier Community for
+            A Trusted Network for
             <span className="highlight"> B2B Leaders</span>
           </h1>
           <p className="hero-subtitle">
-            Connect with verified industry leaders, access exclusive insights, and accelerate your business growth in the world's most trusted B2B community.
+            Connect with verified decision-makers, access qualified market intelligence, and advance strategic growth through a trusted B2B network.
           </p>
           <div className="hero-cta">
-            <button className="btn-primary">Join the Community</button>
-            <button className="btn-secondary">Request Invitation</button>
+            <Link to="/auth" className="btn-primary">Join the Network</Link>
+            <Link to="/auth" className="btn-secondary">Request Access</Link>
           </div>
         </div>
         <div className="hero-scroll-indicator">
-          <span>Scroll to Explore</span>
+          <span>Scroll to Continue</span>
           <div className="scroll-arrow"></div>
         </div>
       </section>
@@ -128,7 +129,7 @@ const Home: React.FC = () => {
         ref={(el) => { sectionRefs.current['trusted-by'] = el; }}
         className={`trusted-section ${isVisible['trusted-by'] ? 'fade-in' : ''}`}
       >
-        <p className="trusted-label">Trusted by Leaders From</p>
+        <p className="trusted-label">Trusted by Leaders at</p>
         <div className="logo-marquee">
           <div className="logo-track">
             <div className="company-logo">Microsoft</div>
@@ -167,13 +168,13 @@ const Home: React.FC = () => {
           </div>
           <div className="stat-card">
             <div className="stat-number">200+</div>
-            <div className="stat-label">Events Hosted</div>
-            <div className="stat-description">Workshops & networking sessions</div>
+            <div className="stat-label">Industry Events</div>
+            <div className="stat-description">Workshops and peer sessions</div>
           </div>
           <div className="stat-card">
             <div className="stat-number">98%</div>
             <div className="stat-label">Satisfaction Rate</div>
-            <div className="stat-description">Member testimonials</div>
+            <div className="stat-description">Member feedback</div>
           </div>
         </div>
       </section>
@@ -185,7 +186,7 @@ const Home: React.FC = () => {
         className={`benefits-section ${isVisible['benefits'] ? 'fade-in' : ''}`}
       >
         <div className="section-header">
-          <h2 className="section-title">Why Join Our Community?</h2>
+          <h2 className="section-title">Why Join Our Network?</h2>
         </div>
         <div className="benefits-grid">
           <div className="benefit-card">
@@ -197,8 +198,8 @@ const Home: React.FC = () => {
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
             </div>
-            <h3>Exclusive Networking</h3>
-            <p>Connect with verified C-level executives and decision-makers from Fortune 500 companies and fast-growing startups.</p>
+            <h3>Qualified Networking</h3>
+            <p>Connect with verified executives and decision-makers across enterprise organizations and growth-stage companies.</p>
           </div>
           <div className="benefit-card">
             <div className="benefit-icon">
@@ -208,7 +209,7 @@ const Home: React.FC = () => {
               </svg>
             </div>
             <h3>Knowledge Library</h3>
-            <p>Access curated resources, industry reports, case studies, and actionable insights from leading business experts.</p>
+            <p>Access curated resources, industry reports, case studies, and practical insights from experienced operators.</p>
           </div>
           <div className="benefit-card">
             <div className="benefit-icon">
@@ -217,8 +218,8 @@ const Home: React.FC = () => {
                 <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
               </svg>
             </div>
-            <h3>Expert-Led Workshops</h3>
-            <p>Participate in masterclasses, webinars, and interactive sessions led by industry thought leaders and successful entrepreneurs.</p>
+            <h3>Expert-Led Sessions</h3>
+            <p>Participate in focused workshops, webinars, and interactive sessions led by recognized industry experts.</p>
           </div>
           <div className="benefit-card">
             <div className="benefit-icon">
@@ -227,7 +228,7 @@ const Home: React.FC = () => {
               </svg>
             </div>
             <h3>Growth Opportunities</h3>
-            <p>Discover partnership opportunities, strategic alliances, and collaborative ventures to scale your business faster.</p>
+            <p>Identify partnership opportunities, strategic alliances, and collaborations that support sustainable growth.</p>
           </div>
         </div>
       </section>
@@ -240,17 +241,17 @@ const Home: React.FC = () => {
       >
         <div className="about-container">
           <div className="section-header">
-            <h2 className="section-title">About B2B Community</h2>
+            <h2 className="section-title">About Global Research Trends</h2>
             <p className="section-subtitle">Connecting business leaders with strategic opportunities</p>
           </div>
           
           <div className="about-content">
             <div className="about-text">
               <p className="about-paragraph">
-                B2B Community is a premier networking platform that bridges the gap between strategic decision-makers and organizations seeking expert perspectives. We've built a curated community where senior executives can contribute their knowledge to shape industry trends and business strategies.
+                Global Research Trends is a professional network connecting strategic decision-makers with organizations seeking informed perspectives.
               </p>
               <p className="about-paragraph">
-                Our platform carefully matches you with opportunities that respect your time and leverage your specific areas of expertise. Unlike traditional networking platforms, we focus on quality over quantity, ensuring every connection you make is relevant to your professional background.
+                Our platform matches participants to relevant opportunities based on role, expertise, and industry context.
               </p>
             </div>
             <div className="about-card">
@@ -263,8 +264,8 @@ const Home: React.FC = () => {
                     </svg>
                   </div>
                   <div className="feature-text">
-                    <h4>Respected Time</h4>
-                    <p>Opportunities are concise and targeted to your expertise</p>
+                    <h4>Time Efficient</h4>
+                    <p>Engagements are concise and aligned to your expertise</p>
                   </div>
                 </div>
                 <div className="about-feature-item">
@@ -275,7 +276,7 @@ const Home: React.FC = () => {
                   </div>
                   <div className="feature-text">
                     <h4>Meaningful Impact</h4>
-                    <p>Your insights directly influence business strategy</p>
+                    <p>Your input contributes directly to strategic decisions</p>
                   </div>
                 </div>
                 <div className="about-feature-item">
@@ -285,8 +286,8 @@ const Home: React.FC = () => {
                     </svg>
                   </div>
                   <div className="feature-text">
-                    <h4>Privacy First</h4>
-                    <p>Your data is protected and never sold to third parties</p>
+                    <h4>Privacy by Design</h4>
+                    <p>Your information is protected and not sold to third parties</p>
                   </div>
                 </div>
                 <div className="about-feature-item">
@@ -296,8 +297,8 @@ const Home: React.FC = () => {
                     </svg>
                   </div>
                   <div className="feature-text">
-                    <h4>Valuable Network</h4>
-                    <p>Connect with peers across industries</p>
+                    <h4>Relevant Network</h4>
+                    <p>Connect with qualified peers across industries</p>
                   </div>
                 </div>
               </div>
@@ -314,7 +315,7 @@ const Home: React.FC = () => {
       >
         <div className="section-header">
           <h2 className="section-title">How It Works</h2>
-          <p className="section-subtitle">A simple 3-step path to join, get matched, and start collaborating with the right people.</p>
+          <p className="section-subtitle">A clear 3-step process to join, get matched, and collaborate with relevant stakeholders.</p>
         </div>
         <div className="steps-container">
           <div className="step-item">
@@ -322,21 +323,21 @@ const Home: React.FC = () => {
               <span>1</span>
             </div>
             <h3>Create Your Profile</h3>
-            <p>Share your professional background, expertise areas, and industry experience. Our AI matches you with relevant opportunities.</p>
+            <p>Provide your professional background, expertise, and industry experience to support accurate matching.</p>
           </div>
           <div className="step-item">
             <div className="step-number">
               <span>2</span>
             </div>
             <h3>Get Matched</h3>
-            <p>Receive personalized invitations and networking opportunities based on your unique expertise. Only relevant connections, no spam.</p>
+            <p>Receive relevant invitations and networking opportunities aligned to your profile.</p>
           </div>
           <div className="step-item">
             <div className="step-number">
               <span>3</span>
             </div>
-            <h3>Grow & Impact</h3>
-            <p>Connect with peers, attend exclusive events, and expand your network. Your insights help shape industry strategies.</p>
+            <h3>Grow and Contribute</h3>
+            <p>Connect with peers, join focused events, and expand your professional network.</p>
           </div>
         </div>
       </section>
@@ -349,42 +350,42 @@ const Home: React.FC = () => {
       >
         <div className="value-prop-container">
           <div className="value-prop-card value-prop-primary">
-            <div className="value-prop-badge">For Businesses & Institutions</div>
-            <h2 className="value-prop-title">We Can Help For You</h2>
+            <div className="value-prop-badge">For Businesses and Institutions</div>
+            <h2 className="value-prop-title">How We Support Your Team</h2>
             <p className="value-prop-description">
-              Need expert insights to conduct research, guide product development, or survey design to gain critical business intelligence.
+              Get qualified insights for research, product strategy, and survey design to support informed decisions.
             </p>
             <div className="value-prop-features">
               <div className="value-feature-item">
-                <div className="feature-icon-circle">✓</div>
+                <div className="feature-icon-circle">1</div>
                 <div className="feature-content">
-                  <h4>End-to-End Survey Solutions</h4>
-                  <p>We design, distribute, and analyze for you</p>
+                  <h4>End-to-End Survey Delivery</h4>
+                  <p>We design, distribute, and analyze on your behalf</p>
                 </div>
               </div>
               <div className="value-feature-item">
-                <div className="feature-icon-circle">✓</div>
+                <div className="feature-icon-circle">2</div>
                 <div className="feature-content">
                   <h4>Access to Verified Executives</h4>
-                  <p>Reach decision-makers in your target industry instantly</p>
+                  <p>Reach decision-makers in your target industries efficiently</p>
                 </div>
               </div>
               <div className="value-feature-item">
-                <div className="feature-icon-circle">✓</div>
+                <div className="feature-icon-circle">3</div>
                 <div className="feature-content">
-                  <h4>Fast Turnaround</h4>
-                  <p>Get actionable insights within days, not weeks</p>
+                  <h4>Timely Turnaround</h4>
+                  <p>Receive decision-ready insights within days</p>
                 </div>
               </div>
               <div className="value-feature-item">
-                <div className="feature-icon-circle">✓</div>
+                <div className="feature-icon-circle">4</div>
                 <div className="feature-content">
-                  <h4>Comprehensive Reports</h4>
-                  <p>Receive detailed analysis with visualizations and recommendations</p>
+                  <h4>Comprehensive Reporting</h4>
+                  <p>Receive detailed analysis with clear visuals and recommendations</p>
                 </div>
               </div>
             </div>
-            <button className="value-prop-btn">Request Survey Services</button>
+            <button className="value-prop-btn">Request Survey Support</button>
           </div>
           <div className="value-prop-card value-prop-secondary">
             <h3 className="value-secondary-title">Our Survey Services Include</h3>
@@ -404,7 +405,7 @@ const Home: React.FC = () => {
                     <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                   </svg>
                 </div>
-                <h4>Respondent Recruiting</h4>
+                <h4>Participant Recruitment</h4>
                 <p className="value-secondary-text">Target specific industries, roles, and demographics</p>
               </div>
               <div className="value-secondary-item">
@@ -438,12 +439,12 @@ const Home: React.FC = () => {
       {/* Final CTA Section */}
       <section className="cta-section">
         <div className="cta-content">
-          <h2 className="cta-title">Ready to Elevate Your Business?</h2>
+          <h2 className="cta-title">Ready to Advance Your Business?</h2>
           <p className="cta-subtitle">
-            Join thousands of B2B leaders who are already transforming their businesses through meaningful connections and expert insights.
+            Join B2B leaders using trusted connections and expert insight to improve business outcomes.
           </p>
           <button className="btn-primary-large">Apply for Membership</button>
-          <p className="cta-note">Limited spots available • Selective admission • Premium community</p>
+          <p className="cta-note">Limited capacity available • Selective onboarding • Professional network</p>
         </div>
       </section>
 
@@ -451,8 +452,8 @@ const Home: React.FC = () => {
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-column footer-about">
-            <h3 className="footer-logo">B2B Community</h3>
-            <p>The premier global community for B2B leaders to connect, learn, and grow. Built on trust and verified expertise.</p>
+            <h3 className="footer-logo">Global Research Trends</h3>
+            <p>A global professional network for B2B leaders to connect, learn, and grow with verified expertise.</p>
             <div className="social-icons">
               <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin-in"></i></a>
               <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
@@ -490,8 +491,8 @@ const Home: React.FC = () => {
             </ul>
           </div>
           <div className="footer-column footer-subscribe">
-            <h4>Subscribe to our Newsletter</h4>
-            <p>Get exclusive insights, event invitations, and community updates.</p>
+            <h4>Subscribe to Updates</h4>
+            <p>Receive industry insights, event invitations, and platform updates.</p>
             <div className="subscribe-form">
               <input type="email" placeholder="Your email address" />
               <button>Subscribe</button>
@@ -499,7 +500,7 @@ const Home: React.FC = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} B2B Community. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Global Research Trends. All Rights Reserved.</p>
         </div>
       </footer>
     </div>
@@ -507,3 +508,5 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+
+

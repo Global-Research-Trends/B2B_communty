@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import './profile.css';
@@ -73,7 +73,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack }) => {
   const [activeNav, setActiveNav] = useState('personal');
 
   const navItems = [
-    { id: 'personal', label: 'Personal Info', icon: <UserIcon /> },
+    { id: 'personal', label: 'Personal Information', icon: <UserIcon /> },
     { id: 'professional', label: 'Professional Details', icon: <BriefcaseIcon /> },
   ];
 
@@ -129,7 +129,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack }) => {
               <span className="completion-percent">75%</span>
             </div>
             <p className="completion-subtext">
-              Complete your profile to unlock exclusive networking opportunities and premium connections.
+              Complete your profile to access trusted networking opportunities and qualified connections.
             </p>
             <div className="progress-container">
               <div className="progress-bar" style={{ width: '75%' }} />
@@ -139,7 +139,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack }) => {
                 <div className="star-icon"><StarIcon /></div>
                 <div className="next-step-text">
                   <span className="next-step-title">Next Step:</span>
-                  <span className="next-step-desc">Add your Company Size to earn +10% completion</span>
+                  <span className="next-step-desc">Add company size to increase completion by 10%</span>
                 </div>
               </div>
               <button className="complete-btn">Complete Profile</button>
@@ -210,8 +210,8 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack }) => {
             </div>
             <div className="info-banner">
               <div className="info-icon"><InfoIcon /></div>
-              <p>Complete your professional profile to unlock premium networking features and industry insights.</p>
-              <a href="#" className="update-link">Update Now</a>
+              <p>Complete your professional profile to access advanced networking features and industry insights.</p>
+              <a href="#" className="update-link">Update now</a>
             </div>
           </section>
 
@@ -225,7 +225,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack }) => {
               <ChevronRightIcon />
             </div>
             <p className="preferences-subtext">
-              Manage what emails you receive from us and control your notification settings.
+              Manage the emails you receive and control your notification preferences.
             </p>
           </section>
         </div>
@@ -234,3 +234,5 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack }) => {
 };
 
 export default ProfilePage;
+
+
