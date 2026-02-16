@@ -1,5 +1,5 @@
-﻿import { useMemo, useState } from 'react';
-//import { signOut } from 'aws-amplify/auth';
+import { useEffect, useMemo, useState } from 'react';
+import { fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import ProfilePage from '../profile/profile';
@@ -53,6 +53,23 @@ const surveys = [
 
 const navigation = ['Dashboard', 'Community', 'Profile', 'Reports', 'Settings'];
 
+type DashboardUserProfile = {
+  displayName: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  location: string;
+  emailVerified: boolean;
+  jobTitle: string;
+};
+
+const notProvided = 'Not provided';
+
+const getValueOrFallback = (value?: string) => {
+  const normalized = value?.trim();
+  return normalized ? normalized : notProvided;
+};
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [filters, setFilters] = useState({
@@ -63,6 +80,15 @@ const Dashboard = () => {
   const [withdrawMethod, setWithdrawMethod] = useState('cash');
   const [activeView, setActiveView] = useState('Dashboard');
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [userProfile, setUserProfile] = useState<DashboardUserProfile>({
+    displayName: 'User',
+    fullName: notProvided,
+    email: notProvided,
+    phone: notProvided,
+    location: notProvided,
+    emailVerified: false,
+    jobTitle: notProvided,
+  });
 
   const profileCompletion = 65;
   const engagementScore = 78;
@@ -86,6 +112,39 @@ const Dashboard = () => {
 
   const activeFilters = Object.values(filters).filter((value) => value !== 'all').length;
 
+  useEffect(() => {
+    const loadUserProfile = async () => {
+      try {
+        const [currentUser, attributes] = await Promise.all([
+          getCurrentUser(),
+          fetchUserAttributes(),
+        ]);
+
+        const firstName = attributes.given_name?.trim() ?? '';
+        const lastName = attributes.family_name?.trim() ?? '';
+        const fullName = `${firstName} ${lastName}`.trim();
+        const displayName = fullName || attributes.name?.trim() || currentUser.username || 'User';
+
+        setUserProfile({
+          displayName,
+          fullName: getValueOrFallback(fullName || attributes.name),
+          email: getValueOrFallback(attributes.email),
+          phone: getValueOrFallback(attributes.phone_number),
+          location: getValueOrFallback(attributes.locale),
+          emailVerified: attributes.email_verified === 'true',
+          jobTitle: getValueOrFallback(attributes['custom:job_title']),
+        });
+      } catch {
+        setUserProfile((prev) => ({
+          ...prev,
+          displayName: 'User',
+        }));
+      }
+    };
+
+    void loadUserProfile();
+  }, []);
+
   const handleLogout = async () => {
     try {
       setIsLoggingOut(true);
@@ -108,12 +167,12 @@ const Dashboard = () => {
         <div className="sidebar-profile-avatar" onClick={() => setActiveView('Profile')}>
           <img
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-            alt="Alex Morgan"
+            alt={userProfile.displayName}
             className="sidebar-avatar-img"
           />
           <div className="sidebar-avatar-info">
-            <span className="sidebar-avatar-name">Alex Morgan</span>
-            <span className="sidebar-avatar-role">Marketing Director</span>
+            <span className="sidebar-avatar-name">{userProfile.displayName}</span>
+            <span className="sidebar-avatar-role">{userProfile.jobTitle}</span>
           </div>
         </div>
 
@@ -142,7 +201,7 @@ const Dashboard = () => {
 
       {activeView === 'Profile' ? (
         <section className="dashboard">
-          <ProfilePage onBack={() => setActiveView('Dashboard')} />
+          <ProfilePage onBack={() => setActiveView('Dashboard')} profileData={userProfile} />
         </section>
       ) : (
       <section className="dashboard">

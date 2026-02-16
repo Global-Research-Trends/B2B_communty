@@ -16,6 +16,8 @@ type ResetPasswordStep = 'request' | 'confirm' | null;
 type VerificationTarget = 'email' | null;
 
 type FormState = {
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   phoneLocal: string;
@@ -41,6 +43,8 @@ const fallbackCountries: CountryOption[] = [
 ];
 
 const initialFormState: FormState = {
+  firstName: '',
+  lastName: '',
   email: '',
   password: '',
   phoneLocal: '',
@@ -164,8 +168,20 @@ const Auth = () => {
   };
 
   const validateSignupCoreFields = () => {
+    const normalizedFirstName = form.firstName.trim();
+    const normalizedLastName = form.lastName.trim();
     const normalizedEmail = form.email.trim();
     const normalizedPhoneLocal = form.phoneLocal.replace(/\D/g, '');
+
+    if (!normalizedFirstName) {
+      setErrorMessage('Enter your first name.');
+      return null;
+    }
+
+    if (!normalizedLastName) {
+      setErrorMessage('Enter your last name.');
+      return null;
+    }
 
     if (!normalizedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       setErrorMessage('Enter a valid email before requesting verification.');
@@ -188,6 +204,8 @@ const Auth = () => {
     }
 
     return {
+      firstName: normalizedFirstName,
+      lastName: normalizedLastName,
       email: normalizedEmail,
       phoneLocal: normalizedPhoneLocal,
       phoneNumber: `${selectedCountry.dialCode}${normalizedPhoneLocal}`,
@@ -210,6 +228,8 @@ const Auth = () => {
           password: form.password,
           options: {
             userAttributes: {
+              given_name: normalized.firstName,
+              family_name: normalized.lastName,
               email: normalized.email,
               birthdate: form.dateOfBirth,
               phone_number: normalized.phoneNumber,
@@ -456,6 +476,30 @@ const Auth = () => {
 
               {mode === 'signup' && (
                 <>
+                  <div className="auth-field">
+                    <label htmlFor="firstName">First name</label>
+                    <input
+                      id="firstName"
+                      type="text"
+                      value={form.firstName}
+                      onChange={(event) => updateField('firstName', event.target.value)}
+                      placeholder="Alex"
+                      required
+                    />
+                  </div>
+
+                  <div className="auth-field">
+                    <label htmlFor="lastName">Last name</label>
+                    <input
+                      id="lastName"
+                      type="text"
+                      value={form.lastName}
+                      onChange={(event) => updateField('lastName', event.target.value)}
+                      placeholder="Morgan"
+                      required
+                    />
+                  </div>
+
                   <div className="auth-field">
                     <label htmlFor="country">Country</label>
                     <select

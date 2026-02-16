@@ -67,9 +67,18 @@ const CheckIcon = () => (
 
 interface ProfilePageProps {
   onBack: () => void;
+  profileData: {
+    displayName: string;
+    fullName: string;
+    email: string;
+    phone: string;
+    location: string;
+    emailVerified: boolean;
+    jobTitle: string;
+  };
 }
 
-const ProfilePage: React.FC<ProfilePageProps> = ({ onBack }) => {
+const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData }) => {
   const [activeNav, setActiveNav] = useState('personal');
 
   const navItems = [
@@ -90,18 +99,18 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack }) => {
         <div className="profile-header-avatar">
           <img
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face"
-            alt="Alex Morgan"
+            alt={profileData.displayName}
           />
           <button className="avatar-edit-btn">
             <EditIcon />
           </button>
         </div>
         <div className="profile-header-info">
-          <h2 className="profile-name">Alex Morgan</h2>
-          <p className="profile-title">Marketing Director at TechFlow</p>
+          <h2 className="profile-name">{profileData.fullName}</h2>
+          <p className="profile-title">{profileData.jobTitle}</p>
           <div className="verified-badge">
             <CheckIcon />
-            <span>Verified Member</span>
+            <span>{profileData.emailVerified ? 'Verified Member' : 'Verification Pending'}</span>
           </div>
         </div>
       </div>
@@ -122,63 +131,84 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack }) => {
 
       {/* Main Content */}
       <div className="profile-main-content">
-          {/* Profile Completion */}
-          <section className="completion-section">
-            <div className="completion-header">
-              <h3>Profile Completion</h3>
-              <span className="completion-percent">75%</span>
+        {/* Profile Completion */}
+        <section className="completion-section">
+          <div className="completion-header">
+            <h3>Profile Completion</h3>
+            <span className="completion-percent">75%</span>
+          </div>
+          <p className="completion-subtext">
+            Complete your profile to access trusted networking opportunities and qualified connections.
+          </p>
+          <div className="progress-container">
+            <div className="progress-bar" style={{ width: '75%' }} />
+          </div>
+          <div className="next-step-card">
+            <div className="next-step-content">
+              <div className="star-icon"><StarIcon /></div>
+              <div className="next-step-text">
+                <span className="next-step-title">Next Step:</span>
+                <span className="next-step-desc">Add company size to increase completion by 10%</span>
+              </div>
             </div>
-            <p className="completion-subtext">
-              Complete your profile to access trusted networking opportunities and qualified connections.
-            </p>
-            <div className="progress-container">
-              <div className="progress-bar" style={{ width: '75%' }} />
-            </div>
-            <div className="next-step-card">
-              <div className="next-step-content">
-                <div className="star-icon"><StarIcon /></div>
-                <div className="next-step-text">
-                  <span className="next-step-title">Next Step:</span>
-                  <span className="next-step-desc">Add company size to increase completion by 10%</span>
+            <button className="complete-btn">Complete Profile</button>
+          </div>
+        </section>
+
+        {activeNav === 'personal' && (
+          <>
+            {/* Personal Details */}
+            <section className="details-section">
+              <div className="section-header">
+                <h3>Personal Details</h3>
+                <button className="edit-btn">
+                  <EditIcon />
+                  <span>Edit</span>
+                </button>
+              </div>
+              <div className="details-grid">
+                <div className="detail-item">
+                  <label>Full Name</label>
+                  <p className="detail-value">{profileData.fullName}</p>
+                </div>
+                <div className="detail-item">
+                  <label>Email Address</label>
+                  <div className="verified-value">
+                    <p className="detail-value">{profileData.email}</p>
+                    <span className="verified-tag">
+                      <CheckIcon />
+                      {profileData.emailVerified ? 'Verified' : 'Not verified'}
+                    </span>
+                  </div>
+                </div>
+                <div className="detail-item">
+                  <label>Phone Number</label>
+                  <p className="detail-value">{profileData.phone}</p>
+                </div>
+                <div className="detail-item">
+                  <label>Location</label>
+                  <p className="detail-value">{profileData.location}</p>
                 </div>
               </div>
-              <button className="complete-btn">Complete Profile</button>
-            </div>
-          </section>
+            </section>
 
-          {/* Personal Details */}
-          <section className="details-section">
-            <div className="section-header">
-              <h3>Personal Details</h3>
-              <button className="edit-btn">
-                <EditIcon />
-                <span>Edit</span>
-              </button>
-            </div>
-            <div className="details-grid">
-              <div className="detail-item">
-                <label>Full Name</label>
-                <p className="detail-value">Alex Morgan</p>
-              </div>
-              <div className="detail-item">
-                <label>Email Address</label>
-                <div className="verified-value">
-                  <p className="detail-value">alex.morgan@techflow.com</p>
-                  <span className="verified-tag"><CheckIcon /> Verified</span>
+            {/* Email Preferences */}
+            <section className="preferences-section">
+              <div className="section-header">
+                <div className="section-title-group">
+                  <MailIcon />
+                  <h3>Email Preferences</h3>
                 </div>
+                <ChevronRightIcon />
               </div>
-              <div className="detail-item">
-                <label>Phone Number</label>
-                <p className="detail-value">+1 (555) 012-3456</p>
-              </div>
-              <div className="detail-item">
-                <label>Location</label>
-                <p className="detail-value">San Francisco, CA</p>
-              </div>
-            </div>
-          </section>
+              <p className="preferences-subtext">
+                Manage the emails you receive and control your notification preferences.
+              </p>
+            </section>
+          </>
+        )}
 
-          {/* Professional Information */}
+        {activeNav === 'professional' && (
           <section className="details-section">
             <div className="section-header">
               <h3>Professional Information</h3>
@@ -190,7 +220,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack }) => {
             <div className="details-grid">
               <div className="detail-item">
                 <label>Job Title</label>
-                <p className="detail-value">Marketing Director</p>
+                <p className="detail-value">{profileData.jobTitle}</p>
               </div>
               <div className="detail-item">
                 <label>Industry</label>
@@ -214,21 +244,8 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack }) => {
               <a href="#" className="update-link">Update now</a>
             </div>
           </section>
-
-          {/* Email Preferences */}
-          <section className="preferences-section">
-            <div className="section-header">
-              <div className="section-title-group">
-                <MailIcon />
-                <h3>Email Preferences</h3>
-              </div>
-              <ChevronRightIcon />
-            </div>
-            <p className="preferences-subtext">
-              Manage the emails you receive and control your notification preferences.
-            </p>
-          </section>
-        </div>
+        )}
+      </div>
       </div>
   );
 };
