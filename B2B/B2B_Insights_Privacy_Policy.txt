@@ -1,0 +1,103 @@
+Privacy Policy
+Effective Date: [Date]
+B2B INSIGHTS (DEFINED AS "B2BINSIGHTS", "US", "WE" OR "OUR", AS APPROPRIATE) VALUES AND APPRECIATES THE TRUST YOU PLACE IN US TO PROTECT AND STORE YOUR PERSONAL INFORMATION CAREFULLY AND IN ACCORDANCE WITH APPLICABLE LAWS. THIS PRIVACY POLICY SETS OUT DETAILS OF B2B INSIGHTS'S INFORMATION GATHERING AND DISSEMINATION PRACTICES FOR OUR PROFESSIONAL COMMUNITY AND RESEARCH PLATFORM. IN THIS PRIVACY POLICY, REFERENCES TO "YOU"/"YOUR" SHALL BE REFERENCES TO ANY PERSON SUBMITTING ANY DATA TO B2B INSIGHTS, WHETHER VIA OUR WEBSITE ("WEBSITE") OR OTHERWISE.
+WE RECOMMEND THAT YOU PRINT A COPY OF THIS PRIVACY POLICY FOR YOUR FUTURE REFERENCE. BY USING THE WEBSITE AND ACCESSING AND USING THE SERVICES, YOU AGREE TO THE TERMS OF THIS POLICY. IF YOU DO NOT AGREE WITH THE TERMS OF THIS POLICY, PLEASE STOP USING THE WEBSITE IMMEDIATELY.
+General
+This Privacy Policy explains how B2B Insights collects and stores information that identifies and relates to you ("personal information") and how we use, disclose, and protect such information. B2B Insights shall use your personal information only in the manner set out in this Privacy Policy. We act in accordance with applicable data protection legislation including GDPR, CCPA, and other regional privacy laws.
+You can visit the website and browse without having to provide personal information. During your visit to the website, you remain anonymous and at no time can we identify you unless you provide any personal information to us or have an account on the website and log on with your account information.
+Please note that we may change, modify, add to, or delete portions of this Privacy Policy at any time. The date for the most recent update will appear at the top of the Privacy Policy. However, please note that it is your responsibility to regularly review the website's Privacy Policy. If you no longer accept this Privacy Policy or any changes or variations to this Privacy Policy, you must cease using the website. Your continued use of the website is deemed as acceptance of this Privacy Policy and any changes thereto.
+B2B Insights may disclose aggregated information to third parties about the use of the website, general statistical information about the website and visitors, such as number of visitors, number and type of services provided, and industry trends.
+B2B Insights shall not sell/use/redistribute or rent your personal information for marketing purposes without your explicit consent.
+If you are using our website, you consent to the collection, use, and sharing of your personal data under this Privacy Policy (including Cookie Policy and other documents referred to in the privacy policy).
+B2B Insights's Commitment to Protect Personal Information
+B2B Insights has implemented necessary safeguards and measures to protect against unauthorized access to and unlawful interception of personal information. However, no internet site can fully eliminate security risks.
+B2B Insights and its affiliates adhere to all applicable data protection laws including GDPR (General Data Protection Regulation), CCPA (California Consumer Privacy Act), and other relevant regional regulations.
+We ensure that appropriate data privacy safeguards are adopted across the organization and your rights stay the same no matter where your data is processed by B2B Insights.
+INFORMATION WE MAY PROCESS ("PERSONAL DATA")
+We may collect personal data on this online portal, including information we collect while performing business transactions and information we collect from other sources, as permitted by law. We may collect your personal data including but not limited to:
+Various usage and user metrics when you visit and use our Website including but not limited to cookies, IP addresses, device and software identifiers, referring and exiting URLs, onsite behavior and usage information, feature use metrics and statistics, usage history, and location data. While some of this data is captured directly from you, for example, by way of web forms and web log servers, others can be captured indirectly from third parties, for example, tracing organization details, preferences, and interests on the basis of IP address and browsing history respectively.
+Professional information that you provide to us for the purpose of registering to use the Website, accessing our research services, subscribing to newsletters, posting material, requesting further services and/or applying for a position of employment with us, including but not limited to your job title, name, business address, telephone number, business e-mail address, LinkedIn profile, company name, industry, company size, curriculum vitae/resume, skillset, preferences, and professional interests.
+Information that you provide to us by completing any other forms on the Website or if you contact us with comments or specific requests (including but not limited to your name, business address, telephone number, and business e-mail address). We may also ask you for information when you report a problem with the Website.
+If you contact us, we may keep a record of that correspondence.
+We may also ask you to complete surveys that we use for research purposes, although you do not have to respond to them.
+We enhance the accuracy and completeness of our business records using external data sources such as data enrichment providers and publicly accessible sources (corporate websites, public registries, professional platforms like LinkedIn) to verify, update, and supplement the business contact and firmographic details we hold.
+MEANS OF PROCESSING DATA
+We may process your Personal Data through the following means:
+Cookies;
+Web forms and registration processes;
+Job application forms/careers applications;
+Newsletter sign-ups;
+Registration for an event/webinar/research access;
+Information request mechanism (for example, Contact Us).
+COOKIES
+Cookies are alphanumeric identifiers with a small amount of data that is commonly used as an anonymous unique identifier. These are sent to your browser from the website that you visit and are stored on your computer's hard drive. Please note, a cookie in no way gives us access to your computer, that is to say, cookies cannot access any other information on your computer.
+Our Website uses these cookies to collect information and to improve our Service by making your interaction with us faster and more secure. They may be used for the purposes of managing your preferences, maintaining and optimizing security, marketing, communication, analytics, and research.
+We majorly use below types of cookies:
+Essential Cookies or Strictly Necessary Cookies: These cookies are essential to the functioning of our Website and for you to move around the Website. Without these cookies, certain features could not function. No information about your browsing habits is gathered by these cookies.
+Functional Cookies: These cookies remember how you prefer to use our Website and improve the way our Website works. These are persistent cookies that help us recognize you as an existing user, so it's easier for you to return to our Website without signing in again. After signing in, the persistent cookies stay on your browser and will be read when you return to our sites. These remain on your computer/device for a pre-defined period of time.
+Performance Cookies: Some cookies help us with the performance and design of our Website. For example, these cookies show us statistics, which are the most frequently visited pages on the Website, help us record any difficulties you have with the Website, and whether our content and research materials are effective or not.
+Targeting or Tracking Cookies: On certain pages of our Website, we use cookies to help us understand your professional interests as you browse the Website, so we can tailor and deliver to you a more personalized service in the future. This assists us in delivering relevant, interest-based content and research to you.
+If you do not want to receive cookies, most browsers allow you to control cookies through their setting preferences. However, if you do turn off cookies in your browser, you will not be able to fully experience some of the features of our Website.
+GROUNDS FOR LAWFUL PROCESSING OF PERSONAL DATA
+When we process your Personal data, we do so primarily in connection with providing research services, market intelligence, professional community services, and to improve and enhance the range of those services and offerings. We may process your personal data in the following circumstances:
+When we process cookies, with your explicit consent; or
+When we process your personal data for recruitment, communication, service delivery, research services, sales and marketing, registration and subscriptions purposes, where processing is necessary for the purpose of pursuing our legitimate interests; or
+When processing is necessary for compliance with legal obligations.
+USE OF PERSONAL DATA
+We generally use the information to establish and enhance our relationship with our professional community members and research platform users for the following purposes:
+Communication: We may use your information to administer and provide services you request or have expressed an interest in, to communicate with you in case of any inquiry or support, for sending newsletters, research reports, industry insights, updates and promotional materials, for seeking your opinion and feedback and personalize, to notify you about changes to our service, and/or tailor any communications that we may send you.
+Service Delivery: We use your professional information to provide access to our research platform, market intelligence reports, business insights, professional networking features, and community services that you have subscribed to or requested.
+Career Offering: We provide career options on our Website for the users. They can apply to them using our online forms/links by registering with us. Once you are registered with us, we may use your personal data for various job openings that we have in our company and for sending you communication in case of job vacancies.
+Professional Networking: We may use your information to facilitate connections within our B2B community, match professionals with relevant research opportunities, and enable participation in expert networks based on your industry, expertise, and professional interests.
+Activity Tracking: We may use your information to track your activity on our digital platforms and personalize and improve your experience. This can be used to create an individual profile for you so that we can understand and respect your preferences or for profiling your characteristics.
+Research and Analytics: We may use aggregated and anonymized data for industry research, market analysis, trend identification, and to improve our research methodologies and service offerings.
+Security and Fraud Prevention: We use your information to maintain the security of our platform, prevent fraud, detect and investigate suspicious activities, and ensure the integrity of our professional community.
+Legal Compliance: We may process your data to comply with legal obligations, respond to lawful requests from authorities, and protect our legal rights and interests.
+TRANSFERRING YOUR PERSONAL DATA
+B2B Insights primarily processes all professional data internally through our employees and systems. We maintain strict control over your personal information.
+We may use limited third-party service providers for specific functions such as website analytics (e.g., Google Analytics), email distribution services, payment processing, and data enrichment tools. These service providers are bound by strict confidentiality agreements and are only permitted to process data according to our instructions.
+We do not sell, rent, or exchange your personal information with third parties for their marketing purposes.
+We may transfer data internationally to provide our services. All transfers are made in compliance with applicable data protection laws and with adequate safeguards in place, such as Standard Contractual Clauses or other approved transfer mechanisms.
+We may disclose your personal information when required by law, regulation, legal process, or governmental request, or to protect our rights, property, or safety, or that of others.
+DATA SECURITY AND RETENTION
+We implement comprehensive physical, technical, and administrative security measures to protect your personal information from unauthorized access, use, disclosure, alteration, or destruction. These measures include:
+Encryption of data in transit and at rest using industry-standard protocols;
+Role-based access controls and multi-factor authentication;
+Regular security audits and vulnerability assessments;
+Employee training on data protection and information security practices;
+Incident response procedures and breach notification protocols.
+We retain professional data for the duration of your business relationship with us, or as long as necessary to provide our services, maintain historical business intelligence records, comply with legal obligations, resolve disputes, and enforce our agreements. You may request erasure of your data subject to applicable laws and legitimate business needs.
+Third-party service processors we engage must adhere to equivalent or higher security standards and are contractually obligated to protect your data.
+CHILDREN'S PRIVACY
+Our Website and services are designed for business professionals and are not intended for individuals under the age of 16 (or 18 in certain jurisdictions). We do not knowingly collect personal information from minors. If you believe we have collected information from a minor, please contact us immediately, and we will take steps to remove such information.
+THIRD-PARTY WEBSITES
+Our Website may contain links to third-party websites, services, or resources that are not operated or controlled by B2B Insights. We are not responsible for the privacy practices or content of these external sites. We encourage you to review the privacy policies of any third-party sites you visit before providing them with personal information.
+YOUR PRIVACY RIGHTS
+You have comprehensive control over your personal data. Subject to applicable law, you may have the following rights:
+Right to Access: Request information about the personal data we hold about you, including details about how we use and share it.
+Right to Rectification: Request correction of inaccurate or incomplete personal information, including updating your job title, employer, or contact details.
+Right to Erasure: Request deletion of your personal data from our systems ("Right to be Forgotten"), subject to legal and contractual obligations.
+Right to Restriction: Request that we limit how we process your data in certain circumstances.
+Right to Object: Opt out of B2B marketing communications, profiling, or other processing based on legitimate interests.
+Right to Data Portability: Request a copy of your personal data in a structured, commonly used, and machine-readable format.
+Right to Withdraw Consent: Withdraw your consent at any time where we rely on consent as the legal basis for processing.
+Right to Lodge a Complaint: File a complaint with your local data protection authority if you believe your rights have been violated.
+For residents of specific jurisdictions (e.g., EEA under GDPR, California under CCPA/CPRA, Canada under PIPEDA), additional or enhanced rights may apply. Please refer to our region-specific disclosures or contact us for more information.
+CALIFORNIA RESIDENTS - CCPA/CPRA RIGHTS
+If you are a California resident, you have specific rights under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA):
+Right to Know: Know what personal information we collect, use, disclose, or sell about you.
+Right to Delete: Request deletion of personal information we have collected about you, subject to certain exceptions.
+Right to Opt-Out: Opt out of the sale or sharing of personal information. Note: B2B Insights does not sell personal information.
+Right to Non-Discrimination: Receive equal service and pricing regardless of exercising your privacy rights.
+Categories of personal information we collect include: identifiers (name, email, IP address), professional information (job title, company, industry), internet activity (browsing behavior, site interactions), geolocation data, and inferences drawn from this information.
+We do not sell personal information and have not sold personal information in the preceding 12 months.
+CHANGES TO THIS PRIVACY POLICY
+We reserve the right to modify this Privacy Policy at any time to reflect changes in our practices, technology, legal requirements, or for other operational reasons. Material changes will be communicated through prominent website notifications or direct communication to registered users. The effective date at the top of this policy indicates the most recent revision. Your continued use of our services after changes are posted constitutes acceptance of the updated Privacy Policy.
+CONTACT US
+In case you have any questions, comments or concerns about this Privacy Policy or wish to exercise any of your privacy rights, you can contact us through:
+B2B Insights Privacy Team
+Email: privacy@b2binsights.com
+Phone: [Insert Contact Number]
+Mailing Address: [Insert Business Address]
+Alternatively, you can reach us through the Contact Us page on our Website.
+Response Timeline: We verify your identity before processing requests and aim to respond within 30 days (or as required by applicable law).

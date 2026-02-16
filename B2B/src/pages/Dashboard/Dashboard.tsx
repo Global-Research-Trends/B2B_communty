@@ -1,5 +1,5 @@
 ﻿import { useMemo, useState } from 'react';
-import { signOut } from 'aws-amplify/auth';
+//import { signOut } from 'aws-amplify/auth';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import ProfilePage from '../profile/profile';
@@ -89,7 +89,7 @@ const Dashboard = () => {
   const handleLogout = async () => {
     try {
       setIsLoggingOut(true);
-      await signOut();
+      //await signOut();
       navigate('/auth');
     } catch {
       setIsLoggingOut(false);

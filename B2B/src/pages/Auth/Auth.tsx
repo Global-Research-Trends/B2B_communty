@@ -1,5 +1,5 @@
 ﻿import { FormEvent, useEffect, useMemo, useState } from 'react';
-import { confirmSignUp, signIn, signUp } from 'aws-amplify/auth';
+//import { confirmSignUp, signIn, signUp } from 'aws-amplify/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import './Auth.css';
 

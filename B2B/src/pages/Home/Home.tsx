@@ -88,7 +88,7 @@ const Home: React.FC = () => {
         <div className="nav-content">
           <div className="nav-logo">Global Research Trends</div>
           <ul className="nav-menu">
-            <li><a href="#about">About</a></li>
+            <li><a href="/about">About</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#pricing">Pricing</a></li>
@@ -464,7 +464,7 @@ const Home: React.FC = () => {
           <div className="footer-column">
             <h4>Explore</h4>
             <ul>
-              <li><a href="#about">About Us</a></li>
+              <li><a href="/about">About Us</a></li>
               <li><a href="#features">Features</a></li>
               <li><a href="#how-it-works">How It Works</a></li>
               <li><a href="#pricing">Pricing</a></li>
@@ -485,7 +485,7 @@ const Home: React.FC = () => {
             <h4>Legal</h4>
             <ul>
               <li><a href="#">Terms of Service</a></li>
-              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="/privacy-policy">Privacy Policy</a></li>
               <li><a href="#">Cookie Policy</a></li>
               <li><a href="#">Acceptable Use</a></li>
             </ul>
