@@ -1,9 +1,19 @@
-﻿import { FormEvent, useEffect, useMemo, useState } from 'react';
-//import { confirmSignUp, signIn, signUp } from 'aws-amplify/auth';
+import { FormEvent, useEffect, useMemo, useState } from 'react';
+import {
+  confirmResetPassword,
+  confirmSignUp,
+  resendSignUpCode,
+  resetPassword,
+  signIn,
+  signUp,
+} from 'aws-amplify/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import './Auth.css';
 
 type AuthMode = 'signup' | 'signin';
+
+type ResetPasswordStep = 'request' | 'confirm' | null;
+type VerificationTarget = 'email' | null;
 
 type FormState = {
   email: string;
@@ -11,8 +21,8 @@ type FormState = {
   phoneLocal: string;
   country: string;
   dateOfBirth: string;
-  gender: string;
-  confirmationCode: string;
+  resetCode: string;
+  resetNewPassword: string;
 };
 
 type CountryOption = {
@@ -36,19 +46,23 @@ const initialFormState: FormState = {
   phoneLocal: '',
   country: 'US',
   dateOfBirth: '',
-  gender: 'male',
-  confirmationCode: '',
+  resetCode: '',
+  resetNewPassword: '',
 };
 
 const Auth = () => {
   const navigate = useNavigate();
   const [mode, setMode] = useState<AuthMode>('signup');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [needsConfirmation, setNeedsConfirmation] = useState(false);
+  const [resetPasswordStep, setResetPasswordStep] = useState<ResetPasswordStep>(null);
   const [countries, setCountries] = useState<CountryOption[]>(fallbackCountries);
   const [form, setForm] = useState<FormState>(initialFormState);
   const [statusMessage, setStatusMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [emailVerified, setEmailVerified] = useState(false);
+  const [verificationTarget, setVerificationTarget] = useState<VerificationTarget>(null);
+  const [verificationCodeInput, setVerificationCodeInput] = useState('');
+  const [verificationDestination, setVerificationDestination] = useState('');
 
   useEffect(() => {
     const controller = new AbortController();
@@ -97,16 +111,30 @@ const Auth = () => {
   }, []);
 
   const helperText = useMemo(() => {
+    if (resetPasswordStep === 'request') {
+      return 'Enter your account email to receive a verification code.';
+    }
+
+    if (resetPasswordStep === 'confirm') {
+      return 'Use the code from your email to set a new password.';
+    }
+
     if (mode === 'signup') {
       return 'Create your account and complete core profile details in one step.';
     }
 
     return 'Sign in to access your professional workspace.';
-  }, [mode]);
+  }, [mode, resetPasswordStep]);
 
   const selectedCountry = useMemo(() => {
     return countries.find((country) => country.value === form.country) ?? fallbackCountries[0];
   }, [countries, form.country]);
+
+  const maxDobDate = useMemo(() => {
+    const today = new Date();
+    const limit = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    return limit.toISOString().split('T')[0];
+  }, []);
 
   const updateField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -115,6 +143,144 @@ const Auth = () => {
   const resetMessages = () => {
     setErrorMessage('');
     setStatusMessage('');
+  };
+
+  const isOlderThan18 = (dateString: string) => {
+    if (!dateString) return false;
+
+    const today = new Date();
+    const birthDate = new Date(dateString);
+
+    if (Number.isNaN(birthDate.getTime())) return false;
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      age -= 1;
+    }
+
+    return age >= 18;
+  };
+
+  const validateSignupCoreFields = () => {
+    const normalizedEmail = form.email.trim();
+    const normalizedPhoneLocal = form.phoneLocal.replace(/\D/g, '');
+
+    if (!normalizedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      setErrorMessage('Enter a valid email before requesting verification.');
+      return null;
+    }
+
+    if (!form.password || form.password.length < 8) {
+      setErrorMessage('Enter a password with at least 8 characters.');
+      return null;
+    }
+
+    if (!normalizedPhoneLocal) {
+      setErrorMessage('Enter your phone number before requesting verification.');
+      return null;
+    }
+
+    if (!isOlderThan18(form.dateOfBirth)) {
+      setErrorMessage('You must be at least 18 years old to register.');
+      return null;
+    }
+
+    return {
+      email: normalizedEmail,
+      phoneLocal: normalizedPhoneLocal,
+      phoneNumber: `${selectedCountry.dialCode}${normalizedPhoneLocal}`,
+    };
+  };
+
+  const openVerificationModal = async () => {
+    resetMessages();
+    setIsSubmitting(true);
+
+    try {
+      const normalized = validateSignupCoreFields();
+      if (!normalized) return;
+
+      let destination = normalized.email;
+
+      try {
+        const response = await signUp({
+          username: normalized.email,
+          password: form.password,
+          options: {
+            userAttributes: {
+              email: normalized.email,
+              birthdate: form.dateOfBirth,
+              phone_number: normalized.phoneNumber,
+              locale: form.country,
+              gender: 'other',
+            },
+            autoSignIn: false,
+          },
+        });
+
+        if (response.nextStep.signUpStep === 'CONFIRM_SIGN_UP') {
+          destination = response.nextStep.codeDeliveryDetails.destination ?? destination;
+        }
+      } catch (error) {
+        const message = error instanceof Error ? error.message : '';
+
+        if (!message.includes('UsernameExistsException')) {
+          throw error;
+        }
+
+        const resendResponse = await resendSignUpCode({ username: normalized.email });
+        destination = resendResponse.destination ?? destination;
+      }
+
+      setVerificationTarget('email');
+      setVerificationDestination(destination);
+      setVerificationCodeInput('');
+      setStatusMessage(`Verification code sent to ${destination}.`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unable to send verification code.';
+      setErrorMessage(message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const closeVerificationModal = () => {
+    setVerificationTarget(null);
+    setVerificationCodeInput('');
+    setVerificationDestination('');
+  };
+
+  const confirmVerificationCode = async () => {
+    resetMessages();
+    setIsSubmitting(true);
+
+    try {
+      if (!verificationCodeInput.trim()) {
+        setErrorMessage('Enter the verification code.');
+        return;
+      }
+
+      await confirmSignUp({
+        username: form.email.trim(),
+        confirmationCode: verificationCodeInput.trim(),
+      });
+
+      await signIn({
+        username: form.email.trim(),
+        password: form.password,
+      });
+
+      setEmailVerified(true);
+      setStatusMessage('Email verified.');
+      closeVerificationModal();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unable to verify code.';
+      setErrorMessage(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSignIn = async (event: FormEvent<HTMLFormElement>) => {
@@ -148,36 +314,25 @@ const Auth = () => {
     setIsSubmitting(true);
 
     try {
-      const normalizedPhoneLocal = form.phoneLocal.replace(/\D/g, '');
-      const fullPhoneNumber = `${selectedCountry.dialCode}${normalizedPhoneLocal}`;
+      const normalized = validateSignupCoreFields();
+      if (!normalized) return;
 
-      if (!normalizedPhoneLocal) {
-        setErrorMessage('Enter your phone number without the country code.');
-        setIsSubmitting(false);
+      if (!emailVerified) {
+        setErrorMessage('Verify your email before creating the account.');
         return;
       }
 
-      const response = await signUp({
-        username: form.email.trim(),
+      const response = await signIn({
+        username: normalized.email,
         password: form.password,
-        options: {
-          userAttributes: {
-            email: form.email.trim(),
-            birthdate: form.dateOfBirth,
-            phone_number: fullPhoneNumber,
-            locale: form.country,
-            gender: form.gender,
-          },
-          autoSignIn: true,
-        },
       });
 
-      if (response.nextStep.signUpStep === 'CONFIRM_SIGN_UP') {
-        setNeedsConfirmation(true);
-        setStatusMessage('A verification code was sent to your email. Enter it below to complete registration.');
-      } else {
+      if (response.isSignedIn) {
         navigate('/dashboard');
+        return;
       }
+
+      setStatusMessage('Account verified. Please complete sign-in to continue.');
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unable to sign up.';
       setErrorMessage(message);
@@ -186,25 +341,44 @@ const Auth = () => {
     }
   };
 
-  const handleConfirm = async (event: FormEvent<HTMLFormElement>) => {
+  const handleResetPasswordRequest = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     resetMessages();
     setIsSubmitting(true);
 
     try {
-      await confirmSignUp({
-        username: form.email.trim(),
-        confirmationCode: form.confirmationCode.trim(),
-      });
+      const response = await resetPassword({ username: form.email.trim() });
+      const destination = response.nextStep.codeDeliveryDetails?.destination;
 
-      await signIn({
-        username: form.email.trim(),
-        password: form.password,
-      });
-
-      navigate('/dashboard');
+      setResetPasswordStep('confirm');
+      setStatusMessage(destination ? `A reset code was sent to ${destination}.` : 'A reset code was sent to your email.');
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unable to verify account.';
+      const message = error instanceof Error ? error.message : 'Unable to start password reset.';
+      setErrorMessage(message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleResetPasswordConfirm = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    resetMessages();
+    setIsSubmitting(true);
+
+    try {
+      await confirmResetPassword({
+        username: form.email.trim(),
+        confirmationCode: form.resetCode.trim(),
+        newPassword: form.resetNewPassword,
+      });
+
+      setResetPasswordStep(null);
+      updateField('password', form.resetNewPassword);
+      updateField('resetCode', '');
+      updateField('resetNewPassword', '');
+      setStatusMessage('Password updated. Sign in with your new password.');
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unable to reset password.';
       setErrorMessage(message);
     } finally {
       setIsSubmitting(false);
@@ -234,21 +408,38 @@ const Auth = () => {
             <p>{helperText}</p>
           </div>
 
-          {!needsConfirmation && (
+          {!resetPasswordStep && (
             <form
               className={`auth-form ${mode === 'signup' ? 'auth-form-signup' : ''}`}
               onSubmit={mode === 'signup' ? handleSignUp : handleSignIn}
             >
               <div className="auth-field auth-span-2">
                 <label htmlFor="email">Business email</label>
-                <input
-                  id="email"
-                  type="email"
-                  value={form.email}
-                  onChange={(event) => updateField('email', event.target.value)}
-                  placeholder="name@company.com"
-                  required
-                />
+                <div className="auth-input-with-action">
+                  <input
+                    id="email"
+                    type="email"
+                    value={form.email}
+                    onChange={(event) => {
+                      updateField('email', event.target.value);
+                      setEmailVerified(false);
+                    }}
+                    placeholder="name@company.com"
+                    required
+                  />
+                  {mode === 'signup' && (
+                    <button
+                      type="button"
+                      className={`auth-verify-btn ${emailVerified ? 'auth-verify-btn-verified' : ''}`}
+                      onClick={() => {
+                        void openVerificationModal();
+                      }}
+                      aria-label={emailVerified ? 'Email verified, request OTP again' : 'Request email OTP'}
+                    >
+                      {emailVerified ? '✓' : 'OTP'}
+                    </button>
+                  )}
+                </div>
               </div>
 
               <div className="auth-field auth-span-2">
@@ -270,7 +461,9 @@ const Auth = () => {
                     <select
                       id="country"
                       value={form.country}
-                      onChange={(event) => updateField('country', event.target.value)}
+                      onChange={(event) => {
+                        updateField('country', event.target.value);
+                      }}
                       required
                     >
                       {countries.map((country) => (
@@ -282,6 +475,18 @@ const Auth = () => {
                   </div>
 
                   <div className="auth-field">
+                    <label htmlFor="dob">Date of birth</label>
+                    <input
+                      id="dob"
+                      type="date"
+                      value={form.dateOfBirth}
+                      onChange={(event) => updateField('dateOfBirth', event.target.value)}
+                      max={maxDobDate}
+                      required
+                    />
+                  </div>
+
+                  <div className="auth-field auth-span-2">
                     <label htmlFor="phone">Phone number</label>
                     <div className="auth-phone-group">
                       <input
@@ -294,36 +499,13 @@ const Auth = () => {
                         id="phone"
                         type="tel"
                         value={form.phoneLocal}
-                        onChange={(event) => updateField('phoneLocal', event.target.value)}
+                        onChange={(event) => {
+                          updateField('phoneLocal', event.target.value);
+                        }}
                         placeholder=""
                         required
                       />
                     </div>
-                  </div>
-
-                  <div className="auth-field">
-                    <label htmlFor="gender">Gender</label>
-                    <select
-                      id="gender"
-                      value={form.gender}
-                      onChange={(event) => updateField('gender', event.target.value)}
-                      required
-                    >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-
-                  <div className="auth-field">
-                    <label htmlFor="dob">Date of birth</label>
-                    <input
-                      id="dob"
-                      type="date"
-                      value={form.dateOfBirth}
-                      onChange={(event) => updateField('dateOfBirth', event.target.value)}
-                      required
-                    />
                   </div>
                 </>
               )}
@@ -332,6 +514,19 @@ const Auth = () => {
                 {errorMessage && <p className="auth-feedback auth-error">{errorMessage}</p>}
                 {statusMessage && <p className="auth-feedback auth-info">{statusMessage}</p>}
 
+                {mode === 'signin' && (
+                  <button
+                    type="button"
+                    className="auth-forgot-link"
+                    onClick={() => {
+                      resetMessages();
+                      setResetPasswordStep('request');
+                    }}
+                  >
+                    Forgot password?
+                  </button>
+                )}
+
                 <button type="submit" className="auth-submit" disabled={isSubmitting}>
                   {isSubmitting ? 'Processing...' : mode === 'signup' ? 'Create account' : 'Sign in'}
                 </button>
@@ -339,16 +534,16 @@ const Auth = () => {
             </form>
           )}
 
-          {needsConfirmation && (
-            <form className="auth-form" onSubmit={handleConfirm}>
+          {resetPasswordStep === 'request' && (
+            <form className="auth-form" onSubmit={handleResetPasswordRequest}>
               <div className="auth-field auth-span-2">
-                <label htmlFor="confirmationCode">Verification code</label>
+                <label htmlFor="resetEmail">Business email</label>
                 <input
-                  id="confirmationCode"
-                  type="text"
-                  value={form.confirmationCode}
-                  onChange={(event) => updateField('confirmationCode', event.target.value)}
-                  placeholder="Enter the code sent to your email"
+                  id="resetEmail"
+                  type="email"
+                  value={form.email}
+                  onChange={(event) => updateField('email', event.target.value)}
+                  placeholder="name@company.com"
                   required
                 />
               </div>
@@ -358,19 +553,142 @@ const Auth = () => {
                 {statusMessage && <p className="auth-feedback auth-info">{statusMessage}</p>}
 
                 <button type="submit" className="auth-submit" disabled={isSubmitting}>
-                  {isSubmitting ? 'Verifying...' : 'Verify and continue'}
+                  {isSubmitting ? 'Sending code...' : 'Send reset code'}
+                </button>
+
+                <button
+                  type="button"
+                  className="auth-secondary-link"
+                  onClick={() => {
+                    resetMessages();
+                    setResetPasswordStep(null);
+                  }}
+                >
+                  Back to sign in
                 </button>
               </div>
             </form>
           )}
 
-          <button
-            type="button"
-            className="auth-linkedin"
-            onClick={() => window.open('https://www.linkedin.com/', '_blank', 'noopener,noreferrer')}
-          >
-            Continue with LinkedIn
-          </button>
+          {resetPasswordStep === 'confirm' && (
+            <form className="auth-form" onSubmit={handleResetPasswordConfirm}>
+              <div className="auth-field auth-span-2">
+                <label htmlFor="resetCode">Verification code</label>
+                <input
+                  id="resetCode"
+                  type="text"
+                  value={form.resetCode}
+                  onChange={(event) => updateField('resetCode', event.target.value)}
+                  placeholder="Enter the code from your email"
+                  required
+                />
+              </div>
+
+              <div className="auth-field auth-span-2">
+                <label htmlFor="resetNewPassword">New password</label>
+                <input
+                  id="resetNewPassword"
+                  type="password"
+                  value={form.resetNewPassword}
+                  onChange={(event) => updateField('resetNewPassword', event.target.value)}
+                  placeholder="Minimum 8 characters"
+                  required
+                />
+              </div>
+
+              <div className="auth-span-2">
+                {errorMessage && <p className="auth-feedback auth-error">{errorMessage}</p>}
+                {statusMessage && <p className="auth-feedback auth-info">{statusMessage}</p>}
+
+                <button type="submit" className="auth-submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Updating password...' : 'Update password'}
+                </button>
+
+                <button
+                  type="button"
+                  className="auth-secondary-link"
+                  onClick={() => {
+                    resetMessages();
+                    setResetPasswordStep('request');
+                  }}
+                >
+                  Resend code
+                </button>
+              </div>
+            </form>
+          )}
+
+          {!resetPasswordStep && mode === 'signin' && (
+            <div className="auth-social-row" aria-label="Social sign in options">
+              <button
+                type="button"
+                className="auth-social-btn auth-social-linkedin"
+                onClick={() => window.open('https://www.linkedin.com/', '_blank', 'noopener,noreferrer')}
+                aria-label="Sign in with LinkedIn"
+                title="Sign in with LinkedIn"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M4.98 3.5A2.49 2.49 0 1 0 5 8.48 2.49 2.49 0 0 0 4.98 3.5zM3 9h4v12H3zm7 0h3.83v1.64h.06c.53-1.01 1.84-2.08 3.79-2.08C21 8.56 22 10.55 22 14.06V21h-4v-6.07c0-1.45-.03-3.32-2.02-3.32-2.02 0-2.33 1.58-2.33 3.21V21h-4z"
+                  />
+                </svg>
+              </button>
+
+              <button
+                type="button"
+                className="auth-social-btn auth-social-google"
+                onClick={() => window.open('https://accounts.google.com/', '_blank', 'noopener,noreferrer')}
+                aria-label="Sign in with Google"
+                title="Sign in with Google"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    fill="#EA4335"
+                    d="M12 10.2v3.9h5.5c-.24 1.26-.97 2.33-2.05 3.05l3.3 2.56c1.92-1.77 3.03-4.38 3.03-7.5 0-.73-.06-1.43-.19-2.1H12z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M12 22c2.73 0 5.01-.9 6.68-2.3l-3.3-2.56c-.92.62-2.09.98-3.38.98-2.6 0-4.8-1.76-5.58-4.13H3.02v2.6A10 10 0 0 0 12 22z"
+                  />
+                  <path
+                    fill="#4A90E2"
+                    d="M6.42 13.99A5.99 5.99 0 0 1 6.1 12c0-.69.12-1.35.32-1.99V7.4H3.02A10 10 0 0 0 2 12c0 1.61.39 3.13 1.02 4.59l3.4-2.6z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M12 5.88c1.48 0 2.8.51 3.85 1.51l2.9-2.9C17 2.91 14.72 2 12 2A10 10 0 0 0 3.02 7.4l3.4 2.6C7.2 7.64 9.4 5.88 12 5.88z"
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
+
+          {verificationTarget && (
+            <div className="auth-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="verificationTitle">
+              <div className="auth-modal">
+                <h3 id="verificationTitle">
+                  Verify email
+                </h3>
+                <p>Enter the 6-digit code sent to {verificationDestination}.</p>
+                <input
+                  type="text"
+                  value={verificationCodeInput}
+                  onChange={(event) => setVerificationCodeInput(event.target.value)}
+                  placeholder="6-digit code"
+                  maxLength={6}
+                />
+                <div className="auth-modal-actions">
+                  <button type="button" className="auth-modal-secondary" onClick={closeVerificationModal}>
+                    Cancel
+                  </button>
+                  <button type="button" className="auth-modal-primary" onClick={confirmVerificationCode}>
+                    Confirm
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
           <p className="auth-switch">
             {mode === 'signup' ? 'Already have an account?' : 'Need an account?'}
@@ -378,7 +696,8 @@ const Auth = () => {
               type="button"
               onClick={() => {
                 resetMessages();
-                setNeedsConfirmation(false);
+                setResetPasswordStep(null);
+                closeVerificationModal();
                 setMode((prev) => (prev === 'signup' ? 'signin' : 'signup'));
               }}
             >
@@ -396,5 +715,3 @@ const Auth = () => {
 };
 
 export default Auth;
-
-
