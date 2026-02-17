@@ -1,116 +1,426 @@
+import React, { useEffect, useRef, useState } from 'react';
 import './About.css';
 
-const values = [
-  {
-    title: 'Integrity First',
-    description: 'We keep research transparent and verifiable so every decision is built on trusted data.'
-  },
-  {
-    title: 'Quality at Scale',
-    description: 'From respondent screening to reporting, we maintain consistent quality across every project.'
-  },
-  {
-    title: 'Client Partnership',
-    description: 'We work as an extension of your team, aligning research workflows with business outcomes.'
-  }
-];
+const About: React.FC = () => {
+  const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({});
+  const [isNavHidden, setIsNavHidden] = useState(false);
+  const [activeValue, setActiveValue] = useState(0);
+  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+  const lastScrollY = useRef(0);
+  const isNavHiddenRef = useRef(isNavHidden);
+  const downAccum = useRef(0);
+  const upAccum = useRef(0);
 
-const stats = [
-  { value: '12+', label: 'Years in Market Insights' },
-  { value: '430+', label: 'Enterprise Projects Delivered' },
-  { value: '1.8M', label: 'Verified Survey Responses' },
-  { value: '96%', label: 'Client Satisfaction Rate' }
-];
+  useEffect(() => {
+    isNavHiddenRef.current = isNavHidden;
+  }, [isNavHidden]);
 
-const leaders = [
-  { name: 'Amina Rahman', role: 'Chief Executive Officer' },
-  { name: 'Daniel Price', role: 'VP, Research Operations' },
-  { name: 'Sophia Chen', role: 'Director, Data Quality' }
-];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible((prev) => ({ ...prev, [entry.target.id]: true }));
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
+    Object.values(sectionRefs.current).forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+    return () => observer.disconnect();
+  }, []);
 
-function About() {
+  useEffect(() => {
+    let ticking = false;
+    const THRESHOLD = 14;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentY = window.scrollY;
+          const delta = currentY - lastScrollY.current;
+          if (currentY < 100) {
+            if (isNavHiddenRef.current) setIsNavHidden(false);
+            downAccum.current = 0;
+            upAccum.current = 0;
+          } else {
+            if (delta > 0) {
+              downAccum.current += delta;
+              upAccum.current = 0;
+              if (!isNavHiddenRef.current && downAccum.current > THRESHOLD) {
+                setIsNavHidden(true);
+                downAccum.current = 0;
+              }
+            } else if (delta < 0) {
+              upAccum.current += -delta;
+              downAccum.current = 0;
+              if (isNavHiddenRef.current && upAccum.current > THRESHOLD) {
+                setIsNavHidden(false);
+                upAccum.current = 0;
+              }
+            }
+          }
+          lastScrollY.current = currentY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const principles = [
+    {
+      number: '01',
+      title: 'Verified Authority',
+      body: 'Every member undergoes a rigorous vetting process. We verify credentials, confirm seniority, and validate industry standing before granting access. There are no exceptions.',
+    },
+    {
+      number: '02',
+      title: 'Intentional Connection',
+      body: 'We reject the premise that more connections equal more value. Our AI matches executives based on strategic alignment, not algorithmic volume. Every introduction is deliberate.',
+    },
+    {
+      number: '03',
+      title: 'Confidential by Default',
+      body: 'Conversations, profiles, and engagements within our platform are governed by strict confidentiality standards. Your data is never sold, shared, or weaponized.',
+    },
+    {
+      number: '04',
+      title: 'Long-Term Thinking',
+      body: 'We are building a generational institution — not chasing quarterly metrics. Every product decision, every admitted member, every partnership reflects a 10-year horizon.',
+    },
+  ];
+
+  const leadership = [
+    { initials: 'SM', name: 'Sarah Mitchell', title: 'Chief Executive Officer', tenure: 'Est. 2018' },
+    { initials: 'JO', name: 'James Okonkwo', title: 'Chief Technology Officer', tenure: 'Est. 2019' },
+    { initials: 'PA', name: 'Priya Anand', title: 'Head of Community', tenure: 'Est. 2020' },
+    { initials: 'DR', name: 'Daniel Reyes', title: 'Head of Partnerships', tenure: 'Est. 2021' },
+    { initials: 'LC', name: 'Laura Chen', title: 'Chief Revenue Officer', tenure: 'Est. 2022' },
+  ];
+
+  const numbers = [
+    { value: '5,000+', label: 'Verified Members' },
+    { value: '75+', label: 'Industries' },
+    { value: '$2.4B', label: 'Deals Facilitated' },
+    { value: '40+', label: 'Countries' },
+  ];
+
   return (
-    <main className="about-shell">
-      <section className="about-hero">
-        <p className="about-kicker">About Us</p>
-        <h1 className="about-title">Building Confident Decisions Through Better Research</h1>
-        <p className="about-subtitle">
-          We help organizations understand people, markets, and behavior with reliable panel data and clear
-          reporting.
-        </p>
+    <div className="ap-root">
+
+      {/* ── NAVBAR ── */}
+      <nav className={`ap-nav ${isNavHidden ? 'ap-nav--hidden' : ''}`}>
+        <div className="ap-nav__inner">
+          <div className="ap-nav__logo">B2B Community</div>
+          <ul className="ap-nav__menu">
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <div className="ap-nav__actions">
+            <button className="ap-nav__btn ap-nav__btn--ghost">Sign In</button>
+            <button className="ap-nav__btn ap-nav__btn--solid">Join Now</button>
+          </div>
+        </div>
+      </nav>
+
+      {/* ── HERO — Editorial Typographic ── */}
+      <section className="ap-hero">
+        <div className="ap-hero__inner">
+          <div className="ap-hero__meta">
+            <span className="ap-rule-line" />
+            <span className="ap-meta-text">About Us &nbsp;·&nbsp; Since 2018</span>
+          </div>
+          <h1 className="ap-hero__headline">
+            <span className="ap-hero__line">We exist</span>
+            <span className="ap-hero__line ap-hero__line--indent">to elevate</span>
+            <span className="ap-hero__line">
+              <em>the way</em>
+            </span>
+            <span className="ap-hero__line ap-hero__line--indent">leaders</span>
+            <span className="ap-hero__line">connect.</span>
+          </h1>
+          <div className="ap-hero__aside">
+            <p className="ap-hero__sub">
+              B2B Community is the world's most selective professional network for senior business leaders. We curate the conditions for consequential conversation.
+            </p>
+            <a href="#mission" className="ap-hero__scroll">
+              <span>Read our story</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M12 5v14M5 12l7 7 7-7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div className="ap-hero__stats">
+          {numbers.map((n, i) => (
+            <div className="ap-hero__stat" key={i}>
+              <strong>{n.value}</strong>
+              <span>{n.label}</span>
+            </div>
+          ))}
+        </div>
       </section>
 
-      <section className="about-story">
-        <div className="about-story-copy">
-          <h2>Our Story</h2>
-          <p>
-            PanelHub began as a small research operations team focused on one goal: making survey intelligence
-            faster, cleaner, and more actionable for growing businesses.
-          </p>
-          <p>
-            Today, we support cross-functional teams with end-to-end survey execution, response quality control,
-            and insight delivery that supports strategic decisions.
-          </p>
-        </div>
-        <div className="about-story-panel" aria-hidden="true">
-          <div className="story-badge">
-            <span>Trusted by product, marketing, and strategy teams</span>
+      {/* ── MISSION — Manifesto Style ── */}
+      <section
+        id="mission"
+        ref={(el) => { sectionRefs.current['mission'] = el; }}
+        className={`ap-section ap-manifesto ${isVisible['mission'] ? 'ap-visible' : ''}`}
+      >
+        <div className="ap-manifesto__inner">
+          <div className="ap-manifesto__label">
+            <span className="ap-folio">01</span>
+            <span className="ap-label-text">Our Mission</span>
+          </div>
+          <div className="ap-manifesto__body">
+            <h2 className="ap-manifesto__statement">
+              The world's best ideas don't live in boardrooms.<br />
+              They emerge when the right leaders<br />
+              <span className="ap-red-text">find each other.</span>
+            </h2>
+            <div className="ap-manifesto__columns">
+              <p>
+                B2B Community was founded on a conviction: that traditional networking is broken. It rewards volume over value, speed over substance, and connection counts over actual consequence. We built the antidote.
+              </p>
+              <p>
+                Our platform carefully engineers the conditions under which senior executives can share knowledge, build strategic alliances, and access opportunities that genuinely move the needle — without the noise that has come to define professional networking.
+              </p>
+            </div>
+            <div className="ap-manifesto__pull">
+              <div className="ap-pull-rule" />
+              <blockquote>
+                "Quality of connection is the only metric that matters."
+              </blockquote>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="about-stats" aria-label="Company highlights">
-        {stats.map((item) => (
-          <article key={item.label} className="about-stat">
-            <h3>{item.value}</h3>
-            <p>{item.label}</p>
-          </article>
-        ))}
-      </section>
-
-      <section className="about-values">
-        <div className="about-values-head">
-          <h2>What We Stand For</h2>
-          <p>Our operating principles keep research outcomes accurate, fast, and business-ready.</p>
-        </div>
-        <div className="about-values-grid">
-          {values.map((value) => (
-            <article key={value.title} className="value-card">
-              <h3>{value.title}</h3>
-              <p>{value.description}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="about-team">
-        <div className="about-team-head">
-          <h2>Leadership</h2>
-          <p>Experienced operators with deep expertise in insights, research, and data standards.</p>
-        </div>
-        <div className="about-team-grid">
-          {leaders.map((leader) => (
-            <article key={leader.name} className="leader-card">
-              <div className="leader-avatar" aria-hidden="true">
-                {leader.name
-                  .split(' ')
-                  .map((part) => part[0])
-                  .join('')}
+      {/* ── PRINCIPLES — Accordion List ── */}
+      <section
+        id="principles"
+        ref={(el) => { sectionRefs.current['principles'] = el; }}
+        className={`ap-section ap-principles ${isVisible['principles'] ? 'ap-visible' : ''}`}
+      >
+        <div className="ap-principles__inner">
+          <div className="ap-principles__header">
+            <span className="ap-folio">02</span>
+            <h2 className="ap-section-title">What We Stand For</h2>
+          </div>
+          <div className="ap-principles__list">
+            {principles.map((p, i) => (
+              <div
+                key={i}
+                className={`ap-principle ${activeValue === i ? 'ap-principle--active' : ''}`}
+                onClick={() => setActiveValue(i)}
+              >
+                <div className="ap-principle__header">
+                  <span className="ap-principle__num">{p.number}</span>
+                  <h3 className="ap-principle__title">{p.title}</h3>
+                  <div className="ap-principle__toggle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d={activeValue === i ? 'M5 12h14' : 'M12 5v14M5 12h14'} />
+                    </svg>
+                  </div>
+                </div>
+                <div className="ap-principle__body">
+                  <p>{p.body}</p>
+                </div>
               </div>
-              <h3>{leader.name}</h3>
-              <p>{leader.role}</p>
-            </article>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="about-cta">
-        <h2>Partner With PanelHub</h2>
-        <p>Need a reliable research partner for ongoing surveys and panel analytics?</p>
-        <button type="button">Talk to Our Team</button>
+      {/* ── TIMELINE — Horizontal Rule Style ── */}
+      <section
+        id="history"
+        ref={(el) => { sectionRefs.current['history'] = el; }}
+        className={`ap-section ap-history ${isVisible['history'] ? 'ap-visible' : ''}`}
+      >
+        <div className="ap-history__inner">
+          <div className="ap-history__header">
+            <span className="ap-folio">03</span>
+            <h2 className="ap-section-title">A Brief History</h2>
+          </div>
+          <div className="ap-history__track">
+            <div className="ap-history__rail" />
+            {[
+              { year: '2018', event: 'Founded', detail: '50 hand-picked executives. One shared belief.' },
+              { year: '2019', event: 'First 1K Members', detail: 'Expanded to London and Singapore.' },
+              { year: '2021', event: 'Series A', detail: '$12M raised. AI matching engine launched.' },
+              { year: '2022', event: 'Global Reach', detail: '40 countries. 75+ industries represented.' },
+              { year: '2024', event: 'Enterprise Tier', detail: 'Survey intelligence services introduced.' },
+              { year: '2025', event: 'Platform 2.0', detail: 'Rebuilt for scale. Uncompromising quality.' },
+            ].map((m, i) => (
+              <div className="ap-history__node" key={i}>
+                <div className="ap-history__dot" />
+                <div className="ap-history__year">{m.year}</div>
+                <div className="ap-history__event">{m.event}</div>
+                <div className="ap-history__detail">{m.detail}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
-    </main>
+
+      {/* ── LEADERSHIP — Dark Strip ── */}
+      <section
+        id="leadership"
+        ref={(el) => { sectionRefs.current['leadership'] = el; }}
+        className={`ap-leadership ${isVisible['leadership'] ? 'ap-visible' : ''}`}
+      >
+        <div className="ap-leadership__inner">
+          <div className="ap-leadership__header">
+            <div className="ap-leadership__label">
+              <span className="ap-folio ap-folio--light">04</span>
+              <h2 className="ap-section-title ap-section-title--light">The Leadership</h2>
+            </div>
+            <p className="ap-leadership__sub">
+              Operators and strategists who have led at the world's most consequential organizations.
+            </p>
+          </div>
+          <div className="ap-leadership__grid">
+            {leadership.map((m, i) => (
+              <div className="ap-leader-card" key={i}>
+                <div className="ap-leader-card__avatar">{m.initials}</div>
+                <div className="ap-leader-card__info">
+                  <span className="ap-leader-card__tenure">{m.tenure}</span>
+                  <h3 className="ap-leader-card__name">{m.name}</h3>
+                  <p className="ap-leader-card__title">{m.title}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── COMMITMENT — Red Accent Block ── */}
+      <section
+        id="commitment"
+        ref={(el) => { sectionRefs.current['commitment'] = el; }}
+        className={`ap-section ap-commitment ${isVisible['commitment'] ? 'ap-visible' : ''}`}
+      >
+        <div className="ap-commitment__inner">
+          <div className="ap-commitment__left">
+            <span className="ap-folio">05</span>
+            <h2 className="ap-section-title">Our Commitment<br />to You</h2>
+            <a href="#" className="ap-text-link">
+              View membership standards
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M3 8h10M9 4l4 4-4 4" />
+              </svg>
+            </a>
+          </div>
+          <div className="ap-commitment__right">
+            {[
+              { label: 'Time Respect', desc: 'Opportunities are concise, targeted, and always worth your attention.' },
+              { label: 'Curated Access', desc: 'Every member you meet has been vetted to the same standard as you.' },
+              { label: 'Zero Spam', desc: 'No cold outreach. No irrelevant pings. Signal only, always.' },
+              { label: 'Privacy First', desc: 'Your data, your network, your control. We never monetize your identity.' },
+              { label: 'Continuous Value', desc: 'Events, insights, and introductions that compound over time.' },
+            ].map((item, i) => (
+              <div className="ap-commitment__item" key={i}>
+                <div className="ap-commitment__item-num">{String(i + 1).padStart(2, '0')}</div>
+                <div className="ap-commitment__item-content">
+                  <strong>{item.label}</strong>
+                  <p>{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FINAL CTA ── */}
+      <section
+        id="ap-cta"
+        ref={(el) => { sectionRefs.current['ap-cta'] = el; }}
+        className={`ap-cta ${isVisible['ap-cta'] ? 'ap-visible' : ''}`}
+      >
+        <div className="ap-cta__inner">
+          <div className="ap-cta__left">
+            <span className="ap-label-text ap-label-text--dim">Membership</span>
+            <h2 className="ap-cta__headline">
+              Ready to join<br />the network?
+            </h2>
+          </div>
+          <div className="ap-cta__right">
+            <p>Selective admission. Verified members.<br />Real, consequential opportunities.</p>
+            <div className="ap-cta__actions">
+              <button className="ap-cta__btn ap-cta__btn--primary">Apply for Membership</button>
+              <button className="ap-cta__btn ap-cta__btn--ghost">Request Information</button>
+            </div>
+            <p className="ap-cta__note">Limited spots available each quarter.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer className="ap-footer">
+        <div className="ap-footer__inner">
+          <div className="ap-footer__brand">
+            <h3 className="ap-footer__logo">B2B Community</h3>
+            <p>The premier global community for B2B leaders to connect, learn, and grow. Built on trust and verified expertise.</p>
+            <div className="ap-footer__social">
+              <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin-in" /></a>
+              <a href="#" aria-label="Twitter"><i className="fab fa-twitter" /></a>
+              <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f" /></a>
+              <a href="#" aria-label="Instagram"><i className="fab fa-instagram" /></a>
+            </div>
+          </div>
+          <div className="ap-footer__col">
+            <h4>Explore</h4>
+            <ul>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#how-it-works">How It Works</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+          <div className="ap-footer__col">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Case Studies</a></li>
+              <li><a href="#">Whitepapers</a></li>
+              <li><a href="#">Webinars</a></li>
+              <li><a href="#">Support Center</a></li>
+              <li><a href="#">API Docs</a></li>
+            </ul>
+          </div>
+          <div className="ap-footer__col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+              <li><a href="#">Acceptable Use</a></li>
+            </ul>
+          </div>
+          <div className="ap-footer__col ap-footer__col--subscribe">
+            <h4>Newsletter</h4>
+            <p>Exclusive insights and community updates.</p>
+            <div className="ap-subscribe">
+              <input type="email" placeholder="Your email address" />
+              <button>Subscribe</button>
+            </div>
+          </div>
+        </div>
+        <div className="ap-footer__bottom">
+          <p>&copy; {new Date().getFullYear()} B2B Community. All Rights Reserved.</p>
+        </div>
+      </footer>
+
+    </div>
   );
-}
+};
 
 export default About;
