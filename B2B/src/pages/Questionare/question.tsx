@@ -127,26 +127,12 @@ const yearsOptions = [
 ];
 
 const hobbiesList = [
-  'Reading / Literature',
-  'Writing / Blogging',
-  'Sports / Athletics',
-  'Fitness / Exercise / Gym',
-  'Outdoor Activities (Hiking, Camping, etc.)',
-  'Travel / Exploration',
-  'Photography / Videography',
-  'Music (Listening, Playing Instruments, etc.)',
-  'Art / Painting / Drawing',
-  'Cooking / Baking',
-  'Gardening / Plant Care',
-  'Gaming (Video Games, Board Games, etc.)',
-  'Technology / Gadgets / Programming',
-  'Movies / TV Shows / Streaming',
-  'Fashion / Style',
-  'Crafts / DIY Projects',
-  'Volunteering / Community Service',
-  'Learning / Online Courses',
-  'Investing / Personal Finance',
-  'Pets / Animal Care',
+  'Skills & Micro-Learning (How-to guides & productivity)',
+  'Career Pathing (Advancement & management tips)',
+  'Work-Life Integration (Mental health & remote work)',
+  'Internal Networking (Cross-department mixers)',
+  'Recognition & Feedback (Celebrating wins)',
+  'Company Culture (Book clubs & fitness)',
   'Other',
 ];
 
@@ -185,7 +171,7 @@ const SECTIONS = [
   { key: 'A', title: 'Educational Background' },
   { key: 'B', title: 'Current Occupation & Employment' },
   { key: 'C', title: 'Personal Information & Demographics' },
-  { key: 'D', title: 'Hobbies, Interests & Lifestyle' },
+  { key: 'D', title: 'Interests & Lifestyle' },
   { key: 'E', title: 'Additional Information' },
   { key: 'F', title: 'Research Participation Consent' },
 ] as const;
@@ -520,7 +506,7 @@ const Questionnaire = () => {
       case 3:
         return (
           <div className="q-question-block">
-            <h3 className="q-question-title">12. What are your primary hobbies and interests? <span className="q-multi-hint">(Select all that apply)</span></h3>
+            <h3 className="q-question-title">12. What are your primary  interests? <span className="q-multi-hint">(Select all that apply)</span></h3>
             {renderCheckboxGroup('hobbies', hobbiesList, selectedHobbies, (v) => toggleMulti(setSelectedHobbies, v))}
           </div>
         );

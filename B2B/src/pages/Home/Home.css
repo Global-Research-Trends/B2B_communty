@@ -1638,8 +1638,8 @@ html {
   flex-grow: 1;
   padding: 12px;
   border: 1px solid var(--dim-grey);
-  background-color: var(--dim-grey);
-  color: var(--porcelain);
+  background-color: white;
+  color: black;
   border-radius: 6px 0 0 6px;
   outline: none;
 }
