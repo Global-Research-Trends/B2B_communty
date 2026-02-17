@@ -51,6 +51,67 @@ const surveys = [
   }
 ];
 
+const discussionCards = [
+  {
+    id: 'd1',
+    author: 'BrainyOlivia',
+    initials: 'BO',
+    title: 'What is the best way to stay consistent with learning?',
+    replies: 120,
+    tags: ['LearningHabits', 'Motivation', 'TimeManagement'],
+  },
+  {
+    id: 'd2',
+    author: 'Katie02',
+    initials: 'K2',
+    title: 'How I landed a freelance gig after finishing strategy training',
+    replies: 43,
+    tags: ['CareerJourney', 'Freelancing', 'BusinessCourse'],
+  },
+];
+
+const peerGroups = [
+  {
+    id: 'g1',
+    name: 'Business and Leadership Learners',
+    description: 'For founders, marketers, and business strategists shaping modern teams.',
+    members: '4.2k',
+  },
+  {
+    id: 'g2',
+    name: 'Design and Creative Circle',
+    description: 'A space for UX, product, and visual storytellers to exchange practical workflows.',
+    members: '3.5k',
+  },
+  {
+    id: 'g3',
+    name: 'Web Developers Unite',
+    description: 'Frontend, backend, and full-stack professionals building better products.',
+    members: '5.1k',
+  },
+];
+
+const trendingHashtags = [
+  'LearningStreak',
+  'BuiltWithCode',
+  'DesignInspo',
+  'AskTheCommunity',
+  'ChallengeAccepted',
+  'CareerSwitch',
+  'StudySetup',
+  'MyFirstCourse',
+  'WomenInTech',
+  'DailyWin',
+];
+
+const peopleToFollow = [
+  { id: 'p1', name: 'Uchiha_Obito', role: 'UX Enthusiast' },
+  { id: 'p2', name: 'Karina01', role: 'Designer' },
+  { id: 'p3', name: 'Designerzzz', role: 'Full-Stack Designer' },
+  { id: 'p4', name: 'StuartSmart', role: 'Mobile App Developer' },
+  { id: 'p5', name: 'OliviaRod01', role: 'Web Designer' },
+];
+
 const navigation = ['Dashboard', 'Community', 'Profile', 'Reports', 'Settings'];
 
 type DashboardUserProfile = {
@@ -202,6 +263,106 @@ const Dashboard = () => {
       {activeView === 'Profile' ? (
         <section className="dashboard">
           <ProfilePage onBack={() => setActiveView('Dashboard')} profileData={userProfile} />
+        </section>
+      ) : activeView === 'Community' ? (
+        <section className="dashboard dashboard-community-view">
+          <section className="community-topbar">
+            <input
+              className="community-search"
+              type="search"
+              placeholder="Search discussions, groups, members..."
+              aria-label="Search dashboard community"
+            />
+            <div className="community-topbar-right">
+              <button type="button" className="community-icon-btn">Mail</button>
+              <button type="button" className="community-icon-btn">Alerts</button>
+              <div className="community-user-pill">
+                <span className="community-user-avatar">{userProfile.displayName.slice(0, 1).toUpperCase()}</span>
+                <span className="community-user-name">{userProfile.displayName}</span>
+              </div>
+            </div>
+          </section>
+
+          <section className="community-layout">
+            <div className="community-main">
+              <section className="community-section">
+                <div className="community-section-head">
+                  <h2>Trending Discussions</h2>
+                  <button type="button" className="community-link-btn">See More</button>
+                </div>
+                <div className="discussion-grid">
+                  {discussionCards.map((discussion) => (
+                    <article key={discussion.id} className="discussion-card">
+                      <div className="discussion-author">
+                        <span className="discussion-avatar">{discussion.initials}</span>
+                        <span className="discussion-name">{discussion.author}</span>
+                      </div>
+                      <h3>{discussion.title}</h3>
+                      <p>{discussion.replies} replies</p>
+                      <div className="discussion-tags">
+                        {discussion.tags.map((tag) => (
+                          <span key={tag} className="discussion-tag">{tag}</span>
+                        ))}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+
+              <section className="community-section">
+                <div className="community-section-head">
+                  <h2>Peer Groups</h2>
+                  <button type="button" className="community-link-btn">See More</button>
+                </div>
+                <div className="group-list">
+                  {peerGroups.map((group) => (
+                    <article key={group.id} className="group-card">
+                      <div className="group-thumb" aria-hidden="true" />
+                      <div className="group-copy">
+                        <h3>{group.name}</h3>
+                        <p>{group.description}</p>
+                        <span>{group.members} members</span>
+                      </div>
+                      <button type="button" className="secondary-button group-join-btn">Join Group</button>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            </div>
+
+            <aside className="community-rail">
+              <article className="community-event-card">
+                <h3>Live Session This Friday: Designing for Impact</h3>
+                <p>May 24, 6:00 PM (GMT)</p>
+                <p>Join our expert-led workshop on practical B2B UX patterns and research-backed decisions.</p>
+                <button type="button" className="community-event-btn">Save Your Seat</button>
+              </article>
+
+              <article className="community-side-card">
+                <h3>Trending Hashtags</h3>
+                <div className="hashtag-list">
+                  {trendingHashtags.map((tag) => (
+                    <span key={tag} className="hashtag-chip">{tag}</span>
+                  ))}
+                </div>
+              </article>
+
+              <article className="community-side-card">
+                <h3>People to Follow</h3>
+                <div className="follow-list">
+                  {peopleToFollow.map((person) => (
+                    <div key={person.id} className="follow-row">
+                      <div>
+                        <p>{person.name}</p>
+                        <span>{person.role}</span>
+                      </div>
+                      <button type="button" className="community-follow-btn">Follow</button>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            </aside>
+          </section>
         </section>
       ) : (
       <section className="dashboard">
