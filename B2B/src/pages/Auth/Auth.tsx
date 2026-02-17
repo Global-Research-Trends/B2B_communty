@@ -6,6 +6,7 @@ import {
   resetPassword,
   signIn,
   signUp,
+  updateUserAttributes,
 } from 'aws-amplify/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import './Auth.css';
@@ -52,6 +53,12 @@ const initialFormState: FormState = {
   dateOfBirth: '',
   resetCode: '',
   resetNewPassword: '',
+};
+
+const getAuthErrorName = (error: unknown) => {
+  if (!error || typeof error !== 'object' || !('name' in error)) return '';
+  const maybeName = (error as { name?: unknown }).name;
+  return typeof maybeName === 'string' ? maybeName : '';
 };
 
 const Auth = () => {
@@ -232,7 +239,6 @@ const Auth = () => {
               family_name: normalized.lastName,
               email: normalized.email,
               birthdate: form.dateOfBirth,
-              phone_number: normalized.phoneNumber,
               locale: form.country,
               gender: 'other',
             },
@@ -244,9 +250,10 @@ const Auth = () => {
           destination = response.nextStep.codeDeliveryDetails.destination ?? destination;
         }
       } catch (error) {
+        const errorName = getAuthErrorName(error);
         const message = error instanceof Error ? error.message : '';
 
-        if (!message.includes('UsernameExistsException')) {
+        if (errorName !== 'UsernameExistsException' && !message.includes('UsernameExistsException')) {
           throw error;
         }
 
@@ -259,6 +266,20 @@ const Auth = () => {
       setVerificationCodeInput('');
       setStatusMessage(`Verification code sent to ${destination}.`);
     } catch (error) {
+      const errorName = getAuthErrorName(error);
+      const errorText = error instanceof Error ? error.message : '';
+
+      if (errorName === 'UserNotFoundException') {
+        setErrorMessage('No pending signup found for this email. Click "Create account" first to request OTP.');
+        return;
+      }
+
+      if (errorName === 'NotAuthorizedException' && errorText.includes('Current status is CONFIRMED')) {
+        setEmailVerified(true);
+        setStatusMessage('Email is already verified. You can continue.');
+        return;
+      }
+
       const message = error instanceof Error ? error.message : 'Unable to send verification code.';
       setErrorMessage(message);
     } finally {
@@ -285,11 +306,6 @@ const Auth = () => {
       await confirmSignUp({
         username: form.email.trim(),
         confirmationCode: verificationCodeInput.trim(),
-      });
-
-      await signIn({
-        username: form.email.trim(),
-        password: form.password,
       });
 
       setEmailVerified(true);
@@ -338,7 +354,7 @@ const Auth = () => {
       if (!normalized) return;
 
       if (!emailVerified) {
-        setErrorMessage('Verify your email before creating the account.');
+        setErrorMessage('Request and verify OTP before creating your account.');
         return;
       }
 
@@ -348,6 +364,11 @@ const Auth = () => {
       });
 
       if (response.isSignedIn) {
+        await updateUserAttributes({
+          userAttributes: {
+            phone_number: normalized.phoneNumber,
+          },
+        });
         navigate('/dashboard');
         return;
       }
@@ -433,6 +454,34 @@ const Auth = () => {
               className={`auth-form ${mode === 'signup' ? 'auth-form-signup' : ''}`}
               onSubmit={mode === 'signup' ? handleSignUp : handleSignIn}
             >
+              {mode === 'signup' && (
+                <>
+                  <div className="auth-field">
+                    <label htmlFor="firstName">First name</label>
+                    <input
+                      id="firstName"
+                      type="text"
+                      value={form.firstName}
+                      onChange={(event) => updateField('firstName', event.target.value)}
+                      placeholder="Alex"
+                      required
+                    />
+                  </div>
+
+                  <div className="auth-field">
+                    <label htmlFor="lastName">Last name</label>
+                    <input
+                      id="lastName"
+                      type="text"
+                      value={form.lastName}
+                      onChange={(event) => updateField('lastName', event.target.value)}
+                      placeholder="Morgan"
+                      required
+                    />
+                  </div>
+                </>
+              )}
+
               <div className="auth-field auth-span-2">
                 <label htmlFor="email">Business email</label>
                 <div className="auth-input-with-action">
@@ -476,30 +525,6 @@ const Auth = () => {
 
               {mode === 'signup' && (
                 <>
-                  <div className="auth-field">
-                    <label htmlFor="firstName">First name</label>
-                    <input
-                      id="firstName"
-                      type="text"
-                      value={form.firstName}
-                      onChange={(event) => updateField('firstName', event.target.value)}
-                      placeholder="Alex"
-                      required
-                    />
-                  </div>
-
-                  <div className="auth-field">
-                    <label htmlFor="lastName">Last name</label>
-                    <input
-                      id="lastName"
-                      type="text"
-                      value={form.lastName}
-                      onChange={(event) => updateField('lastName', event.target.value)}
-                      placeholder="Morgan"
-                      required
-                    />
-                  </div>
-
                   <div className="auth-field">
                     <label htmlFor="country">Country</label>
                     <select
