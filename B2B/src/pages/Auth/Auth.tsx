@@ -331,7 +331,7 @@ const Auth = () => {
       });
 
       if (response.isSignedIn) {
-        navigate('/dashboard');
+        navigate('/questionnaire');
         return;
       }
 
@@ -364,12 +364,7 @@ const Auth = () => {
       });
 
       if (response.isSignedIn) {
-        await updateUserAttributes({
-          userAttributes: {
-            phone_number: normalized.phoneNumber,
-          },
-        });
-        navigate('/dashboard');
+        navigate('/questionnaire');
         return;
       }
 

@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard/Dashboard.tsx';
 import Auth from './pages/Auth/Auth.tsx';
 import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy.tsx';
 import About from './pages/About/About.tsx';
+import Questionnaire from './pages/Questionare/question.tsx';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/auth' element={<Auth />} />
+        <Route path='/questionnaire' element={<Questionnaire />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/about' element={<About />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
