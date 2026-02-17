@@ -1,19 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import './About.css';
 
 const About: React.FC = () => {
   const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({});
-  const [isNavHidden, setIsNavHidden] = useState(false);
   const [activeValue, setActiveValue] = useState(0);
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
-  const lastScrollY = useRef(0);
-  const isNavHiddenRef = useRef(isNavHidden);
-  const downAccum = useRef(0);
-  const upAccum = useRef(0);
-
-  useEffect(() => {
-    isNavHiddenRef.current = isNavHidden;
-  }, [isNavHidden]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,45 +23,6 @@ const About: React.FC = () => {
       if (ref) observer.observe(ref);
     });
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    let ticking = false;
-    const THRESHOLD = 14;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentY = window.scrollY;
-          const delta = currentY - lastScrollY.current;
-          if (currentY < 100) {
-            if (isNavHiddenRef.current) setIsNavHidden(false);
-            downAccum.current = 0;
-            upAccum.current = 0;
-          } else {
-            if (delta > 0) {
-              downAccum.current += delta;
-              upAccum.current = 0;
-              if (!isNavHiddenRef.current && downAccum.current > THRESHOLD) {
-                setIsNavHidden(true);
-                downAccum.current = 0;
-              }
-            } else if (delta < 0) {
-              upAccum.current += -delta;
-              downAccum.current = 0;
-              if (isNavHiddenRef.current && upAccum.current > THRESHOLD) {
-                setIsNavHidden(false);
-                upAccum.current = 0;
-              }
-            }
-          }
-          lastScrollY.current = currentY;
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const principles = [
@@ -113,22 +67,7 @@ const About: React.FC = () => {
     <div className="ap-root">
 
       {/* ── NAVBAR ── */}
-      <nav className={`ap-nav ${isNavHidden ? 'ap-nav--hidden' : ''}`}>
-        <div className="ap-nav__inner">
-          <div className="ap-nav__logo">B2B Community</div>
-          <ul className="ap-nav__menu">
-            <li><a href="#about">About</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-          <div className="ap-nav__actions">
-            <button className="ap-nav__btn ap-nav__btn--ghost">Sign In</button>
-            <button className="ap-nav__btn ap-nav__btn--solid">Join Now</button>
-          </div>
-        </div>
-      </nav>
+      <Header />
 
       {/* ── HERO — Editorial Typographic ── */}
       <section className="ap-hero">
@@ -364,63 +303,11 @@ const About: React.FC = () => {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="ap-footer">
-        <div className="ap-footer__inner">
-          <div className="ap-footer__brand">
-            <h3 className="ap-footer__logo">B2B Community</h3>
-            <p>The premier global community for B2B leaders to connect, learn, and grow. Built on trust and verified expertise.</p>
-            <div className="ap-footer__social">
-              <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin-in" /></a>
-              <a href="#" aria-label="Twitter"><i className="fab fa-twitter" /></a>
-              <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f" /></a>
-              <a href="#" aria-label="Instagram"><i className="fab fa-instagram" /></a>
-            </div>
-          </div>
-          <div className="ap-footer__col">
-            <h4>Explore</h4>
-            <ul>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#how-it-works">How It Works</a></li>
-              <li><a href="#pricing">Pricing</a></li>
-              <li><a href="#">Blog</a></li>
-            </ul>
-          </div>
-          <div className="ap-footer__col">
-            <h4>Resources</h4>
-            <ul>
-              <li><a href="#">Case Studies</a></li>
-              <li><a href="#">Whitepapers</a></li>
-              <li><a href="#">Webinars</a></li>
-              <li><a href="#">Support Center</a></li>
-              <li><a href="#">API Docs</a></li>
-            </ul>
-          </div>
-          <div className="ap-footer__col">
-            <h4>Legal</h4>
-            <ul>
-              <li><a href="#">Terms of Service</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Cookie Policy</a></li>
-              <li><a href="#">Acceptable Use</a></li>
-            </ul>
-          </div>
-          <div className="ap-footer__col ap-footer__col--subscribe">
-            <h4>Newsletter</h4>
-            <p>Exclusive insights and community updates.</p>
-            <div className="ap-subscribe">
-              <input type="email" placeholder="Your email address" />
-              <button>Subscribe</button>
-            </div>
-          </div>
-        </div>
-        <div className="ap-footer__bottom">
-          <p>&copy; {new Date().getFullYear()} B2B Community. All Rights Reserved.</p>
-        </div>
-      </footer>
+      <Footer />
 
     </div>
   );
 };
 
 export default About;
+

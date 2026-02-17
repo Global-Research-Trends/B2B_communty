@@ -59,128 +59,6 @@ section {
 }
 
 
-/* ========================================
-   NAVIGATION BAR
-======================================== */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.82);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(100, 101, 104, 0.4);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-  transition: transform 0.4s ease, opacity 0.35s ease;
-}
-
-.navbar::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--classic-crimson), transparent);
-  opacity: 0.6;
-}
-
-.nav-content {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0 4%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 76px;
-}
-
-.nav-logo {
-  color: var(--porcelain);
-  font-weight: 900;
-  letter-spacing: -0.5px;
-  font-size: 1.6rem;
-}
-
-.nav-menu {
-  list-style: none;
-  display: flex;
-  gap: 32px;
-  align-items: center;
-}
-
-.nav-menu li a {
-  color: var(--porcelain);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.98rem;
-  position: relative;
-  padding: 6px 0;
-  transition: color 0.3s ease;
-}
-
-.nav-menu li a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 2px;
-  background: var(--classic-crimson);
-  transition: width 0.3s ease;
-}
-
-.nav-menu li a:hover {
-  color: var(--classic-crimson);
-}
-
-.nav-menu li a:hover::after {
-  width: 100%;
-}
-
-.nav-actions {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.nav-btn {
-  padding: 10px 22px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 252, 0.25);
-  background: rgba(255, 255, 252, 0.05);
-  color: var(--porcelain);
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.nav-login {
-  border-color: rgba(110, 131, 135, 0.4);
-}
-
-.nav-login:hover {
-  background: rgba(110, 131, 135, 0.2);
-  border-color: var(--slate-grey);
-}
-
-.nav-signup {
-  background: linear-gradient(135deg, #d80032, #b50028);
-  border-color: transparent;
-  box-shadow: 0 10px 30px rgba(216, 0, 50, 0.35);
-}
-
-.nav-signup:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 14px 36px rgba(216, 0, 50, 0.45);
-}
-
-.navbar.nav-hidden {
-  transform: translateY(-110%);
-  opacity: 0;
-}
-
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -1519,31 +1397,11 @@ html {
   -ms-overflow-style: none; /* IE/Edge */
 }
 
-/* ========================================
-   RESPONSIVE NAVIGATION
-======================================== */
-@media (max-width: 1024px) {
-  .nav-menu {
-    gap: 25px;
-  }
-  
-  .nav-menu li a {
-    font-size: 0.9rem;
-  }
-}
-
 @media (max-width: 768px) {
-  .nav-menu {
-    display: none;
-  }
-  
-  .nav-content {
-    padding: 0 4%;
-  }
-  
   section {
     padding: 80px 4%;
   }
+<<<<<<< Updated upstream
 }
 
 /* ========================================
@@ -1671,6 +1529,8 @@ html {
 }
 
 @media (max-width: 768px) {
+=======
+>>>>>>> Stashed changes
 
   .cta-subtitle {
     font-size: 1.1rem;
