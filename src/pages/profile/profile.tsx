@@ -1,6 +1,8 @@
 ﻿'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { uploadData, getUrl, list } from 'aws-amplify/storage';
+import { getCurrentUser } from 'aws-amplify/auth';
 import './profile.css';
 
 // Icons as SVG components for cleaner code
@@ -76,10 +78,90 @@ interface ProfilePageProps {
     emailVerified: boolean;
     jobTitle: string;
   };
+  profileImageUrl?: string;
+  onProfileImageChange?: (url: string) => void;
 }
 
-const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData }) => {
+const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData, profileImageUrl, onProfileImageChange }) => {
   const [activeNav, setActiveNav] = useState('personal');
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(profileImageUrl ?? null);
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Load existing profile image from S3 on mount
+  useEffect(() => {
+    const loadProfileImage = async () => {
+      try {
+        const { userId } = await getCurrentUser();
+        const result = await list({ path: `profile-pictures/${userId}/` });
+        if (result.items.length > 0) {
+          // Get the most recent file
+          const sorted = [...result.items].sort((a, b) => {
+            const aTime = a.lastModified ? new Date(a.lastModified).getTime() : 0;
+            const bTime = b.lastModified ? new Date(b.lastModified).getTime() : 0;
+            return bTime - aTime;
+          });
+          const latestFile = sorted[0];
+          const urlResult = await getUrl({ path: latestFile.path });
+          setAvatarUrl(urlResult.url.toString());
+        }
+      } catch {
+        // If no image exists, keep default
+      }
+    };
+    if (!profileImageUrl) {
+      void loadProfileImage();
+    }
+  }, [profileImageUrl]);
+
+  const handleAvatarClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    if (!validTypes.includes(file.type)) {
+      alert('Please select a valid image file (JPEG, PNG, WebP, or GIF).');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Image must be smaller than 5MB.');
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const { userId } = await getCurrentUser();
+      const ext = file.name.split('.').pop() ?? 'jpg';
+      const key = `profile-pictures/${userId}/avatar.${ext}`;
+
+      await uploadData({
+        path: key,
+        data: file,
+        options: {
+          contentType: file.type,
+        },
+      }).result;
+
+      const urlResult = await getUrl({ path: key });
+      const newUrl = urlResult.url.toString();
+      setAvatarUrl(newUrl);
+      onProfileImageChange?.(newUrl);
+    } catch (err) {
+      console.error('Failed to upload profile image:', err);
+      alert('Failed to upload image. Please try again.');
+    } finally {
+      setUploading(false);
+      // Reset file input so the same file can be re-selected
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
 
   const navItems = [
     { id: 'personal', label: 'Personal Information', icon: <UserIcon /> },
@@ -98,12 +180,24 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData }) => {
       <div className="profile-header-card">
         <div className="profile-header-avatar">
           <img
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face"
+            src={avatarUrl ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(profileData.displayName)}&size=200&background=4f46e5&color=fff`}
             alt={profileData.displayName}
           />
-          <button className="avatar-edit-btn">
-            <EditIcon />
+          <button
+            className="avatar-edit-btn"
+            onClick={handleAvatarClick}
+            disabled={uploading}
+            title="Change profile picture"
+          >
+            {uploading ? <span className="avatar-spinner" /> : <EditIcon />}
           </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+          />
         </div>
         <div className="profile-header-info">
           <h2 className="profile-name">{profileData.fullName}</h2>

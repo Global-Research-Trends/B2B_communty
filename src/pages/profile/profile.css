@@ -647,3 +647,29 @@ html {
   background: rgba(216, 0, 50, 0.2);
   color: var(--color-secondary);
 }
+
+/* Profile Image Upload Spinner */
+.avatar-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: avatar-spin 0.6s linear infinite;
+}
+
+@keyframes avatar-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.avatar-edit-btn:disabled {
+  cursor: wait;
+  opacity: 0.8;
+}
+
+.profile-header-avatar img {
+  object-fit: cover;
+}

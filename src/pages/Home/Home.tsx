@@ -1,19 +1,12 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+﻿﻿import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import './Home.css';
 
 const Home: React.FC = () => {
   const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({});
-  const [isNavHidden, setIsNavHidden] = useState(false);
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
-  const lastScrollY = useRef(0);
-  const isNavHiddenRef = useRef(isNavHidden);
-  const downAccum = useRef(0);
-  const upAccum = useRef(0);
-
-  useEffect(() => {
-    isNavHiddenRef.current = isNavHidden;
-  }, [isNavHidden]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,72 +27,9 @@ const Home: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    let ticking = false;
-    const THRESHOLD = 14; // px required in one direction before toggling
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentY = window.scrollY;
-          const previousY = lastScrollY.current;
-          const delta = currentY - previousY;
-
-          // Near top - always show and reset accumulators
-          if (currentY < 100) {
-            if (isNavHiddenRef.current) setIsNavHidden(false);
-            downAccum.current = 0;
-            upAccum.current = 0;
-          } else {
-            if (delta > 0) {
-              // Scrolling down
-              downAccum.current += delta;
-              upAccum.current = 0;
-              if (!isNavHiddenRef.current && downAccum.current > THRESHOLD) {
-                setIsNavHidden(true);
-                downAccum.current = 0;
-              }
-            } else if (delta < 0) {
-              // Scrolling up
-              upAccum.current += -delta;
-              downAccum.current = 0;
-              if (isNavHiddenRef.current && upAccum.current > THRESHOLD) {
-                setIsNavHidden(false);
-                upAccum.current = 0;
-              }
-            }
-          }
-
-          lastScrollY.current = currentY;
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <div className="home-container">
-      {/* Navigation Bar */}
-      <nav className={`navbar ${isNavHidden ? 'nav-hidden' : ''}`}>
-        <div className="nav-content">
-          <div className="nav-logo">Global Research Trends</div>
-          <ul className="nav-menu">
-            <li><a href="/about">About</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-          <div className="nav-actions">
-            <Link to="/auth" className="nav-btn nav-login">Sign In</Link>
-            <Link to="/auth" className="nav-btn nav-signup">Request Access</Link>
-          </div>
-        </div>
-      </nav>
+      <Header />
 
       {/* Hero Section */}
       <section className="hero-section">
@@ -448,65 +378,9 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer Section */}
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-column footer-about">
-            <h3 className="footer-logo">Global Research Trends</h3>
-            <p>A global professional network for B2B leaders to connect, learn, and grow with verified expertise.</p>
-            <div className="social-icons">
-              <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin-in"></i></a>
-              <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
-              <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
-            </div>
-          </div>
-          <div className="footer-column">
-            <h4>Explore</h4>
-            <ul>
-              <li><a href="/about">About Us</a></li>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#how-it-works">How It Works</a></li>
-              <li><a href="#pricing">Pricing</a></li>
-              <li><a href="#">Blog</a></li>
-            </ul>
-          </div>
-          <div className="footer-column">
-            <h4>Resources</h4>
-            <ul>
-              <li><a href="#">Case Studies</a></li>
-              <li><a href="#">Whitepapers</a></li>
-              <li><a href="#">Webinars</a></li>
-              <li><a href="#">Support Center</a></li>
-              <li><a href="#">API Docs</a></li>
-            </ul>
-          </div>
-          <div className="footer-column">
-            <h4>Legal</h4>
-            <ul>
-              <li><a href="#">Terms of Service</a></li>
-              <li><a href="/privacy-policy">Privacy Policy</a></li>
-              <li><a href="#">Cookie Policy</a></li>
-              <li><a href="#">Acceptable Use</a></li>
-            </ul>
-          </div>
-          <div className="footer-column footer-subscribe">
-            <h4>Subscribe to Updates</h4>
-            <p>Receive industry insights, event invitations, and platform updates.</p>
-            <div className="subscribe-form">
-              <input type="email" placeholder="Your email address" />
-              <button>Subscribe</button>
-            </div>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Global Research Trends. All Rights Reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
 
 export default Home;
-
-

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
+import { getUrl, list } from 'aws-amplify/storage';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import ProfilePage from '../profile/profile';
@@ -150,6 +151,7 @@ const Dashboard = () => {
     emailVerified: false,
     jobTitle: notProvided,
   });
+  const [profileImageUrl, setProfileImageUrl] = useState<string | undefined>(undefined);
 
   const profileCompletion = 65;
   const engagementScore = 78;
@@ -195,6 +197,22 @@ const Dashboard = () => {
           emailVerified: attributes.email_verified === 'true',
           jobTitle: getValueOrFallback(attributes['custom:job_title']),
         });
+
+        // Load profile image from S3
+        try {
+          const imgResult = await list({ path: `profile-pictures/${currentUser.userId}/` });
+          if (imgResult.items.length > 0) {
+            const sorted = [...imgResult.items].sort((a, b) => {
+              const aTime = a.lastModified ? new Date(a.lastModified).getTime() : 0;
+              const bTime = b.lastModified ? new Date(b.lastModified).getTime() : 0;
+              return bTime - aTime;
+            });
+            const urlResult = await getUrl({ path: sorted[0].path });
+            setProfileImageUrl(urlResult.url.toString());
+          }
+        } catch {
+          // No profile image found, keep default
+        }
       } catch {
         setUserProfile((prev) => ({
           ...prev,
@@ -227,7 +245,7 @@ const Dashboard = () => {
         {/* Profile Avatar in Sidebar */}
         <div className="sidebar-profile-avatar" onClick={() => setActiveView('Profile')}>
           <img
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+            src={profileImageUrl ?? `https://ui-avatars.com/api/?name=${encodeURIComponent(userProfile.displayName)}&size=100&background=4f46e5&color=fff`}
             alt={userProfile.displayName}
             className="sidebar-avatar-img"
           />
@@ -262,7 +280,12 @@ const Dashboard = () => {
 
       {activeView === 'Profile' ? (
         <section className="dashboard">
-          <ProfilePage onBack={() => setActiveView('Dashboard')} profileData={userProfile} />
+          <ProfilePage
+            onBack={() => setActiveView('Dashboard')}
+            profileData={userProfile}
+            profileImageUrl={profileImageUrl}
+            onProfileImageChange={(url) => setProfileImageUrl(url)}
+          />
         </section>
       ) : activeView === 'Community' ? (
         <section className="dashboard dashboard-community-view">
