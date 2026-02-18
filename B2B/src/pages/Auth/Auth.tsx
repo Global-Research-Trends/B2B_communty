@@ -6,7 +6,6 @@ import {
   resetPassword,
   signIn,
   signUp,
-  updateUserAttributes,
 } from 'aws-amplify/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import './Auth.css';
