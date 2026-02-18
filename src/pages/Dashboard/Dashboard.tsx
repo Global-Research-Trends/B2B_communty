@@ -138,8 +138,6 @@ const Dashboard = () => {
     type: 'all',
     duration: 'all'
   });
-  const [showWithdrawOptions, setShowWithdrawOptions] = useState(false);
-  const [withdrawMethod, setWithdrawMethod] = useState('cash');
   const [activeView, setActiveView] = useState('Dashboard');
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [userProfile, setUserProfile] = useState<DashboardUserProfile>({
@@ -158,8 +156,9 @@ const Dashboard = () => {
   const currentEarnings = 85;
   const payoutGoal = 100;
   const payoutRemaining = 15;
-  const totalWithdrawable = 85;
-  const withdrawOptions = ['cash', 'voucher', 'gift card'];
+  const lifetimeTotal = 1240;
+  const lifetimeWithdrawn = 1095;
+  const lifetimePipeline = 145;
 
   const filteredSurveys = useMemo(() => {
     return surveys.filter((survey) => {
@@ -232,6 +231,10 @@ const Dashboard = () => {
     } catch {
       setIsLoggingOut(false);
     }
+  };
+
+  const handleWithdraw = () => {
+    navigate('/payment-gateway');
   };
 
   return (
@@ -397,17 +400,32 @@ const Dashboard = () => {
               Monitor survey performance, response quality, and panel activity from one workspace.
             </p>
           </div>
-          <button className="primary-button">Export Report</button>
+          <button type="button" className="primary-button">Export Report</button>
         </section>
 
         <section className="stats-grid">
-          <article className="stat-card">
+          <article className="stat-card profile-card">
             <p className="stat-label">Profile Completion</p>
-            <h2 className="stat-value">{profileCompletion}%</h2>
-            <div className="profile-progress-track" aria-hidden="true">
-              <div className="profile-progress-fill" />
+            <div className="profile-card-body">
+              <div className="profile-ring-wrap">
+                <svg className="profile-ring-svg" viewBox="0 0 64 64" aria-hidden="true">
+                  <circle cx="32" cy="32" r="26" className="profile-ring-track" />
+                  <circle cx="32" cy="32" r="26" className="profile-ring-fill" strokeDasharray={`${2 * Math.PI * 26 * profileCompletion / 100} ${2 * Math.PI * 26}`} />
+                </svg>
+                <span className="profile-ring-pct">{profileCompletion}%</span>
+              </div>
+              <div className="profile-card-copy">
+                <h3 className="profile-card-heading">Almost there</h3>
+                <p className="profile-card-sub">
+                  {100 - profileCompletion}% remaining to unlock all features
+                </p>
+                <div className="profile-steps">
+                  <span className="profile-step profile-step--done">Identity</span>
+                  <span className="profile-step profile-step--done">Contact</span>
+                  <span className="profile-step profile-step--pending">Documents</span>
+                </div>
+              </div>
             </div>
-            <p className="stat-meta">Complete your profile to access additional features</p>
           </article>
 
           <article className="stat-card engagement-card">
@@ -426,57 +444,59 @@ const Dashboard = () => {
             </div>
           </article>
 
-          <article className="stat-card earnings-card">
-            <p className="stat-label">Earnings Progress</p>
-            <div className="earnings-visual">
-              <div className="earnings-badge">
-                <span className="earnings-badge-value">${currentEarnings}</span>
-                <span className="earnings-badge-label">Current</span>
-              </div>
-              <div className="earnings-metrics">
-                <div className="earnings-metric">
-                  <p>Next Payout</p>
-                  <strong>${payoutGoal}</strong>
+          <article className="stat-card lifetime-card">
+            <p className="stat-label">Lifetime Rewards</p>
+            <h2 className="stat-value lifetime-total">${lifetimeTotal.toLocaleString()}</h2>
+            <div className="lifetime-rows">
+              <div className="lifetime-row">
+                <div className="lifetime-row-left">
+                  <span className="lifetime-row-icon lifetime-row-icon--withdrawn" />
+                  <span className="lifetime-row-label">Successfully Paid Out</span>
                 </div>
-                <div className="earnings-metric">
-                  <p>Remaining</p>
-                  <strong>${payoutRemaining}</strong>
-                </div>
+                <span className="lifetime-row-value">${lifetimeWithdrawn.toLocaleString()}</span>
               </div>
-            </div>
-            <p className="stat-meta">You are ${payoutRemaining} away from your next ${payoutGoal} payout.</p>
-          </article>
-
-          <article className="stat-card withdraw-card">
-            <div className="withdraw-head">
-              <p className="stat-label">Withdrawal Options</p>
-              <span className="withdraw-amount">${totalWithdrawable}</span>
-            </div>
-            <button
-              type="button"
-              className="withdraw-toggle"
-              onClick={() => setShowWithdrawOptions((prev) => !prev)}
-            >
-              Withdraw Funds
-            </button>
-            <div className={`withdraw-options ${showWithdrawOptions ? 'open' : ''}`}>
-              {withdrawOptions.map((option) => (
-                <button
-                  key={option}
-                  type="button"
-                  className={`withdraw-option ${withdrawMethod === option ? 'active' : ''}`}
-                  onClick={() => setWithdrawMethod(option)}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
-            <div className="withdraw-foot">
-              <p className="withdraw-total">Total withdrawable balance</p>
-              <p className="stat-meta">Selected method: {withdrawMethod}</p>
+              <div className="lifetime-row">
+                <div className="lifetime-row-left">
+                  <span className="lifetime-row-icon lifetime-row-icon--pipeline" />
+                  <span className="lifetime-row-label">Awaiting Payout</span>
+                </div>
+                <span className="lifetime-row-value lifetime-row-value--muted">${lifetimePipeline}</span>
+              </div>
+              <div className="lifetime-row">
+                <div className="lifetime-row-left">
+                  <span className="lifetime-row-icon lifetime-row-icon--rate" />
+                  <span className="lifetime-row-label">Payout Success Rate</span>
+                </div>
+                <span className="lifetime-row-value">{Math.round(lifetimeWithdrawn / lifetimeTotal * 100)}%</span>
+              </div>
             </div>
           </article>
         </section>
+
+        {/* ── Withdraw CTA Strip ── */}
+        <div className="withdraw-strip" onClick={handleWithdraw}>
+          <div className="withdraw-strip-inner">
+            <div className="withdraw-strip-copy">
+              <span className="withdraw-strip-label">Available Balance</span>
+              <h3 className="withdraw-strip-heading">Ready to cash out your earnings?</h3>
+              <p className="withdraw-strip-sub">${payoutRemaining} more until your next ${payoutGoal} payout threshold</p>
+            </div>
+            <div className="withdraw-strip-right">
+              <div className="withdraw-strip-amount">
+                <span className="withdraw-strip-amount-value">${currentEarnings}</span>
+                <span className="withdraw-strip-amount-label">Current balance</span>
+              </div>
+              <div className="withdraw-strip-divider" aria-hidden="true" />
+              <button
+                type="button"
+                className="withdraw-strip-btn"
+                onClick={(e) => { e.stopPropagation(); handleWithdraw(); }}
+              >
+                Withdraw Funds
+              </button>
+            </div>
+          </div>
+        </div>
 
         <section className="surveys-panel">
           <div className="panel-header">
@@ -563,5 +583,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-

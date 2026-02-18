@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import Header from '../../../B2B/src/components/Header/Header';
+import Footer from '../../../B2B/src/components/Footer/Footer';
 import './About.css';
 
 const About: React.FC = () => {
