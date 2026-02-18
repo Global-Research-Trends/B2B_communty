@@ -1,0 +1,20 @@
+type QuestionnaireResponse @model @auth(rules: [{allow: owner, ownerField: "owner"}])
+{
+  owner: String!
+  educationLevel: String
+  fieldOfStudy: String
+  graduationYear: String
+  occupationStatus: String
+  organizationType: String
+  industry: String
+  department: String
+  roleLevel: String
+  yearsExperience: String
+  provinceState: String
+  city: String
+  hobbies: String
+  languages: String
+  participationConsent: String
+  contactPreference: String
+  completedAt: AWSDateTime
+}
