@@ -1,5 +1,39 @@
-/* Color Palette Variables - Based on User's Palette */
-:root {
+/* Add these styles at the very beginning of your Home.css file */
+
+/* Network Canvas Background - Only for Hero Section */
+.hero-network-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background: black;
+}
+
+/* Ensure hero section content appears above canvas */
+.hero-section {
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
+  overflow: hidden; /* Prevents canvas overflow */
+}
+
+/* Keep all other sections with their original backgrounds */
+.trusted-section,
+.stats-section,
+.benefits-section,
+.about-section,
+.how-it-works-section,
+.value-prop-section,
+.cta-section,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ... (keep all your existing CSS below this) ... */:root {
   /* Primary Colors - 50-25-10-10-5 Rule */
   --porcelain: #fffffc;        /* 50% - Main backgrounds */
   --pure-black: #000000;        /* 25% - Hero, footer, primary text */
@@ -1401,7 +1435,6 @@ html {
   section {
     padding: 80px 4%;
   }
-<<<<<<< Updated upstream
 }
 
 /* ========================================
@@ -1529,8 +1562,6 @@ html {
 }
 
 @media (max-width: 768px) {
-=======
->>>>>>> Stashed changes
 
   .cta-subtitle {
     font-size: 1.1rem;
@@ -1551,5 +1582,478 @@ html {
   .hero-stats {
     flex-direction: column;
     gap: 20px;
+  }
+}
+* {
+  cursor: default !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+/* Allow pointer cursor only on clickable elements */
+a, button, .nav-btn, .btn-primary, .btn-secondary, 
+.btn-primary-large, .value-prop-btn, .subscribe-form button,
+.social-icons a, .footer-column ul a, [role="button"] {
+  cursor: pointer !important;
+}
+/* ========================================
+   HOW IT WORKS SECTION - SCROLL BASED ANIMATIONS
+======================================== */
+
+/* Initial state for heading - hidden and scaled down */
+.how-it-works-section .section-header {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Heading pop out effect when visible */
+.how-it-works-section.heading-visible .section-header {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Initial state for step items - slide from left */
+.how-it-works-section .step-item {
+  opacity: 0;
+  transform: translateX(-75px);
+  transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+  position: relative;
+}
+
+/* Hide all text content initially */
+.how-it-works-section .step-item .step-number,
+.how-it-works-section .step-item h3,
+.how-it-works-section .step-item p {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* ===== CARD ANIMATION STAGES ===== */
+
+/* Card 1 animation: 35% to 55% scroll */
+.how-it-works-section[data-cards-animated="1"] .step-item[data-card="1"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.how-it-works-section[data-cards-animated="1"] .step-item[data-card="1"] .step-number,
+.how-it-works-section[data-cards-animated="1"] .step-item[data-card="1"] h3,
+.how-it-works-section[data-cards-animated="1"] .step-item[data-card="1"] p {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+/* Card 2 animation: 55% to 75% scroll */
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="1"],
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="2"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="1"] .step-number,
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="1"] h3,
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="1"] p,
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="2"] .step-number,
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="2"] h3,
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="2"] p {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+/* Card 3 animation: 75% to 95% scroll */
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="1"],
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="2"],
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="3"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="1"] .step-number,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="1"] h3,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="1"] p,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="2"] .step-number,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="2"] h3,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="2"] p,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="3"] .step-number,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="3"] h3,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="3"] p {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+/* Hover effects */
+.how-it-works-section .step-item:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+}
+
+.how-it-works-section .step-item:hover .step-number {
+  background-color: var(--classic-crimson);
+  color: var(--porcelain);
+  transform: scale(1.1);
+  box-shadow: 0 10px 30px rgba(216, 0, 50, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .how-it-works-section .step-item {
+    transform: translateX(-100px);
+  }
+}
+
+@media (max-width: 768px) {
+  .how-it-works-section .step-item {
+    transform: translateX(-80px);
+  }
+}
+
+@media (max-width: 480px) {
+  .how-it-works-section .step-item {
+    transform: translateX(-60px);
+  }
+}
+
+/* ========================================
+   BENEFITS SECTION - SCROLL BASED ANIMATIONS
+======================================== */
+
+/* Initial state for heading - hidden and slide up */
+.benefits-section .section-header {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 300ms cubic-bezier(0.34, 1.56, 0.64, 1), 
+              transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Heading slide in effect when visible */
+.benefits-section.heading-visible .section-header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Initial state for benefit cards */
+.benefits-grid .benefit-card {
+  transform-origin: center bottom;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+  opacity: 0;
+  transform: translateY(28px) rotateX(12deg) scale(0.985);
+  filter: blur(4px);
+}
+
+/* Trigger animation when data attribute is set */
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card {
+  animation-name: joinNetworkReveal;
+  animation-duration: 600ms;
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation-fill-mode: forwards;
+}
+
+/* Stagger the cards */
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(1) { animation-delay: 0.04s; }
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(2) { animation-delay: 0.10s; }
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(3) { animation-delay: 0.16s; }
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(4) { animation-delay: 0.22s; }
+
+@keyframes joinNetworkReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) rotateX(12deg) scale(0.985);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-8px) rotateX(0deg) scale(1.02);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Disappear animation */
+@keyframes joinNetworkDisappear {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg) scale(1);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(28px) rotateX(12deg) scale(0.985);
+    filter: blur(4px);
+  }
+}
+
+.benefits-section[data-benefits-cards-disappear="1"] .benefits-grid > .benefit-card {
+  animation-name: joinNetworkDisappear;
+  animation-duration: 500ms;
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation-fill-mode: forwards;
+}
+
+/* Stagger disappear animation in reverse order */
+.benefits-section[data-benefits-cards-disappear="1"] .benefits-grid > .benefit-card:nth-child(1) { animation-delay: 0.22s; }
+.benefits-section[data-benefits-cards-disappear="1"] .benefits-grid > .benefit-card:nth-child(2) { animation-delay: 0.16s; }
+.benefits-section[data-benefits-cards-disappear="1"] .benefits-grid > .benefit-card:nth-child(3) { animation-delay: 0.10s; }
+.benefits-section[data-benefits-cards-disappear="1"] .benefits-grid > .benefit-card:nth-child(4) { animation-delay: 0.04s; }
+
+/* Hide content inside cards when disappearing */
+.benefits-section[data-benefits-cards-disappear="1"] .benefit-icon,
+.benefits-section[data-benefits-cards-disappear="1"] .benefit-card h3,
+.benefits-section[data-benefits-cards-disappear="1"] .benefit-card p {
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+
+/* Benefit card inner content reveal */
+.benefits-grid .benefit-icon,
+.benefits-grid .benefit-card h3,
+.benefits-grid .benefit-card p {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 200ms cubic-bezier(0.34, 1.56, 0.64, 1), 
+              transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(1) .benefit-icon,
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(1) h3,
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(1) p {
+  opacity: 1; transform: none; transition-delay: 0.28s;
+}
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(2) .benefit-icon,
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(2) h3,
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(2) p {
+  opacity: 1; transform: none; transition-delay: 0.35s;
+}
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(3) .benefit-icon,
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(3) h3,
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(3) p {
+  opacity: 1; transform: none; transition-delay: 0.45s;
+}
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(4) .benefit-icon,
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(4) h3,
+.benefits-section[data-benefits-cards-animated="1"] .benefits-grid > .benefit-card:nth-child(4) p {
+  opacity: 1; transform: none; transition-delay: 0.55s;
+}
+
+/* ========================================
+   VALUE PROPOSITION SECTION - ANIMATIONS
+======================================== */
+
+/* Initial hidden state for the two main cards */
+.value-prop-card.value-prop-primary {
+  opacity: 0;
+  transform: translateX(-36px);
+}
+.value-prop-card.value-prop-secondary {
+  opacity: 0;
+  transform: translateX(36px);
+}
+
+/* When the section receives data attribute, trigger slide-in animations */
+.value-prop-section[data-valueprop-animated="1"] .value-prop-card.value-prop-primary {
+  animation: slideInFromLeft 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.06s;
+}
+.value-prop-section[data-valueprop-animated="1"] .value-prop-card.value-prop-secondary {
+  animation: slideInFromRight 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: 0.12s;
+}
+
+@keyframes slideInFromLeft {
+  0% { opacity: 0; transform: translateX(-36px); }
+  60% { opacity: 1; transform: translateX(8px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInFromRight {
+  0% { opacity: 0; transform: translateX(36px); }
+  60% { opacity: 1; transform: translateX(-8px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Reveal inner content after card is visible */
+.value-prop-card .value-prop-badge,
+.value-prop-card .value-prop-title,
+.value-prop-card .value-prop-description,
+.value-prop-card .value-prop-features,
+.value-prop-card .value-prop-btn,
+.value-prop-card .value-secondary-title,
+.value-prop-card .value-secondary-item,
+.value-prop-card .value-prop-icon {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 200ms cubic-bezier(0.34, 1.56, 0.64, 1), 
+              transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Primary card content reveal (staggered) */
+.value-prop-section[data-valueprop-animated="1"] .value-prop-card.value-prop-primary .value-prop-badge { 
+  opacity: 1; transform: none; transition-delay: 0.24s; 
+}
+.value-prop-section[data-valueprop-animated="1"] .value-prop-card.value-prop-primary .value-prop-title { 
+  opacity: 1; transform: none; transition-delay: 0.31s; 
+}
+.value-prop-section[data-valueprop-animated="1"] .value-prop-card.value-prop-primary .value-prop-description { 
+  opacity: 1; transform: none; transition-delay: 0.40s; 
+}
+.value-prop-section[data-valueprop-animated="1"] .value-prop-card.value-prop-primary .value-prop-features { 
+  opacity: 1; transform: none; transition-delay: 0.51s; 
+}
+.value-prop-section[data-valueprop-animated="1"] .value-prop-card.value-prop-primary .value-prop-btn { 
+  opacity: 1; transform: none; transition-delay: 0.60s; 
+}
+
+/* Secondary card content reveal */
+.value-prop-section[data-valueprop-animated="1"] .value-prop-card.value-prop-secondary .value-secondary-title { 
+  opacity: 1; transform: none; transition-delay: 0.31s; 
+}
+.value-prop-section[data-valueprop-animated="1"] .value-prop-card.value-prop-secondary .value-secondary-item { 
+  opacity: 1; transform: none; transition-delay: 0.46s; 
+}
+.value-prop-section[data-valueprop-animated="1"] .value-prop-card.value-prop-secondary .value-prop-icon { 
+  opacity: 1; transform: none; transition-delay: 0.46s; 
+}
+
+/* ========================================
+   HOW IT WORKS SECTION - SCROLL BASED ANIMATIONS
+======================================== */
+
+/* Initial state for heading - hidden and scaled down */
+.how-it-works-section .section-header {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Heading pop out effect when visible */
+.how-it-works-section.heading-visible .section-header {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Initial state for step items - slide from left */
+.how-it-works-section .step-item {
+  opacity: 0;
+  transform: translateX(-75px);
+  transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+  position: relative;
+}
+
+/* Hide all text content initially */
+.how-it-works-section .step-item .step-number,
+.how-it-works-section .step-item h3,
+.how-it-works-section .step-item p {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* ===== CARD ANIMATION STAGES ===== */
+
+/* Card 1 animation */
+.how-it-works-section[data-cards-animated="1"] .step-item[data-card="1"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.how-it-works-section[data-cards-animated="1"] .step-item[data-card="1"] .step-number,
+.how-it-works-section[data-cards-animated="1"] .step-item[data-card="1"] h3,
+.how-it-works-section[data-cards-animated="1"] .step-item[data-card="1"] p {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+/* Fallback: ensure first card also animates when heading is visible */
+.how-it-works-section.heading-visible .step-item[data-card="1"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+.how-it-works-section.heading-visible .step-item[data-card="1"] .step-number,
+.how-it-works-section.heading-visible .step-item[data-card="1"] h3,
+.how-it-works-section.heading-visible .step-item[data-card="1"] p {
+  opacity: 1;
+  transition-delay: 0.18s;
+}
+
+/* Card 2 animation */
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="1"],
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="2"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="1"] .step-number,
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="1"] h3,
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="1"] p {
+  opacity: 1;
+}
+
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="2"] .step-number,
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="2"] h3,
+.how-it-works-section[data-cards-animated="2"] .step-item[data-card="2"] p {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+/* Card 3 animation */
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="1"],
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="2"],
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="3"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="1"] .step-number,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="1"] h3,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="1"] p,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="2"] .step-number,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="2"] h3,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="2"] p {
+  opacity: 1;
+}
+
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="3"] .step-number,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="3"] h3,
+.how-it-works-section[data-cards-animated="3"] .step-item[data-card="3"] p {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+/* Hover effects */
+.how-it-works-section .step-item:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+}
+
+.how-it-works-section .step-item:hover .step-number {
+  background-color: var(--classic-crimson);
+  color: var(--porcelain);
+  transform: scale(1.1);
+  box-shadow: 0 10px 30px rgba(216, 0, 50, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .how-it-works-section .step-item {
+    transform: translateX(-100px);
+  }
+}
+
+@media (max-width: 768px) {
+  .how-it-works-section .step-item {
+    transform: translateX(-80px);
+  }
+}
+
+@media (max-width: 480px) {
+  .how-it-works-section .step-item {
+    transform: translateX(-60px);
   }
 }

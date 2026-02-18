@@ -1,25 +1,278 @@
 ﻿﻿import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import Header from '../../../B2B/src/components/Header/Header';
+import Footer from '../../../B2B/src/components/Footer/Footer';
 import './Home.css';
 
 const Home: React.FC = () => {
   const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({});
+  
+  // ===== STATE FOR HOW IT WORKS SECTION ANIMATIONS =====
+  const [howItWorksVisible, setHowItWorksVisible] = useState(false);
+  const [cardAnimationStage, setCardAnimationStage] = useState(0); // 0,1,2,3 for cards animated
+  
+  // ===== STATE FOR BENEFITS SECTION ANIMATIONS =====
+  const [benefitsHeadingVisible, setBenefitsHeadingVisible] = useState(false);
+  const [benefitsCardsAnimated, setBenefitsCardsAnimated] = useState(0); // 0 or 1
+  const [benefitsCardsDisappear, setBenefitsCardsDisappear] = useState(0); // 0 or 1 for disappear animation
+  
+  // ===== STATE FOR VALUE PROP SECTION ANIMATIONS =====
+  const [valuePropAnimated, setValuePropAnimated] = useState(0);
+  
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+  // Network animation setup - only for hero section
   useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Get the hero section dimensions
+    const heroSection = document.querySelector('.hero-section');
+    if (!heroSection) return;
+
+    const updateCanvasSize = () => {
+      const rect = heroSection.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+    };
+
+    updateCanvasSize();
+
+    let width = canvas.width;
+    let height = canvas.height;
+    let dots: any[] = [];
+
+    const mouse = { x: null as number | null, y: null as number | null, radius: 150 };
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      // Get mouse position relative to hero section
+      const rect = heroSection.getBoundingClientRect();
+      if (e.clientX >= rect.left && e.clientX <= rect.right && 
+          e.clientY >= rect.top && e.clientY <= rect.bottom) {
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      } else {
+        mouse.x = null;
+        mouse.y = null;
+      }
+    };
+    
+    const handleMouseLeave = () => {
+      mouse.x = null;
+      mouse.y = null;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+
+    const colors = { crimson: '#d80032', slate: '#6e8387', dark: '#0a0a0a' };
+
+    // Initialize dots
+    const init = () => {
+      updateCanvasSize();
+      width = canvas.width;
+      height = canvas.height;
+      dots = [];
+      const numDots = Math.floor((width * height) / 7000);
+      for (let i = 0; i < numDots; i++) {
+        createDot();
+      }
+    };
+
+    // Create a bubble dot with fade-in & burst
+    const createDot = () => {
+      const dot = {
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+        size: Math.random() * 3 + 1.5,
+        color: Math.random() > 0.7 ? colors.crimson : colors.slate,
+        glow: Math.random() * 15 + 8,
+        alpha: 0,
+        alphaSpeed: 0.03,
+        burst: 1.5
+      };
+      dots.push(dot);
+    };
+
+    // Draw connections
+    const drawConnections = (maxDistance = 150) => {
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i < dots.length; i++) {
+        for (let j = i + 1; j < dots.length; j++) {
+          const dx = dots[i].x - dots[j].x;
+          const dy = dots[i].y - dots[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < maxDistance) {
+            ctx.beginPath();
+            ctx.moveTo(dots[i].x, dots[i].y);
+            ctx.lineTo(dots[j].x, dots[j].y);
+            let opacity = 0.25 * (1 - distance / maxDistance);
+            if (mouse.x && mouse.y) {
+              const d1 = Math.sqrt((dots[i].x - mouse.x) ** 2 + (dots[i].y - mouse.y) ** 2);
+              const d2 = Math.sqrt((dots[j].x - mouse.x) ** 2 + (dots[j].y - mouse.y) ** 2);
+              if (d1 < mouse.radius || d2 < mouse.radius) opacity += 0.3;
+            }
+            ctx.strokeStyle = `rgba(255,255,255,${opacity})`;
+            ctx.stroke();
+          }
+        }
+      }
+    };
+
+    // Animate dots (Bubble)
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      dots.forEach(dot => {
+        // Fade-in & shrink burst
+        if (dot.alpha < 1) dot.alpha += dot.alphaSpeed;
+        if (dot.alpha > 1) dot.alpha = 1;
+        if (dot.burst > 1) dot.burst -= 0.02;
+
+        // Bubble upward movement
+        dot.y -= dot.vy * 0.5;
+        if (dot.y < 0) dot.y = height;
+        if (dot.y > height) dot.y = 0;
+
+        // Horizontal movement with bounce
+        dot.x += dot.vx * 0.5;
+        if (dot.x < 0) {
+          dot.x = 0;
+          dot.vx *= -1;
+        }
+        if (dot.x > width) {
+          dot.x = width;
+          dot.vx *= -1;
+        }
+
+        // Mouse attraction
+        const attraction = 0.008;
+        if (mouse.x && mouse.y) {
+          const dx = mouse.x - dot.x;
+          const dy = mouse.y - dot.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            dot.x += dx * attraction;
+            dot.y += dy * attraction;
+          }
+        }
+
+        // Glow effect near mouse
+        let glow = dot.glow;
+        if (mouse.x && mouse.y) {
+          const dx = dot.x - mouse.x;
+          const dy = dot.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) glow += 10;
+        }
+
+        // Draw dot
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, dot.size * dot.burst, 0, Math.PI * 2);
+        ctx.fillStyle = dot.color;
+        ctx.globalAlpha = dot.alpha;
+        ctx.shadowColor = dot.color;
+        ctx.shadowBlur = glow;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      });
+
+      ctx.shadowBlur = 0;
+      drawConnections();
+      requestAnimationFrame(animate);
+    };
+
+    // Dynamic new dots spawn
+    const dynamicSpawn = () => {
+      const batch = Math.floor(Math.random() * 6 + 5); // 5 to 10 dots
+      for (let i = 0; i < batch; i++) {
+        createDot();
+      }
+      const nextTime = Math.floor(Math.random() * 10000 + 20000); // 20000–30000 ms
+      setTimeout(dynamicSpawn, nextTime);
+    };
+
+    // Handle resize
+    const handleResize = () => {
+      init();
+    };
+
+    window.addEventListener('resize', handleResize);
+    init();
+    animate();
+    dynamicSpawn();
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  // ===== UPDATED INTERSECTION OBSERVER WITH ALL SECTION ANIMATIONS =====
+  useEffect(() => {
+    // Use a slightly larger rootMargin so the animations begin just before
+    // the section fully enters the viewport.
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible((prev) => ({ ...prev, [entry.target.id]: true }));
           }
+
+          // Special handling for how-it-works section animations
+          if (entry.target && (entry.target as HTMLElement).id === 'how-it-works') {
+            const visiblePercentage = entry.intersectionRatio;
+            
+            // Show heading when ~18-20% of section is visible
+            if (visiblePercentage >= 0.18) {
+              setHowItWorksVisible(true);
+            }
+
+            // Animate cards progressively as visibility increases
+            if (visiblePercentage >= 0.25) {
+              setCardAnimationStage(1);
+            }
+            if (visiblePercentage >= 0.35) {
+              setCardAnimationStage(2);
+            }
+            if (visiblePercentage >= 0.45) {
+              setCardAnimationStage(3);
+            }
+          }
+
+          // Special handling for benefits section: heading and card animations
+          if (entry.target && (entry.target as HTMLElement).id === 'benefits') {
+            const visiblePct = entry.intersectionRatio;
+            // show heading when ~20% visible
+            if (visiblePct >= 0.20) setBenefitsHeadingVisible(true);
+            // start cards animation at ~25%
+            if (visiblePct >= 0.25) setBenefitsCardsAnimated(1);
+            // trigger disappear animation when ~20% or less visible
+            if (visiblePct <= 0.20) setBenefitsCardsDisappear(1);
+            else setBenefitsCardsDisappear(0);
+          }
+
+          // Value-prop section animations at ~40%
+          if (entry.target && (entry.target as HTMLElement).id === 'value-prop') {
+            const v = entry.intersectionRatio;
+            if (v >= 0.40) setValuePropAnimated(1);
+          }
         });
       },
-      { threshold: 0.1 }
+      { threshold: [0, 0.18, 0.20, 0.25, 0.35, 0.40, 0.45, 0.75, 1], rootMargin: '0px 0px -15% 0px' }
     );
 
+    // Ensure we observe any section refs that have been assigned
     Object.values(sectionRefs.current).forEach((ref) => {
       if (ref) observer.observe(ref);
     });
@@ -31,8 +284,14 @@ const Home: React.FC = () => {
     <div className="home-container">
       <Header />
 
-      {/* Hero Section */}
+      {/* Hero Section with Network Animation */}
       <section className="hero-section">
+        {/* Network Animation Canvas - Only in Hero Section */}
+        <canvas
+          ref={canvasRef}
+          id="heroNetworkCanvas"
+          className="hero-network-canvas"
+        />
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1 className="hero-title">
@@ -109,11 +368,13 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Benefits Section */}
+      {/* Benefits Section - With Animations */}
       <section 
         id="benefits" 
         ref={(el) => { sectionRefs.current['benefits'] = el; }}
-        className={`benefits-section ${isVisible['benefits'] ? 'fade-in' : ''}`}
+        className={`benefits-section ${isVisible['benefits'] ? 'fade-in' : ''} ${benefitsHeadingVisible ? 'heading-visible' : ''}`}
+        data-benefits-cards-animated={benefitsCardsAnimated}
+        data-benefits-cards-disappear={benefitsCardsDisappear}
       >
         <div className="section-header">
           <h2 className="section-title">Why Join Our Network?</h2>
@@ -237,32 +498,36 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
+      {/* How It Works Section - With Animations */}
       <section 
         id="how-it-works" 
         ref={(el) => { sectionRefs.current['how-it-works'] = el; }}
-        className={`how-it-works-section ${isVisible['how-it-works'] ? 'fade-in' : ''}`}
+        className={`how-it-works-section ${isVisible['how-it-works'] ? 'fade-in' : ''} ${howItWorksVisible ? 'heading-visible' : ''}`}
+        data-cards-animated={cardAnimationStage}
       >
         <div className="section-header">
           <h2 className="section-title">How It Works</h2>
           <p className="section-subtitle">A clear 3-step process to join, get matched, and collaborate with relevant stakeholders.</p>
         </div>
         <div className="steps-container">
-          <div className="step-item">
+          {/* Card 1 - Will animate first */}
+          <div className="step-item" data-card="1">
             <div className="step-number">
               <span>1</span>
             </div>
             <h3>Create Your Profile</h3>
             <p>Provide your professional background, expertise, and industry experience to support accurate matching.</p>
           </div>
-          <div className="step-item">
+          {/* Card 2 - Will animate second */}
+          <div className="step-item" data-card="2">
             <div className="step-number">
               <span>2</span>
             </div>
             <h3>Get Matched</h3>
             <p>Receive relevant invitations and networking opportunities aligned to your profile.</p>
           </div>
-          <div className="step-item">
+          {/* Card 3 - Will animate third */}
+          <div className="step-item" data-card="3">
             <div className="step-number">
               <span>3</span>
             </div>
@@ -272,11 +537,12 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Value Proposition Section */}
+      {/* Value Proposition Section - With Animations */}
       <section 
         id="value-prop" 
         ref={(el) => { sectionRefs.current['value-prop'] = el; }}
         className={`value-prop-section ${isVisible['value-prop'] ? 'fade-in' : ''}`}
+        data-valueprop-animated={valuePropAnimated}
       >
         <div className="value-prop-container">
           <div className="value-prop-card value-prop-primary">
