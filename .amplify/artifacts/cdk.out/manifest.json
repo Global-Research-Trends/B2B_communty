@@ -22,7 +22,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/addcc41dd3334aa526dd5d3e3e809bcebc7cc2ec3d08d8d428a84e6441d097ab.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/dcece52cc6a5a38ca32bfd00a11b4417429555b1ce4f889a91b742254e5075b3.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -1171,6 +1171,102 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "awsAppsyncAdditionalAuthenticationTypes"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/b2bProfileImages/Bucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "b2bProfileImagesBucket3D726F30"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/b2bProfileImages/Bucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "b2bProfileImagesBucketPolicy9D2CD6B7"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/b2bProfileImages/Bucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "b2bProfileImagesBucketAutoDeleteObjectsCustomResource64134045"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/B_2_B_PROFILE_IMAGES_BUCKET_NAMEParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "B2BPROFILEIMAGESBUCKETNAMEParameterC93DD32F"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/amplify-b2b-Maisum-sandbox-2d4f59d75b--storageAccess3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyb2bMaisumsandbox2d4f59d75bstorageAccess37122D291"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/reference-to-amplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputs.amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthauthenticatedUserRole0E2EE6C7Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputsamplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthauthenticatedUserRole0E2EE6C7Ref"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage/amplifyb2bMaisumsandbox2d4f59d75bstorageb2bProfileImagesBucket05B12C76Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyb2bMaisumsandbox2d4f59d75bstorageb2bProfileImagesBucket05B12C76Ref"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storage.NestedStack/storage.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "storage0EC3F24A"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/storageRegion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "storageRegion"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/bucketName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bucketName"
+          }
+        ],
+        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/buckets": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buckets"
           }
         ],
         "/amplify-b2b-Maisum-sandbox-2d4f59d75b/CDKMetadata/Default": [
