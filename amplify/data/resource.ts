@@ -19,6 +19,7 @@ const schema = a.schema({
       yearsExperience: a.string(),
 
       // Section C: Personal Information
+      country: a.string(),
       provinceState: a.string(),
       city: a.string(),
 

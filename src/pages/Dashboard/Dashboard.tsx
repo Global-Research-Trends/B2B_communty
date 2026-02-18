@@ -1,9 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
-import { fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
+import { fetchAuthSession, fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
 import { getUrl, list } from 'aws-amplify/storage';
+import { generateClient } from 'aws-amplify/data';
+import type { Schema } from '../../../amplify/data/resource';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import ProfilePage from '../profile/profile';
+import type { QuestionnaireData } from '../profile/profile';
+
+const client = generateClient<Schema>();
 
 const surveys = [
   {
@@ -150,6 +155,7 @@ const Dashboard = () => {
     jobTitle: notProvided,
   });
   const [profileImageUrl, setProfileImageUrl] = useState<string | undefined>(undefined);
+  const [questionnaireData, setQuestionnaireData] = useState<QuestionnaireData | null>(null);
 
   const profileCompletion = 65;
   const engagementScore = 78;
@@ -197,9 +203,41 @@ const Dashboard = () => {
           jobTitle: getValueOrFallback(attributes['custom:job_title']),
         });
 
-        // Load profile image from S3
+        // Load questionnaire data
         try {
-          const imgResult = await list({ path: `profile-pictures/${currentUser.userId}/` });
+          const { data: responses } = await client.models.QuestionnaireResponse.list({
+            filter: { owner: { eq: currentUser.userId } },
+          });
+          if (responses.length > 0) {
+            const r = responses[0];
+            setQuestionnaireData({
+              educationLevel: r.educationLevel ?? '',
+              fieldOfStudy: r.fieldOfStudy ?? '',
+              graduationYear: r.graduationYear ?? '',
+              occupationStatus: r.occupationStatus ?? '',
+              organizationType: r.organizationType ?? '',
+              industry: r.industry ?? '[]',
+              department: r.department ?? '',
+              roleLevel: r.roleLevel ?? '',
+              yearsExperience: r.yearsExperience ?? '',
+              country: r.country ?? '',
+              provinceState: r.provinceState ?? '',
+              city: r.city ?? '',
+              hobbies: r.hobbies ?? '[]',
+              languages: r.languages ?? '[]',
+              participationConsent: r.participationConsent ?? '',
+              contactPreference: r.contactPreference ?? '',
+            });
+          }
+        } catch {
+          // Questionnaire data not available
+        }
+
+        // Load profile image from S3 (uses identityId, same as profile page upload)
+        try {
+          const session = await fetchAuthSession();
+          const identityId = session.identityId;
+          const imgResult = await list({ path: `profile-pictures/${identityId}/` });
           if (imgResult.items.length > 0) {
             const sorted = [...imgResult.items].sort((a, b) => {
               const aTime = a.lastModified ? new Date(a.lastModified).getTime() : 0;
@@ -213,15 +251,13 @@ const Dashboard = () => {
           // No profile image found, keep default
         }
       } catch {
-        setUserProfile((prev) => ({
-          ...prev,
-          displayName: 'User',
-        }));
+        // Not authenticated — redirect to auth page
+        navigate('/auth', { replace: true });
       }
     };
 
     void loadUserProfile();
-  }, []);
+  }, [navigate]);
 
   const handleLogout = async () => {
     try {
@@ -288,6 +324,7 @@ const Dashboard = () => {
             profileData={userProfile}
             profileImageUrl={profileImageUrl}
             onProfileImageChange={(url) => setProfileImageUrl(url)}
+            questionnaireData={questionnaireData}
           />
         </section>
       ) : activeView === 'Community' ? (

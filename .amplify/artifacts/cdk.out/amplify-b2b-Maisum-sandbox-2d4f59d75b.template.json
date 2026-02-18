@@ -44,6 +44,14 @@
     "amplifyApiModelSchemaS3Uri",
     "awsAppsyncAdditionalAuthenticationTypes"
    ]
+  },
+  "AWS::Amplify::Storage": {
+   "version": "1",
+   "stackOutputs": [
+    "buckets",
+    "storageRegion",
+    "bucketName"
+   ]
   }
  },
  "Outputs": {
@@ -203,6 +211,40 @@
   },
   "awsAppsyncAdditionalAuthenticationTypes": {
    "Value": "AWS_IAM"
+  },
+  "storageRegion": {
+   "Value": {
+    "Ref": "AWS::Region"
+   }
+  },
+  "bucketName": {
+   "Value": {
+    "Fn::GetAtt": [
+     "storage0EC3F24A",
+     "Outputs.amplifyb2bMaisumsandbox2d4f59d75bstorageb2bProfileImagesBucket05B12C76Ref"
+    ]
+   }
+  },
+  "buckets": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "[\"{\\\"name\\\":\\\"b2bProfileImages\\\",\\\"bucketName\\\":\\\"",
+      {
+       "Fn::GetAtt": [
+        "storage0EC3F24A",
+        "Outputs.amplifyb2bMaisumsandbox2d4f59d75bstorageb2bProfileImagesBucket05B12C76Ref"
+       ]
+      },
+      "\\\",\\\"storageRegion\\\":\\\"",
+      {
+       "Ref": "AWS::Region"
+      },
+      "\\\",\\\"paths\\\":{\\\"profile-pictures/${cognito-identity.amazonaws.com:sub}/*\\\":{\\\"entityidentity\\\":[\\\"get\\\",\\\"list\\\",\\\"write\\\",\\\"delete\\\"]},\\\"profile-pictures/*\\\":{\\\"authenticated\\\":[\\\"get\\\",\\\"list\\\"]}}}\"]"
+     ]
+    ]
+   }
   }
  },
  "Resources": {
@@ -313,6 +355,56 @@
    "Metadata": {
     "aws:cdk:path": "amplify-b2b-Maisum-sandbox-2d4f59d75b/data.NestedStack/data.NestedStackResource",
     "aws:asset:path": "amplifyb2bMaisumsandbox2d4f59d75bdata818CF74F.nested.template.json",
+    "aws:asset:property": "TemplateURL"
+   }
+  },
+  "storage0EC3F24A": {
+   "Type": "AWS::CloudFormation::Stack",
+   "Properties": {
+    "Parameters": {
+     "referencetoamplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputsamplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthauthenticatedUserRole0E2EE6C7Ref": {
+      "Fn::GetAtt": [
+       "auth179371D7",
+       "Outputs.amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthauthenticatedUserRole0E2EE6C7Ref"
+      ]
+     }
+    },
+    "Tags": [
+     {
+      "Key": "amplify:deployment-type",
+      "Value": "sandbox"
+     },
+     {
+      "Key": "created-by",
+      "Value": "amplify"
+     }
+    ],
+    "TemplateURL": {
+     "Fn::Join": [
+      "",
+      [
+       "https://s3.",
+       {
+        "Ref": "AWS::Region"
+       },
+       ".",
+       {
+        "Ref": "AWS::URLSuffix"
+       },
+       "/",
+       {
+        "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+       },
+       "/7448f14e1addc8c19881990a61c1344540488f42a23de3835bb5189b9e052c38.json"
+      ]
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "amplify-b2b-Maisum-sandbox-2d4f59d75b/storage.NestedStack/storage.NestedStackResource",
+    "aws:asset:path": "amplifyb2bMaisumsandbox2d4f59d75bstorage8E3D8ABB.nested.template.json",
     "aws:asset:property": "TemplateURL"
    }
   },

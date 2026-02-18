@@ -449,16 +449,30 @@
         }
       }
     },
-    "addcc41dd3334aa526dd5d3e3e809bcebc7cc2ec3d08d8d428a84e6441d097ab": {
+    "7448f14e1addc8c19881990a61c1344540488f42a23de3835bb5189b9e052c38": {
+      "displayName": "storage Nested Stack Template",
+      "source": {
+        "path": "amplifyb2bMaisumsandbox2d4f59d75bstorage8E3D8ABB.nested.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region-9546bf76": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "7448f14e1addc8c19881990a61c1344540488f42a23de3835bb5189b9e052c38.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "dcece52cc6a5a38ca32bfd00a11b4417429555b1ce4f889a91b742254e5075b3": {
       "displayName": "amplify-b2b-Maisum-sandbox-2d4f59d75b Template",
       "source": {
         "path": "amplify-b2b-Maisum-sandbox-2d4f59d75b.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "current_account-current_region-027e24ec": {
+        "current_account-current_region-8cbfb5dd": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "addcc41dd3334aa526dd5d3e3e809bcebc7cc2ec3d08d8d428a84e6441d097ab.json",
+          "objectKey": "dcece52cc6a5a38ca32bfd00a11b4417429555b1ce4f889a91b742254e5075b3.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

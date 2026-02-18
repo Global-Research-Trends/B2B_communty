@@ -1,23 +1,20 @@
 {
   "auth": {
-    "user_pool_id": "us-east-1_8jnCrd9y5",
+    "user_pool_id": "us-east-1_n5aEMPHns",
     "aws_region": "us-east-1",
-    "user_pool_client_id": "3si096deh4pc87gbdqe1hm2lo3",
-    "identity_pool_id": "us-east-1:48f5b811-b1a0-4720-94fa-3eed5a92f480",
+    "user_pool_client_id": "7eck93929r6je58rjsiuulbca5",
+    "identity_pool_id": "us-east-1:2fdf8753-ccb8-4152-aa67-eee631b6cff6",
     "mfa_methods": [],
     "standard_required_attributes": [
       "email",
-      "phone_number",
       "birthdate",
       "locale"
     ],
     "username_attributes": [
-      "email",
-      "phone_number"
+      "email"
     ],
     "user_verification_types": [
-      "email",
-      "phone_number"
+      "email"
     ],
     "groups": [],
     "mfa_configuration": "NONE",
@@ -28,14 +25,10 @@
       "require_symbols": true,
       "require_uppercase": true
     },
-    "unauthenticated_identities_enabled": true,
-    "passwordless": {
-      "email_otp_enabled": false,
-      "sms_otp_enabled": true
-    }
+    "unauthenticated_identities_enabled": true
   },
   "data": {
-    "url": "https://wgwzn6mg7ngxrnb73zoehusj5u.appsync-api.us-east-1.amazonaws.com/graphql",
+    "url": "https://5knyhh33ybg2bjluzbwrpqmlti.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_region": "us-east-1",
     "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
     "authorization_types": [
@@ -227,6 +220,33 @@
       "enums": {},
       "nonModels": {}
     }
+  },
+  "storage": {
+    "aws_region": "us-east-1",
+    "bucket_name": "amplify-b2b-maisum-sandbo-b2bprofileimagesbucket3d-lq4adjcoffgw",
+    "buckets": [
+      {
+        "name": "b2bProfileImages",
+        "bucket_name": "amplify-b2b-maisum-sandbo-b2bprofileimagesbucket3d-lq4adjcoffgw",
+        "aws_region": "us-east-1",
+        "paths": {
+          "profile-pictures/${cognito-identity.amazonaws.com:sub}/*": {
+            "entityidentity": [
+              "get",
+              "list",
+              "write",
+              "delete"
+            ]
+          },
+          "profile-pictures/*": {
+            "authenticated": [
+              "get",
+              "list"
+            ]
+          }
+        }
+      }
+    ]
   },
   "version": "1.4"
 }

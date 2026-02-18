@@ -1,11 +1,18 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { generateClient } from 'aws-amplify/data';
 import type { Schema } from '../../../amplify/data/resource';
+import countriesData from '../../../country/countries+states+cities.json';
 import './question.css';
 
 const client = generateClient<Schema>();
+
+type CityData = { name: string };
+type StateData = { name: string; cities?: CityData[] };
+type CountryData = { name: string; states?: StateData[] };
+
+const countryData = countriesData as CountryData[];
 
 /* ─── Question data ─── */
 
@@ -200,6 +207,7 @@ const Questionnaire = () => {
   const [roleLevel, setRoleLevel] = useState('');
   const [yearsExperience, setYearsExperience] = useState('');
 
+  const [country, setCountry] = useState('');
   const [provinceState, setProvinceState] = useState('');
   const [city, setCity] = useState('');
 
@@ -209,18 +217,30 @@ const Questionnaire = () => {
 
   const [participationConsent, setParticipationConsent] = useState('');
   const [contactPreference, setContactPreference] = useState('');
+  const [checkingAuth, setCheckingAuth] = useState(true);
 
-  /* auth guard – disabled for preview */
-  // useEffect(() => {
-  //   const checkAuth = async () => {
-  //     try {
-  //       await getCurrentUser();
-  //     } catch {
-  //       navigate('/auth');
-  //     }
-  //   };
-  //   void checkAuth();
-  // }, [navigate]);
+  /* auth guard + questionnaire completion check */
+  useEffect(() => {
+    const checkAuthAndQuestionnaire = async () => {
+      try {
+        const { userId } = await getCurrentUser();
+        // If already completed, redirect to dashboard
+        const { data } = await client.models.QuestionnaireResponse.list({
+          filter: { owner: { eq: userId } },
+        });
+        if (data.length > 0) {
+          navigate('/dashboard', { replace: true });
+          return;
+        }
+      } catch {
+        navigate('/auth', { replace: true });
+        return;
+      } finally {
+        setCheckingAuth(false);
+      }
+    };
+    void checkAuthAndQuestionnaire();
+  }, [navigate]);
 
   /* helpers */
   const toggleMulti = (
@@ -246,6 +266,55 @@ const Questionnaire = () => {
     });
   };
 
+  const handleCountryChange = (value: string) => {
+    setCountry(value);
+    setProvinceState('');
+    setCity('');
+  };
+
+  const handleStateChange = (value: string) => {
+    setProvinceState(value);
+    setCity('');
+  };
+
+  const normalize = (value: string) => value.trim().toLowerCase();
+
+  const findCountry = (value: string) =>
+    countryData.find((item) => normalize(item.name) === normalize(value));
+
+  const findState = (countryItem: CountryData | undefined, value: string) =>
+    countryItem?.states?.find((item) => normalize(item.name) === normalize(value));
+
+  const findCity = (stateItem: StateData | undefined, value: string) =>
+    stateItem?.cities?.find((item) => normalize(item.name) === normalize(value));
+
+  const countryOptions = useMemo(
+    () => countryData.map((item) => item.name).sort((a, b) => a.localeCompare(b)),
+    [],
+  );
+
+  const selectedCountryData = useMemo(() => findCountry(country), [country]);
+
+  const stateOptions = useMemo(
+    () => (selectedCountryData?.states ?? []).map((item) => item.name).sort((a, b) => a.localeCompare(b)),
+    [selectedCountryData],
+  );
+
+  const selectedStateData = useMemo(
+    () => findState(selectedCountryData, provinceState),
+    [selectedCountryData, provinceState],
+  );
+
+  const cityOptions = useMemo(
+    () => (selectedStateData?.cities ?? []).map((item) => item.name).sort((a, b) => a.localeCompare(b)),
+    [selectedStateData],
+  );
+
+  const selectedCityData = useMemo(
+    () => findCity(selectedStateData, city),
+    [selectedStateData, city],
+  );
+
   const validateCurrentSection = (): boolean => {
     setErrorMessage('');
     switch (currentSection) {
@@ -263,8 +332,12 @@ const Questionnaire = () => {
         if (!yearsExperience) { setErrorMessage('Please select your years of experience.'); return false; }
         return true;
       case 2:
-        if (!provinceState.trim()) { setErrorMessage('Please enter your province/state.'); return false; }
-        if (!city.trim()) { setErrorMessage('Please enter your city.'); return false; }
+        if (!country.trim()) { setErrorMessage('Please select your country.'); return false; }
+        if (!selectedCountryData) { setErrorMessage('Please select a valid country from the list.'); return false; }
+        if (!provinceState.trim()) { setErrorMessage('Please select your province/state.'); return false; }
+        if (!selectedStateData) { setErrorMessage('Please select a valid province/state from the list.'); return false; }
+        if (!city.trim()) { setErrorMessage('Please select your city.'); return false; }
+        if (!selectedCityData) { setErrorMessage('Please select a valid city from the list.'); return false; }
         return true;
       case 3:
         if (selectedHobbies.length === 0) { setErrorMessage('Please select at least one hobby or interest.'); return false; }
@@ -309,6 +382,10 @@ const Questionnaire = () => {
         // allow preview without login
       }
 
+      const resolvedCountry = selectedCountryData?.name ?? country.trim();
+      const resolvedProvinceState = selectedStateData?.name ?? provinceState.trim();
+      const resolvedCity = selectedCityData?.name ?? city.trim();
+
       await client.models.QuestionnaireResponse.create({
         owner: userId,
         educationLevel: resolveValue(educationLevel, 'educationLevel'),
@@ -320,8 +397,9 @@ const Questionnaire = () => {
         department: resolveValue(department, 'department'),
         roleLevel: resolveValue(roleLevel, 'roleLevel'),
         yearsExperience,
-        provinceState: provinceState.trim(),
-        city: city.trim(),
+        country: resolvedCountry,
+        provinceState: resolvedProvinceState,
+        city: resolvedCity,
         hobbies: JSON.stringify(resolveMulti(selectedHobbies, 'hobbies')),
         languages: JSON.stringify(resolveMulti(selectedLanguages, 'languages')),
         participationConsent,
@@ -482,24 +560,54 @@ const Questionnaire = () => {
         return (
           <>
             <div className="q-question-block">
-              <h3 className="q-question-title">10. In which province/state do you currently reside?</h3>
+              <h3 className="q-question-title">10. In which country do you currently reside?</h3>
               <input
                 type="text"
                 className="q-text-input"
-                placeholder="Enter your province or state"
-                value={provinceState}
-                onChange={(e) => setProvinceState(e.target.value)}
+                placeholder="Start typing your country"
+                list="q-country-options"
+                value={country}
+                onChange={(e) => handleCountryChange(e.target.value)}
               />
+              <datalist id="q-country-options">
+                {countryOptions.map((opt) => (
+                  <option key={opt} value={opt} />
+                ))}
+              </datalist>
             </div>
             <div className="q-question-block">
-              <h3 className="q-question-title">11. Which city do you currently live in?</h3>
+              <h3 className="q-question-title">11. In which province/state do you currently reside?</h3>
               <input
                 type="text"
                 className="q-text-input"
-                placeholder="Enter your city"
+                placeholder={selectedCountryData ? 'Start typing your province/state' : 'Select a country first'}
+                list="q-state-options"
+                value={provinceState}
+                onChange={(e) => handleStateChange(e.target.value)}
+                disabled={!selectedCountryData}
+              />
+              <datalist id="q-state-options">
+                {stateOptions.map((opt) => (
+                  <option key={opt} value={opt} />
+                ))}
+              </datalist>
+            </div>
+            <div className="q-question-block">
+              <h3 className="q-question-title">12. Which city do you currently live in?</h3>
+              <input
+                type="text"
+                className="q-text-input"
+                placeholder={selectedStateData ? 'Start typing your city' : 'Select a province/state first'}
+                list="q-city-options"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
+                disabled={!selectedStateData}
               />
+              <datalist id="q-city-options">
+                {cityOptions.map((opt) => (
+                  <option key={opt} value={opt} />
+                ))}
+              </datalist>
             </div>
           </>
         );
@@ -507,7 +615,7 @@ const Questionnaire = () => {
       case 3:
         return (
           <div className="q-question-block">
-            <h3 className="q-question-title">12. What are your primary  interests? <span className="q-multi-hint">(Select all that apply)</span></h3>
+            <h3 className="q-question-title">13. What are your primary  interests? <span className="q-multi-hint">(Select all that apply)</span></h3>
             {renderCheckboxGroup('hobbies', hobbiesList, selectedHobbies, (v) => toggleMulti(setSelectedHobbies, v))}
           </div>
         );
@@ -515,7 +623,7 @@ const Questionnaire = () => {
       case 4:
         return (
           <div className="q-question-block">
-            <h3 className="q-question-title">13. What languages are you proficient in? <span className="q-multi-hint">(Select all that apply)</span></h3>
+            <h3 className="q-question-title">14. What languages are you proficient in? <span className="q-multi-hint">(Select all that apply)</span></h3>
             {renderCheckboxGroup('languages', languagesList, selectedLanguages, (v) => toggleMulti(setSelectedLanguages, v))}
           </div>
         );
@@ -524,11 +632,11 @@ const Questionnaire = () => {
         return (
           <>
             <div className="q-question-block">
-              <h3 className="q-question-title">14. Are you willing to be a part of this research platform?</h3>
+              <h3 className="q-question-title">15. Are you willing to be a part of this research platform?</h3>
               {renderRadioGroup('participationConsent', consentOptions, participationConsent, setParticipationConsent)}
             </div>
             <div className="q-question-block">
-              <h3 className="q-question-title">15. If you agreed to participate, how would you prefer to be contacted?</h3>
+              <h3 className="q-question-title">16. If you agreed to participate, how would you prefer to be contacted?</h3>
               {renderRadioGroup('contactPreference', contactOptions, contactPreference, setContactPreference)}
             </div>
           </>
@@ -538,6 +646,16 @@ const Questionnaire = () => {
         return null;
     }
   };
+
+  if (checkingAuth) {
+    return (
+      <main className="q-page">
+        <div className="q-container" style={{ textAlign: 'center', paddingTop: '4rem' }}>
+          <p>Loading...</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="q-page">
