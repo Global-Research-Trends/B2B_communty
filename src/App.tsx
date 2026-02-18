@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home/Home.tsx';
 import Dashboard from './pages/Dashboard/Dashboard.tsx';
 import Auth from './pages/Auth/Auth.tsx';
@@ -16,6 +16,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/about' element={<About />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+        <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #000000;
+  border-bottom: 1px solid rgba(100, 101, 104, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.4s ease, opacity 0.35s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d80032, transparent);
+  opacity: 0.6;
+}
+
+.nav-content {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 4%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+}
+
+.nav-logo {
+  color: #f6f6f4;
+  font-weight: 900;
+  letter-spacing: -0.35px;
+  font-size: 1.5rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  transition: color 0.25s ease;
+}
+
+.nav-logo:hover {
+  color: #ffffff;
+}
+
+.nav-logo__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1.5px solid rgba(216, 0, 50, 0.75);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.nav-logo__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.nav-logo:hover .nav-logo__icon {
+  border-color: #d80032;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 18px rgba(216, 0, 50, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.nav-logo__text {
+  font-weight: 800;
+}
+
+.nav-logo:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.72);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-menu li a {
+  color: #fffffc;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.98rem;
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.3s ease;
+}
+
+.nav-menu li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #d80032;
+  transition: width 0.3s ease;
+}
+
+.nav-menu li a:hover {
+  color: #d80032;
+}
+
+.nav-menu li a:hover::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-btn {
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 252, 0.25);
+  background: rgba(255, 255, 252, 0.05);
+  color: #fffffc;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.nav-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.18) 50%, transparent 80%);
+  transform: translateX(-140%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.nav-btn:hover::before {
+  transform: translateX(140%);
+}
+
+.nav-btn:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.nav-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 252, 0.75);
+  outline-offset: 2px;
+}
+
+.nav-login {
+  border-color: rgba(110, 131, 135, 0.4);
+}
+
+.nav-login:hover {
+  background: rgba(110, 131, 135, 0.2);
+  border-color: #6e8387;
+  box-shadow: 0 8px 20px rgba(110, 131, 135, 0.25);
+}
+
+.nav-signup {
+  background: linear-gradient(135deg, #d80032, #b50028);
+  border-color: transparent;
+  box-shadow: 0 10px 30px rgba(216, 0, 50, 0.35);
+}
+
+.nav-signup:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(216, 0, 50, 0.45);
+}
+
+.navbar.nav-hidden {
+  transform: translateY(-110%);
+  opacity: 0;
+}
+
+@media (max-width: 1024px) {
+  .nav-menu {
+    gap: 25px;
+  }
+
+  .nav-menu li a {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .nav-content {
+    padding: 0 4%;
+  }
+}

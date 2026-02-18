@@ -1401,7 +1401,6 @@ html {
   section {
     padding: 80px 4%;
   }
-<<<<<<< Updated upstream
 }
 
 /* ========================================
@@ -1529,8 +1528,6 @@ html {
 }
 
 @media (max-width: 768px) {
-=======
->>>>>>> Stashed changes
 
   .cta-subtitle {
     font-size: 1.1rem;
