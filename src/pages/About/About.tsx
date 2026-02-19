@@ -97,7 +97,7 @@ const About: React.FC = () => {
             </a>
           </div>
         </div>
-        <div className="ap-hero__stats">
+        <div id="stats" ref={(el) => { sectionRefs.current['stats'] = el; }} className={`ap-hero__stats ${isVisible['stats'] ? 'ap-visible' : ''}`}>
           {numbers.map((n, i) => (
             <div className="ap-hero__stat" key={i}>
               <strong>{n.value}</strong>

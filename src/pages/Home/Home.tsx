@@ -19,6 +19,9 @@ const Home: React.FC = () => {
   // ===== STATE FOR VALUE PROP SECTION ANIMATIONS =====
   const [valuePropAnimated, setValuePropAnimated] = useState(0);
   
+  // ===== STATE FOR ABOUT SECTION ANIMATIONS =====
+  const [aboutAnimated, setAboutAnimated] = useState(0); // 0 or 1 for animations
+  
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -258,18 +261,29 @@ const Home: React.FC = () => {
             // start cards animation at ~25%
             if (visiblePct >= 0.25) setBenefitsCardsAnimated(1);
             // trigger disappear animation when ~20% or less visible
-            if (visiblePct <= 0.20) setBenefitsCardsDisappear(1);
+            if (visiblePct <= 0.10) setBenefitsCardsDisappear(1);
             else setBenefitsCardsDisappear(0);
           }
 
-          // Value-prop section animations at ~40%
+          // Value-prop section animations at ~30%
           if (entry.target && (entry.target as HTMLElement).id === 'value-prop') {
             const v = entry.intersectionRatio;
-            if (v >= 0.40) setValuePropAnimated(1);
+            if (v >= 0.20) setValuePropAnimated(1);
+            else if (v < 0.10) setValuePropAnimated(0);
+          }
+
+          // About section animations: trigger at 30% visible, reverse at 30% or less
+          if (entry.target && (entry.target as HTMLElement).id === 'about') {
+            const aboutVisibility = entry.intersectionRatio;
+            if (aboutVisibility >= 0.30) {
+              setAboutAnimated(1);
+            } else if (aboutVisibility < 0.30) {
+              setAboutAnimated(0);
+            }
           }
         });
       },
-      { threshold: [0, 0.18, 0.20, 0.25, 0.35, 0.40, 0.45, 0.75, 1], rootMargin: '0px 0px -15% 0px' }
+      { threshold: [0, 0.18, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.75, 1], rootMargin: '0px 0px -15% 0px' }
     );
 
     // Ensure we observe any section refs that have been assigned
@@ -428,7 +442,8 @@ const Home: React.FC = () => {
       <section 
         id="about" 
         ref={(el) => { sectionRefs.current['about'] = el; }}
-        className={`about-section ${isVisible['about'] ? 'fade-in' : ''}`}
+        className={`about-section ${isVisible['about'] ? 'fade-in' : ''} ${aboutAnimated ? 'about-animated' : ''}`}
+        data-about-animated={aboutAnimated}
       >
         <div className="about-container">
           <div className="section-header">

@@ -4,6 +4,7 @@ import './Header.css';
 
 const Header: React.FC = () => {
   const [isNavHidden, setIsNavHidden] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
   const isNavHiddenRef = useRef(isNavHidden);
   const downAccum = useRef(0);
@@ -78,18 +79,30 @@ const Header: React.FC = () => {
           <span className="nav-logo__text">B2B Insights</span>
         </Link>
 
-        <ul className="nav-menu">
-          <li><a href="/about">About</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <ul className={`nav-menu ${isMenuOpen ? 'menu-open' : ''}`}>
+          <li><a href="/about" onClick={() => setIsMenuOpen(false)}>About</a></li>
+          <li><a href="#features" onClick={() => setIsMenuOpen(false)}>Features</a></li>
+          <li><a href="#how-it-works" onClick={() => setIsMenuOpen(false)}>How It Works</a></li>
+          <li><a href="#pricing" onClick={() => setIsMenuOpen(false)}>Pricing</a></li>
+          <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
         </ul>
 
-        <div className="nav-actions">
-          <Link to="/auth" className="nav-btn nav-login">Sign In</Link>
-          <Link to="/auth" className="nav-btn nav-signup">Request Access</Link>
+        <div className={`nav-actions ${isMenuOpen ? 'menu-open' : ''}`}>
+          <Link to="/auth" className="nav-btn nav-login" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
+          <Link to="/auth" className="nav-btn nav-signup" onClick={() => setIsMenuOpen(false)}>Request Access</Link>
         </div>
+
+        {/* Hamburger menu button */}
+        <button
+          className={`hamburger-menu ${isMenuOpen ? 'active' : ''}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMenuOpen}
+        >
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+        </button>
       </div>
     </nav>
   );
