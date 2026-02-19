@@ -1,0 +1,473 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+.footer {
+  background-color: var(--pure-black);
+  color: var(--slate-grey);
+  padding: 80px 4% 0;
+  font-size: 0.75rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  /* Fixed 5-column layout: about gets more room, nav cols are equal, subscribe stretches */
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+  gap: 48px;
+  padding-bottom: 60px;
+  align-items: start;
+}
+
+.footer-column h4,
+.footer-logo {
+  color: var(--porcelain);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 22px;
+  white-space: nowrap;
+}
+
+.footer-logo {
+  font-size: 1.5rem;
+  font-weight: 900;
+  white-space: normal;
+  line-height: 1.25;
+}
+
+.footer-about p {
+  line-height: 1.8;
+  margin-bottom: 25px;
+  max-width: 300px;
+  font-size: 0.95rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.social-icons a {
+  color: var(--slate-grey);
+  font-size: 1rem;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--dim-grey);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.social-icons a:hover {
+  color: var(--porcelain);
+  background-color: var(--classic-crimson);
+  border-color: var(--classic-crimson);
+  transform: translateY(-3px);
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 14px;
+}
+
+.footer-column ul a {
+  color: var(--slate-grey);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+.footer-column ul a:hover {
+  color: var(--classic-crimson);
+}
+
+.footer-subscribe p {
+  margin-bottom: 20px;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.subscribe-form {
+  display: flex;
+}
+
+.subscribe-form input {
+  flex-grow: 1;
+<<<<<<< HEAD
+  min-width: 0;
+=======
+  min-width: 0; /* prevents overflow in grid */
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
+  padding: 12px;
+  border: 1px solid var(--dim-grey);
+  background-color: var(--dim-grey);
+  color: var(--porcelain);
+  border-radius: 6px 0 0 6px;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+}
+
+.subscribe-form input::placeholder {
+  color: var(--slate-grey);
+}
+
+.subscribe-form button {
+  padding: 12px 20px;
+  border: none;
+  background-color: var(--classic-crimson);
+  color: var(--porcelain);
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+  min-height: 46px;
+}
+
+.subscribe-form button:hover {
+  background-color: #b50028;
+}
+
+.footer-bottom {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 25px 4%;
+  text-align: center;
+  border-top: 1px solid var(--dim-grey);
+}
+
+.footer-bottom p {
+  font-size: 0.85rem;
+  color: var(--dim-grey);
+}
+
+<<<<<<< HEAD
+=======
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+
+<<<<<<< HEAD:B2B/src/components/Footer/Footer.css
+/* Extra Large - 1600px+ */
+@media (min-width: 1600px) {
+  .footer {
+    padding: 100px 6% 0;
+  }
+
+=======
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
+@media (max-width: 1100px) {
+>>>>>>> 091c557f930e55a7b771df9acbea33238ddace4d:src/components/Footer/Footer.css
+  .footer-container {
+    gap: 56px;
+    padding-bottom: 80px;
+  }
+
+  .footer-column h4,
+  .footer-logo {
+    font-size: 1.2rem;
+    margin-bottom: 28px;
+  }
+
+  .footer-about p {
+    margin-bottom: 30px;
+    max-width: 350px;
+  }
+}
+
+/* Desktop - 1200px to 1599px */
+@media (max-width: 1599px) and (min-width: 1200px) {
+  .footer-container {
+    gap: 45px;
+    padding-bottom: 70px;
+  }
+
+  .footer-column h4,
+  .footer-logo {
+    margin-bottom: 20px;
+  }
+}
+
+/* Tablet Landscape - 1024px to 1199px */
+@media (max-width: 1024px) {
+  .footer {
+    padding: 70px 5% 0;
+  }
+
+  .footer-container {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 50px;
+  }
+
+  .footer-about {
+    grid-column: 1 / -1;
+  }
+
+  .footer-subscribe {
+    grid-column: 1 / -1;
+  }
+
+  .footer-column h4,
+  .footer-logo {
+    font-size: 1rem;
+    margin-bottom: 18px;
+  }
+
+  .footer-about p {
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  .social-icons a {
+    width: 36px;
+    height: 36px;
+  }
+
+  .footer-column ul a {
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet - 768px to 1023px */
+@media (max-width: 768px) {
+  .footer {
+    padding: 60px 5% 0;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding-bottom: 40px;
+  }
+
+  .footer-about,
+  .footer-subscribe {
+    grid-column: 1 / -1;
+  }
+<<<<<<< HEAD:B2B/src/components/Footer/Footer.css
+
+  .footer-column h4,
+  .footer-logo {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+
+  .footer-about p {
+    margin-bottom: 18px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .footer-column ul li {
+    margin-bottom: 12px;
+  }
+
+  .footer-column ul a {
+    font-size: 0.85rem;
+    white-space: normal;
+  }
+
+  .footer-subscribe p {
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+  }
+
+  .subscribe-form input {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+
+  .subscribe-form button {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+
+  .social-icons a {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+
+  .footer-bottom {
+    padding: 20px 5%;
+  }
+
+  .footer-bottom p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Mobile - 480px to 767px */
+@media (max-width: 480px) {
+  .footer {
+    padding: 50px 5% 0;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-bottom: 35px;
+  }
+
+  .footer-about,
+  .footer-subscribe {
+    grid-column: 1;
+  }
+
+  .footer-column h4,
+  .footer-logo {
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+  }
+
+  .footer-logo {
+    font-size: 1.1rem;
+  }
+
+  .footer-about p {
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .footer-column ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .footer-column ul li {
+    margin-bottom: 0;
+  }
+
+  .footer-column ul a {
+    font-size: 0.8rem;
+  }
+
+  .footer-subscribe p {
+    margin-bottom: 14px;
+    font-size: 0.85rem;
+  }
+
+  .subscribe-form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .subscribe-form input {
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 0.8rem;
+    width: 100%;
+  }
+
+  .subscribe-form button {
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.8rem;
+    width: 100%;
+  }
+
+  .social-icons {
+    gap: 10px;
+  }
+
+  .social-icons a {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom {
+    padding: 18px 5%;
+  }
+
+  .footer-bottom p {
+    font-size: 0.75rem;
+  }
+}
+
+/* Extra Small - 360px and below */
+@media (max-width: 360px) {
+  .footer {
+    padding: 40px 4% 0;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding-bottom: 30px;
+  }
+
+  .footer-column h4,
+  .footer-logo {
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+
+  .footer-logo {
+    font-size: 1rem;
+  }
+
+  .footer-about p {
+    margin-bottom: 14px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .footer-column ul {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .footer-column ul a {
+    font-size: 0.75rem;
+  }
+
+  .subscribe-form input {
+    padding: 8px;
+    font-size: 0.75rem;
+  }
+
+  .subscribe-form button {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  .social-icons {
+    gap: 8px;
+  }
+
+  .social-icons a {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .footer-bottom {
+    padding: 16px 4%;
+  }
+
+  .footer-bottom p {
+    font-size: 0.7rem;
+  }
+}
+=======
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
+>>>>>>> 091c557f930e55a7b771df9acbea33238ddace4d:src/components/Footer/Footer.css

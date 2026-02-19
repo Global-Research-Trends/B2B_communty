@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { uploadData, getUrl, list } from 'aws-amplify/storage';
-import { getCurrentUser } from 'aws-amplify/auth';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import './profile.css';
 
 // Icons as SVG components for cleaner code
@@ -67,6 +67,32 @@ const CheckIcon = () => (
   </svg>
 );
 
+const GraduationIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+    <path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>
+  </svg>
+);
+
+export type QuestionnaireData = {
+  educationLevel: string;
+  fieldOfStudy: string;
+  graduationYear: string;
+  occupationStatus: string;
+  organizationType: string;
+  industry: string;
+  department: string;
+  roleLevel: string;
+  yearsExperience: string;
+  country: string;
+  provinceState: string;
+  city: string;
+  hobbies: string;
+  languages: string;
+  participationConsent: string;
+  contactPreference: string;
+};
+
 interface ProfilePageProps {
   onBack: () => void;
   profileData: {
@@ -80,20 +106,30 @@ interface ProfilePageProps {
   };
   profileImageUrl?: string;
   onProfileImageChange?: (url: string) => void;
+  questionnaireData?: QuestionnaireData | null;
 }
 
-const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData, profileImageUrl, onProfileImageChange }) => {
+const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData, profileImageUrl, onProfileImageChange, questionnaireData }) => {
   const [activeNav, setActiveNav] = useState('personal');
   const [avatarUrl, setAvatarUrl] = useState<string | null>(profileImageUrl ?? null);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const getIdentityId = async () => {
+    const session = await fetchAuthSession();
+    const identityId = session.identityId;
+    if (!identityId) {
+      throw new Error('Missing identityId in auth session');
+    }
+    return identityId;
+  };
+
   // Load existing profile image from S3 on mount
   useEffect(() => {
     const loadProfileImage = async () => {
       try {
-        const { userId } = await getCurrentUser();
-        const result = await list({ path: `profile-pictures/${userId}/` });
+        const identityId = await getIdentityId();
+        const result = await list({ path: `profile-pictures/${identityId}/` });
         if (result.items.length > 0) {
           // Get the most recent file
           const sorted = [...result.items].sort((a, b) => {
@@ -137,9 +173,9 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData, profileI
 
     setUploading(true);
     try {
-      const { userId } = await getCurrentUser();
+      const identityId = await getIdentityId();
       const ext = file.name.split('.').pop() ?? 'jpg';
-      const key = `profile-pictures/${userId}/avatar.${ext}`;
+      const key = `profile-pictures/${identityId}/avatar.${ext}`;
 
       await uploadData({
         path: key,
@@ -166,7 +202,90 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData, profileI
   const navItems = [
     { id: 'personal', label: 'Personal Information', icon: <UserIcon /> },
     { id: 'professional', label: 'Professional Details', icon: <BriefcaseIcon /> },
+    { id: 'education', label: 'Education', icon: <GraduationIcon /> },
   ];
+
+  const qVal = (value: string | undefined) => value?.trim() || 'Not provided';
+
+  // Derive country name from locale code (e.g. "US" → "United States")
+  const getCountryFromCode = (code: string | undefined): string => {
+    if (!code || !code.trim()) return 'Not provided';
+    try {
+      const displayNames = new Intl.DisplayNames(['en'], { type: 'region' });
+      return displayNames.of(code.trim().toUpperCase()) ?? code;
+    } catch {
+      return code;
+    }
+  };
+
+  // Derive country from phone number dial code
+  const getCountryFromPhone = (phone: string | undefined): string => {
+    if (!phone || !phone.startsWith('+')) return 'Not provided';
+    const dialCodeMap: Record<string, string> = {
+      '+1': 'US', '+44': 'GB', '+91': 'IN', '+49': 'DE', '+971': 'AE',
+      '+27': 'ZA', '+33': 'FR', '+61': 'AU', '+81': 'JP', '+86': 'CN',
+      '+55': 'BR', '+7': 'RU', '+39': 'IT', '+34': 'ES', '+82': 'KR',
+      '+31': 'NL', '+46': 'SE', '+47': 'NO', '+45': 'DK', '+358': 'FI',
+      '+48': 'PL', '+43': 'AT', '+41': 'CH', '+32': 'BE', '+351': 'PT',
+      '+353': 'IE', '+64': 'NZ', '+65': 'SG', '+60': 'MY', '+66': 'TH',
+      '+62': 'ID', '+63': 'PH', '+84': 'VN', '+90': 'TR', '+20': 'EG',
+      '+234': 'NG', '+254': 'KE', '+92': 'PK', '+880': 'BD', '+94': 'LK',
+      '+977': 'NP', '+852': 'HK', '+886': 'TW', '+972': 'IL', '+966': 'SA',
+      '+974': 'QA', '+973': 'BH', '+968': 'OM', '+965': 'KW', '+962': 'JO',
+      '+961': 'LB', '+964': 'IQ', '+98': 'IR', '+993': 'TM', '+998': 'UZ',
+      '+380': 'UA', '+40': 'RO', '+36': 'HU', '+420': 'CZ', '+421': 'SK',
+      '+385': 'HR', '+381': 'RS', '+30': 'GR', '+359': 'BG', '+370': 'LT',
+      '+371': 'LV', '+372': 'EE', '+52': 'MX', '+57': 'CO', '+56': 'CL',
+      '+54': 'AR', '+51': 'PE', '+58': 'VE', '+593': 'EC', '+591': 'BO',
+      '+595': 'PY', '+598': 'UY',
+    };
+    // Try matching longest dial codes first
+    for (const len of [4, 3, 2]) {
+      const candidate = phone.slice(0, len + 1); // +1 for the '+' char
+      if (dialCodeMap[candidate]) {
+        return dialCodeMap[candidate];
+      }
+    }
+    return 'Not provided';
+  };
+
+  // Determine country name: prefer locale code, fallback to phone dial code
+  const resolvedCountryCode = profileData.location && profileData.location !== 'Not provided'
+    ? profileData.location
+    : getCountryFromPhone(profileData.phone);
+  const resolvedCountryName = resolvedCountryCode !== 'Not provided'
+    ? getCountryFromCode(resolvedCountryCode)
+    : 'Not provided';
+
+  const parseJsonArray = (json: string | undefined): string[] => {
+    if (!json) return [];
+    try {
+      const parsed = JSON.parse(json) as string[];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const industries = parseJsonArray(questionnaireData?.industry);
+
+  // Calculate profile completion dynamically
+  const completionFields = [
+    profileData.fullName,
+    profileData.email,
+    profileData.phone,
+    questionnaireData?.educationLevel,
+    questionnaireData?.fieldOfStudy,
+    questionnaireData?.occupationStatus,
+    questionnaireData?.organizationType,
+    questionnaireData?.department,
+    questionnaireData?.roleLevel,
+    questionnaireData?.yearsExperience,
+    resolvedCountryCode !== 'Not provided' ? resolvedCountryCode : undefined,
+    questionnaireData?.industry,
+  ];
+  const filledCount = completionFields.filter((v) => v && v.trim() && v !== 'Not provided' && v !== '[]').length;
+  const profileCompletion = Math.round((filledCount / completionFields.length) * 100);
 
   return (
     <div className="profile-content-wrapper">
@@ -201,7 +320,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData, profileI
         </div>
         <div className="profile-header-info">
           <h2 className="profile-name">{profileData.fullName}</h2>
-          <p className="profile-title">{profileData.jobTitle}</p>
+          <p className="profile-title">{questionnaireData?.roleLevel || profileData.jobTitle}</p>
           <div className="verified-badge">
             <CheckIcon />
             <span>{profileData.emailVerified ? 'Verified Member' : 'Verification Pending'}</span>
@@ -229,24 +348,27 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData, profileI
         <section className="completion-section">
           <div className="completion-header">
             <h3>Profile Completion</h3>
-            <span className="completion-percent">75%</span>
+            <span className="completion-percent">{profileCompletion}%</span>
           </div>
           <p className="completion-subtext">
             Complete your profile to access trusted networking opportunities and qualified connections.
           </p>
           <div className="progress-container">
-            <div className="progress-bar" style={{ width: '75%' }} />
+            <div className="progress-bar" style={{ width: `${profileCompletion}%` }} />
           </div>
-          <div className="next-step-card">
-            <div className="next-step-content">
-              <div className="star-icon"><StarIcon /></div>
-              <div className="next-step-text">
-                <span className="next-step-title">Next Step:</span>
-                <span className="next-step-desc">Add company size to increase completion by 10%</span>
+          {profileCompletion < 100 && (
+            <div className="next-step-card">
+              <div className="next-step-content">
+                <div className="star-icon"><StarIcon /></div>
+                <div className="next-step-text">
+                  <span className="next-step-title">Next Step:</span>
+                  <span className="next-step-desc">
+                    {!questionnaireData ? 'Complete the questionnaire to fill your profile' : 'Add missing details to increase completion'}
+                  </span>
+                </div>
               </div>
             </div>
-            <button className="complete-btn">Complete Profile</button>
-          </div>
+          )}
         </section>
 
         {activeNav === 'personal' && (
@@ -280,8 +402,8 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData, profileI
                   <p className="detail-value">{profileData.phone}</p>
                 </div>
                 <div className="detail-item">
-                  <label>Location</label>
-                  <p className="detail-value">{profileData.location}</p>
+                  <label>Country</label>
+                  <p className="detail-value">{resolvedCountryName}</p>
                 </div>
               </div>
             </section>
@@ -306,39 +428,63 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, profileData, profileI
           <section className="details-section">
             <div className="section-header">
               <h3>Professional Information</h3>
-              <button className="edit-btn">
-                <EditIcon />
-                <span>Edit</span>
-              </button>
             </div>
             <div className="details-grid">
               <div className="detail-item">
-                <label>Job Title</label>
-                <p className="detail-value">{profileData.jobTitle}</p>
+                <label>Occupation Status</label>
+                <p className="detail-value">{qVal(questionnaireData?.occupationStatus)}</p>
+              </div>
+              <div className="detail-item">
+                <label>Role Level</label>
+                <p className="detail-value">{qVal(questionnaireData?.roleLevel)}</p>
               </div>
               <div className="detail-item">
                 <label>Industry</label>
-                <p className="detail-value">Software & Technology</p>
-              </div>
-              <div className="detail-item">
-                <label>Company Size</label>
-                <div className="missing-value">
-                  <p className="detail-value missing">Not provided</p>
-                  <span className="missing-tag">Missing</span>
-                </div>
+                <p className="detail-value">{industries.length > 0 ? industries.join(', ') : 'Not provided'}</p>
               </div>
               <div className="detail-item">
                 <label>Years of Experience</label>
-                <p className="detail-value">8-10 Years</p>
+                <p className="detail-value">{qVal(questionnaireData?.yearsExperience)}</p>
               </div>
             </div>
-            <div className="info-banner">
-              <div className="info-icon"><InfoIcon /></div>
-              <p>Complete your professional profile to access advanced networking features and industry insights.</p>
-              <a href="#" className="update-link">Update now</a>
-            </div>
+            {!questionnaireData && (
+              <div className="info-banner">
+                <div className="info-icon"><InfoIcon /></div>
+                <p>Complete the questionnaire to populate your professional profile.</p>
+              </div>
+            )}
           </section>
         )}
+
+        {activeNav === 'education' && (
+          <section className="details-section">
+            <div className="section-header">
+              <h3>Educational Background</h3>
+            </div>
+            <div className="details-grid">
+              <div className="detail-item">
+                <label>Highest Education Level</label>
+                <p className="detail-value">{qVal(questionnaireData?.educationLevel)}</p>
+              </div>
+              <div className="detail-item">
+                <label>Field of Study</label>
+                <p className="detail-value">{qVal(questionnaireData?.fieldOfStudy)}</p>
+              </div>
+              <div className="detail-item">
+                <label>Graduation Year</label>
+                <p className="detail-value">{qVal(questionnaireData?.graduationYear)}</p>
+              </div>
+            </div>
+            {!questionnaireData && (
+              <div className="info-banner">
+                <div className="info-icon"><InfoIcon /></div>
+                <p>Complete the questionnaire to populate your education details.</p>
+              </div>
+            )}
+          </section>
+        )}
+
+
       </div>
       </div>
   );

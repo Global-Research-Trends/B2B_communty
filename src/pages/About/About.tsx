@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+<<<<<<< HEAD
 import Header from '../../../B2B/src/components/Header/Header';
 import Footer from '../../../B2B/src/components/Footer/Footer';
+=======
+import Header from '../../components/Header/Header.tsx';
+import Footer from '../../components/Footer/Footer.tsx';
+>>>>>>> 091c557f930e55a7b771df9acbea33238ddace4d
 import './About.css';
 
 const About: React.FC = () => {

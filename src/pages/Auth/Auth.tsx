@@ -1,24 +1,46 @@
-import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import {
   confirmResetPassword,
   confirmSignUp,
+<<<<<<< HEAD
+=======
+  getCurrentUser,
   resendSignUpCode,
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
   resetPassword,
   signIn,
+  signOut,
   signUp,
-  updateUserAttributes,
 } from 'aws-amplify/auth';
+import { generateClient } from 'aws-amplify/data';
+import type { Schema } from '../../../amplify/data/resource';
 import { Link, useNavigate } from 'react-router-dom';
 import './Auth.css';
+
+const client = generateClient<Schema>();
+
+const checkQuestionnaireCompleted = async (): Promise<boolean> => {
+  try {
+    const { userId } = await getCurrentUser();
+    const { data } = await client.models.QuestionnaireResponse.list({
+      filter: { owner: { eq: userId } },
+    });
+    return data.length > 0;
+  } catch {
+    return false;
+  }
+};
 
 type AuthMode = 'signup' | 'signin';
 
 type ResetPasswordStep = 'request' | 'confirm' | null;
 type VerificationTarget = 'email' | null;
+type UsernameAvailability = 'idle' | 'checking' | 'available' | 'taken' | 'unknown';
 
 type FormState = {
   firstName: string;
   lastName: string;
+  username: string;
   email: string;
   password: string;
   phoneLocal: string;
@@ -46,6 +68,7 @@ const fallbackCountries: CountryOption[] = [
 const initialFormState: FormState = {
   firstName: '',
   lastName: '',
+  username: '',
   email: '',
   password: '',
   phoneLocal: '',
@@ -61,6 +84,21 @@ const getAuthErrorName = (error: unknown) => {
   return typeof maybeName === 'string' ? maybeName : '';
 };
 
+const getFriendlyPasswordError = (error: unknown) => {
+  const errorName = getAuthErrorName(error);
+  const message = error instanceof Error ? error.message : '';
+
+  if (errorName === 'InvalidPasswordException') {
+    return 'Password is not strong enough.';
+  }
+
+  if (/password/i.test(message) && /(policy|conform|requirement|minimum|uppercase|lowercase|number|special)/i.test(message)) {
+    return 'Password is not strong enough.';
+  }
+
+  return message;
+};
+
 const Auth = () => {
   const navigate = useNavigate();
   const [mode, setMode] = useState<AuthMode>('signup');
@@ -71,9 +109,13 @@ const Auth = () => {
   const [statusMessage, setStatusMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [emailVerified, setEmailVerified] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [pendingSignupUsername, setPendingSignupUsername] = useState('');
+  const [usernameAvailability, setUsernameAvailability] = useState<UsernameAvailability>('idle');
   const [verificationTarget, setVerificationTarget] = useState<VerificationTarget>(null);
   const [verificationCodeInput, setVerificationCodeInput] = useState('');
   const [verificationDestination, setVerificationDestination] = useState('');
+  const usernameCheckSeqRef = useRef(0);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -141,11 +183,61 @@ const Auth = () => {
     return countries.find((country) => country.value === form.country) ?? fallbackCountries[0];
   }, [countries, form.country]);
 
-  const maxDobDate = useMemo(() => {
-    const today = new Date();
-    const limit = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-    return limit.toISOString().split('T')[0];
-  }, []);
+  useEffect(() => {
+    if (mode !== 'signup' || resetPasswordStep) {
+      setUsernameAvailability('idle');
+      return;
+    }
+
+    const username = form.username.trim();
+    if (!username || !/^[a-zA-Z0-9._-]{3,30}$/.test(username)) {
+      setUsernameAvailability('idle');
+      return;
+    }
+
+    setUsernameAvailability('checking');
+    const seq = ++usernameCheckSeqRef.current;
+    const timeoutId = window.setTimeout(async () => {
+      try {
+        await signIn({
+          username,
+          password: 'AvailabilityProbe_9x@Q3',
+        });
+
+        if (seq !== usernameCheckSeqRef.current) return;
+        setUsernameAvailability('unknown');
+      } catch (error) {
+        if (seq !== usernameCheckSeqRef.current) return;
+
+        const errorName = getAuthErrorName(error);
+        const message = error instanceof Error ? error.message : '';
+
+        if (errorName === 'UserNotFoundException') {
+          setUsernameAvailability('available');
+          return;
+        }
+
+        if (errorName === 'UserNotConfirmedException' || errorName === 'PasswordResetRequiredException') {
+          setUsernameAvailability('taken');
+          return;
+        }
+
+        if (/already a signed in user/i.test(message)) {
+          setUsernameAvailability('unknown');
+          return;
+        }
+
+        if (errorName === 'NotAuthorizedException') {
+          setUsernameAvailability('unknown');
+          return;
+        }
+
+        setUsernameAvailability('unknown');
+      }
+    }, 500);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [form.username, mode, resetPasswordStep]);
 
   const updateField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -177,6 +269,7 @@ const Auth = () => {
   const validateSignupCoreFields = () => {
     const normalizedFirstName = form.firstName.trim();
     const normalizedLastName = form.lastName.trim();
+    const normalizedUsername = form.username.trim();
     const normalizedEmail = form.email.trim();
     const normalizedPhoneLocal = form.phoneLocal.replace(/\D/g, '');
 
@@ -190,13 +283,23 @@ const Auth = () => {
       return null;
     }
 
+    if (!/^[a-zA-Z0-9._-]{3,30}$/.test(normalizedUsername)) {
+      setErrorMessage('Enter a valid username.');
+      return null;
+    }
+
+    if (usernameAvailability === 'taken') {
+      setErrorMessage('Username already taken.');
+      return null;
+    }
+
     if (!normalizedEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
       setErrorMessage('Enter a valid email before requesting verification.');
       return null;
     }
 
     if (!form.password || form.password.length < 8) {
-      setErrorMessage('Enter a password with at least 8 characters.');
+      setErrorMessage('Password is not strong enough.');
       return null;
     }
 
@@ -213,6 +316,7 @@ const Auth = () => {
     return {
       firstName: normalizedFirstName,
       lastName: normalizedLastName,
+      username: normalizedUsername,
       email: normalizedEmail,
       phoneLocal: normalizedPhoneLocal,
       phoneNumber: `${selectedCountry.dialCode}${normalizedPhoneLocal}`,
@@ -221,6 +325,7 @@ const Auth = () => {
 
   const openVerificationModal = async () => {
     resetMessages();
+    setPendingSignupUsername('');
     setIsSubmitting(true);
 
     try {
@@ -231,13 +336,14 @@ const Auth = () => {
 
       try {
         const response = await signUp({
-          username: normalized.email,
+          username: normalized.username,
           password: form.password,
           options: {
             userAttributes: {
               given_name: normalized.firstName,
               family_name: normalized.lastName,
               email: normalized.email,
+              phone_number: normalized.phoneNumber,
               birthdate: form.dateOfBirth,
               locale: form.country,
               gender: 'other',
@@ -253,15 +359,21 @@ const Auth = () => {
         const errorName = getAuthErrorName(error);
         const message = error instanceof Error ? error.message : '';
 
-        if (errorName !== 'UsernameExistsException' && !message.includes('UsernameExistsException')) {
-          throw error;
+        if (errorName === 'UsernameExistsException' || message.includes('UsernameExistsException')) {
+          setUsernameAvailability('taken');
+          setErrorMessage('Username already taken. Please choose a different username.');
+          return;
         }
 
-        const resendResponse = await resendSignUpCode({ username: normalized.email });
-        destination = resendResponse.destination ?? destination;
+        if (errorName === 'AliasExistsException' || message.includes('AliasExistsException')) {
+          setErrorMessage('An account with this email already exists. Try signing in.');
+          return;
+        }
+        throw error;
       }
 
       setVerificationTarget('email');
+      setPendingSignupUsername(normalized.username);
       setVerificationDestination(destination);
       setVerificationCodeInput('');
       setStatusMessage(`Verification code sent to ${destination}.`);
@@ -280,7 +392,8 @@ const Auth = () => {
         return;
       }
 
-      const message = error instanceof Error ? error.message : 'Unable to send verification code.';
+      const friendlyPasswordMessage = getFriendlyPasswordError(error);
+      const message = friendlyPasswordMessage || 'Unable to send verification code.';
       setErrorMessage(message);
     } finally {
       setIsSubmitting(false);
@@ -291,7 +404,16 @@ const Auth = () => {
     setVerificationTarget(null);
     setVerificationCodeInput('');
     setVerificationDestination('');
+    setPendingSignupUsername('');
   };
+
+  const usernameAvailabilityText = useMemo(() => {
+    if (usernameAvailability === 'checking') return 'Checking username...';
+    if (usernameAvailability === 'available') return 'Username is available.';
+    if (usernameAvailability === 'taken') return 'Username already taken.';
+    if (usernameAvailability === 'unknown') return "We'll confirm username availability when you submit.";
+    return '';
+  }, [usernameAvailability]);
 
   const confirmVerificationCode = async () => {
     resetMessages();
@@ -304,7 +426,7 @@ const Auth = () => {
       }
 
       await confirmSignUp({
-        username: form.email.trim(),
+        username: pendingSignupUsername || form.username.trim(),
         confirmationCode: verificationCodeInput.trim(),
       });
 
@@ -325,13 +447,31 @@ const Auth = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await signIn({
-        username: form.email.trim(),
-        password: form.password,
-      });
+      const loginIdentifier = form.email.trim();
+      let response: Awaited<ReturnType<typeof signIn>>;
+
+      try {
+        response = await signIn({
+          username: loginIdentifier,
+          password: form.password,
+        });
+      } catch (error) {
+        const message = error instanceof Error ? error.message : '';
+
+        if (/already a signed in user/i.test(message)) {
+          await signOut();
+          response = await signIn({
+            username: loginIdentifier,
+            password: form.password,
+          });
+        } else {
+          throw error;
+        }
+      }
 
       if (response.isSignedIn) {
-        navigate('/questionnaire');
+        const done = await checkQuestionnaireCompleted();
+        navigate(done ? '/dashboard' : '/questionnaire');
         return;
       }
 
@@ -359,12 +499,13 @@ const Auth = () => {
       }
 
       const response = await signIn({
-        username: normalized.email,
+        username: normalized.username,
         password: form.password,
       });
 
       if (response.isSignedIn) {
-        navigate('/questionnaire');
+        const done = await checkQuestionnaireCompleted();
+        navigate(done ? '/dashboard' : '/questionnaire');
         return;
       }
 
@@ -414,7 +555,8 @@ const Auth = () => {
       updateField('resetNewPassword', '');
       setStatusMessage('Password updated. Sign in with your new password.');
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unable to reset password.';
+      const friendlyPasswordMessage = getFriendlyPasswordError(error);
+      const message = friendlyPasswordMessage || 'Unable to reset password.';
       setErrorMessage(message);
     } finally {
       setIsSubmitting(false);
@@ -474,21 +616,46 @@ const Auth = () => {
                       required
                     />
                   </div>
+
+                  <div className="auth-field auth-span-2">
+                    <label htmlFor="username">Username</label>
+                    <input
+                      id="username"
+                      type="text"
+                      value={form.username}
+                      onChange={(event) => {
+                        updateField('username', event.target.value);
+                        setEmailVerified(false);
+                        setPendingSignupUsername('');
+                      }}
+                      placeholder="Choose a unique username"
+                      required
+                    />
+                    {usernameAvailabilityText && (
+                      <p
+                        className={`auth-username-status auth-username-status-${usernameAvailability}`}
+                        aria-live="polite"
+                      >
+                        {usernameAvailabilityText}
+                      </p>
+                    )}
+                  </div>
                 </>
               )}
 
               <div className="auth-field auth-span-2">
-                <label htmlFor="email">Business email</label>
+                <label htmlFor="email">{mode === 'signup' ? 'Business email' : 'Email or username'}</label>
                 <div className="auth-input-with-action">
                   <input
                     id="email"
-                    type="email"
+                    type={mode === 'signup' ? 'email' : 'text'}
                     value={form.email}
                     onChange={(event) => {
                       updateField('email', event.target.value);
                       setEmailVerified(false);
+                      setPendingSignupUsername('');
                     }}
-                    placeholder="name@company.com"
+                    placeholder={mode === 'signup' ? 'name@company.com' : 'email or username'}
                     required
                   />
                   {mode === 'signup' && (
@@ -508,14 +675,59 @@ const Auth = () => {
 
               <div className="auth-field auth-span-2">
                 <label htmlFor="password">Password</label>
-                <input
-                  id="password"
-                  type="password"
-                  value={form.password}
-                  onChange={(event) => updateField('password', event.target.value)}
-                  placeholder="Minimum 8 characters"
-                  required
-                />
+                <div className="auth-password-field">
+                  <input
+                    id="password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={form.password}
+                    onChange={(event) => updateField('password', event.target.value)}
+                    placeholder="Minimum 8 characters"
+                    required
+                  />
+                  <button
+                    type="button"
+                    className="auth-password-toggle"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    aria-pressed={showPassword}
+                  >
+                    {showPassword ? (
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                          d="M2.2 12s3.3-6 9.8-6 9.8 6 9.8 6-3.3 6-9.8 6-9.8-6-9.8-6z"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="3"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                        />
+                      </svg>
+                    ) : (
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                          d="M3.5 13.5c2.3-2.1 5.2-3.3 8.5-3.3s6.2 1.2 8.5 3.3"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path d="M6 11.2 4.8 9.6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                        <path d="M10 10.2 9.6 8.4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                        <path d="M14 10.2 14.4 8.4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                        <path d="M18 11.2 19.2 9.6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
               </div>
 
               {mode === 'signup' && (
@@ -545,7 +757,6 @@ const Auth = () => {
                       type="date"
                       value={form.dateOfBirth}
                       onChange={(event) => updateField('dateOfBirth', event.target.value)}
-                      max={maxDobDate}
                       required
                     />
                   </div>
@@ -682,21 +893,18 @@ const Auth = () => {
             </form>
           )}
 
-          {!resetPasswordStep && mode === 'signin' && (
+          {!resetPasswordStep && (
             <div className="auth-social-row" aria-label="Social sign in options">
               <button
                 type="button"
                 className="auth-social-btn auth-social-linkedin"
                 onClick={() => window.open('https://www.linkedin.com/', '_blank', 'noopener,noreferrer')}
-                aria-label="Sign in with LinkedIn"
-                title="Sign in with LinkedIn"
+                aria-label={mode === 'signup' ? 'Sign up with LinkedIn' : 'Sign in with LinkedIn'}
+                title={mode === 'signup' ? 'Sign up with LinkedIn' : 'Sign in with LinkedIn'}
               >
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    fill="currentColor"
-                    d="M4.98 3.5A2.49 2.49 0 1 0 5 8.48 2.49 2.49 0 0 0 4.98 3.5zM3 9h4v12H3zm7 0h3.83v1.64h.06c.53-1.01 1.84-2.08 3.79-2.08C21 8.56 22 10.55 22 14.06V21h-4v-6.07c0-1.45-.03-3.32-2.02-3.32-2.02 0-2.33 1.58-2.33 3.21V21h-4z"
-                  />
-                </svg>
+                <span className="auth-social-linkedin-mark" aria-hidden="true">
+                  in
+                </span>
               </button>
 
               <button
@@ -762,6 +970,7 @@ const Auth = () => {
                 resetMessages();
                 setResetPasswordStep(null);
                 closeVerificationModal();
+                setPendingSignupUsername('');
                 setMode((prev) => (prev === 'signup' ? 'signin' : 'signup'));
               }}
             >
