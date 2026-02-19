@@ -1,9 +1,9 @@
 {
   "auth": {
-    "user_pool_id": "us-east-1_n5aEMPHns",
+    "user_pool_id": "us-east-1_Q6kiogcCf",
     "aws_region": "us-east-1",
-    "user_pool_client_id": "7eck93929r6je58rjsiuulbca5",
-    "identity_pool_id": "us-east-1:2fdf8753-ccb8-4152-aa67-eee631b6cff6",
+    "user_pool_client_id": "7b4ll8ratebef7t836uvrcckf7",
+    "identity_pool_id": "us-east-1:1cb4b38e-2058-4df5-bcd9-24def559790a",
     "mfa_methods": [],
     "standard_required_attributes": [
       "email",
@@ -28,7 +28,7 @@
     "unauthenticated_identities_enabled": true
   },
   "data": {
-    "url": "https://5knyhh33ybg2bjluzbwrpqmlti.appsync-api.us-east-1.amazonaws.com/graphql",
+    "url": "https://irmt3soa2ndhdfcmko44rcutp4.appsync-api.us-east-1.amazonaws.com/graphql",
     "aws_region": "us-east-1",
     "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
     "authorization_types": [
@@ -52,6 +52,90 @@
               "isArray": false,
               "type": "String",
               "isRequired": true,
+              "attributes": []
+            },
+            "roleLevel": {
+              "name": "roleLevel",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "seniorityLevel": {
+              "name": "seniorityLevel",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "department": {
+              "name": "department",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationType": {
+              "name": "organizationType",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "industry": {
+              "name": "industry",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "yearsExperience": {
+              "name": "yearsExperience",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "companySize": {
+              "name": "companySize",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "annualRevenue": {
+              "name": "annualRevenue",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "primaryMarket": {
+              "name": "primaryMarket",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "joinReason": {
+              "name": "joinReason",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "biggestChallenge": {
+              "name": "biggestChallenge",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "contentPreference": {
+              "name": "contentPreference",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
               "attributes": []
             },
             "educationLevel": {
@@ -82,36 +166,8 @@
               "isRequired": false,
               "attributes": []
             },
-            "organizationType": {
-              "name": "organizationType",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "industry": {
-              "name": "industry",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "department": {
-              "name": "department",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "roleLevel": {
-              "name": "roleLevel",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "yearsExperience": {
-              "name": "yearsExperience",
+            "country": {
+              "name": "country",
               "isArray": false,
               "type": "String",
               "isRequired": false,
@@ -131,15 +187,15 @@
               "isRequired": false,
               "attributes": []
             },
-            "hobbies": {
-              "name": "hobbies",
+            "languages": {
+              "name": "languages",
               "isArray": false,
               "type": "String",
               "isRequired": false,
               "attributes": []
             },
-            "languages": {
-              "name": "languages",
+            "hobbies": {
+              "name": "hobbies",
               "isArray": false,
               "type": "String",
               "isRequired": false,
@@ -223,11 +279,11 @@
   },
   "storage": {
     "aws_region": "us-east-1",
-    "bucket_name": "amplify-b2b-maisum-sandbo-b2bprofileimagesbucket3d-lq4adjcoffgw",
+    "bucket_name": "amplify-b2b-maisum-sandbo-b2bprofileimagesbucket3d-lmgqqxtmmmrd",
     "buckets": [
       {
         "name": "b2bProfileImages",
-        "bucket_name": "amplify-b2b-maisum-sandbo-b2bprofileimagesbucket3d-lq4adjcoffgw",
+        "bucket_name": "amplify-b2b-maisum-sandbo-b2bprofileimagesbucket3d-lmgqqxtmmmrd",
         "aws_region": "us-east-1",
         "paths": {
           "profile-pictures/${cognito-identity.amazonaws.com:sub}/*": {

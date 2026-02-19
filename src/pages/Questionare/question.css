@@ -231,10 +231,18 @@
   font-size: 0.82rem;
 }
 
-/* ── Options Grid ── */
+.q-question-hint {
+  font-size: 0.82rem;
+  color: var(--dim-grey);
+  margin: -8px 0 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ── Options List (one option per line) ── */
 .q-options-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -242,12 +250,17 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 16px;
+  padding: 12px 18px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface);
   cursor: pointer;
   transition: all 0.2s ease;
+  flex-wrap: wrap;
+}
+
+/* Cards with "Other" text input need to wrap */
+.q-option-card:has(.q-other-input) {
   flex-wrap: wrap;
 }
 
@@ -475,7 +488,12 @@
 /* ── Responsive ── */
 @media (max-width: 640px) {
   .q-options-grid {
-    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .q-option-card {
+    padding: 8px 14px;
+    font-size: 0.82rem;
   }
 
   .q-header {
@@ -527,6 +545,7 @@
   }
 
   .q-option-card {
-    padding: 10px 12px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
   }
 }
