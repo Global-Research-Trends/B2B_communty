@@ -5,30 +5,36 @@ const schema = a.schema({
     .model({
       owner: a.string().required(),
 
-      // Section A: Educational Background
+      // Step 1: Your Role
+      roleLevel: a.string(),         // job title
+      seniorityLevel: a.string(),
+      department: a.string(),
+
+      // Step 2: Your Company
+      organizationType: a.string(),
+      industry: a.string(),          // JSON array of selected values
+      yearsExperience: a.string(),
+      companySize: a.string(),
+      annualRevenue: a.string(),
+      primaryMarket: a.string(),
+
+      // Step 3: Your Goals
+      joinReason: a.string(),
+      biggestChallenge: a.string(),
+      contentPreference: a.string(), // JSON array of selected values
+
+      // Step 4: Background & Location
       educationLevel: a.string(),
       fieldOfStudy: a.string(),
       graduationYear: a.string(),
-
-      // Section B: Occupation & Employment
       occupationStatus: a.string(),
-      organizationType: a.string(),
-      industry: a.string(),       // JSON array of selected values
-      department: a.string(),
-      roleLevel: a.string(),
-      yearsExperience: a.string(),
-
-      // Section C: Personal Information
+      country: a.string(),
       provinceState: a.string(),
       city: a.string(),
 
-      // Section D: Hobbies & Interests
-      hobbies: a.string(),        // JSON array of selected values
-
-      // Section E: Additional Information
-      languages: a.string(),      // JSON array of selected values
-
-      // Section F: Research Participation
+      // Step 5: Preferences & Consent
+      languages: a.string(),        // JSON array of selected values
+      hobbies: a.string(),          // JSON array of selected values
       participationConsent: a.string(),
       contactPreference: a.string(),
 

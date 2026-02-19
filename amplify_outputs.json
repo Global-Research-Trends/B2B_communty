@@ -13,6 +13,7 @@
     "username_attributes": [],
     "user_verification_types": [
       "email"
+      "email"
     ],
     "groups": [],
     "mfa_configuration": "NONE",
@@ -23,6 +24,7 @@
       "require_symbols": true,
       "require_uppercase": true
     },
+    "unauthenticated_identities_enabled": true
     "unauthenticated_identities_enabled": true
   },
   "data": {
@@ -50,6 +52,90 @@
               "isArray": false,
               "type": "String",
               "isRequired": true,
+              "attributes": []
+            },
+            "roleLevel": {
+              "name": "roleLevel",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "seniorityLevel": {
+              "name": "seniorityLevel",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "department": {
+              "name": "department",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "organizationType": {
+              "name": "organizationType",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "industry": {
+              "name": "industry",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "yearsExperience": {
+              "name": "yearsExperience",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "companySize": {
+              "name": "companySize",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "annualRevenue": {
+              "name": "annualRevenue",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "primaryMarket": {
+              "name": "primaryMarket",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "joinReason": {
+              "name": "joinReason",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "biggestChallenge": {
+              "name": "biggestChallenge",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "contentPreference": {
+              "name": "contentPreference",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
               "attributes": []
             },
             "educationLevel": {
@@ -80,36 +166,8 @@
               "isRequired": false,
               "attributes": []
             },
-            "organizationType": {
-              "name": "organizationType",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "industry": {
-              "name": "industry",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "department": {
-              "name": "department",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "roleLevel": {
-              "name": "roleLevel",
-              "isArray": false,
-              "type": "String",
-              "isRequired": false,
-              "attributes": []
-            },
-            "yearsExperience": {
-              "name": "yearsExperience",
+            "country": {
+              "name": "country",
               "isArray": false,
               "type": "String",
               "isRequired": false,
@@ -129,15 +187,15 @@
               "isRequired": false,
               "attributes": []
             },
-            "hobbies": {
-              "name": "hobbies",
+            "languages": {
+              "name": "languages",
               "isArray": false,
               "type": "String",
               "isRequired": false,
               "attributes": []
             },
-            "languages": {
-              "name": "languages",
+            "hobbies": {
+              "name": "hobbies",
               "isArray": false,
               "type": "String",
               "isRequired": false,

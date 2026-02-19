@@ -10,6 +10,10 @@
 .footer-container {
   max-width: 1600px;
   margin: 0 auto;
+<<<<<<< HEAD
+=======
+  /* Fixed 5-column layout: about gets more room, nav cols are equal, subscribe stretches */
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
   gap: 48px;
@@ -96,7 +100,11 @@
 
 .subscribe-form input {
   flex-grow: 1;
+<<<<<<< HEAD
   min-width: 0;
+=======
+  min-width: 0; /* prevents overflow in grid */
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
   padding: 12px;
   border: 1px solid var(--dim-grey);
   background-color: var(--dim-grey);
@@ -139,6 +147,11 @@
   font-size: 0.9rem;
 }
 
+<<<<<<< HEAD
+=======
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
 @media (max-width: 1100px) {
   .footer-container {
     grid-template-columns: 1fr 1fr 1fr;
@@ -164,4 +177,8 @@
   .footer-subscribe {
     grid-column: 1 / -1;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a

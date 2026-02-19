@@ -2,13 +2,34 @@ import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import {
   confirmResetPassword,
   confirmSignUp,
+<<<<<<< HEAD
+=======
+  getCurrentUser,
+  resendSignUpCode,
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
   resetPassword,
   signIn,
   signOut,
   signUp,
 } from 'aws-amplify/auth';
+import { generateClient } from 'aws-amplify/data';
+import type { Schema } from '../../../amplify/data/resource';
 import { Link, useNavigate } from 'react-router-dom';
 import './Auth.css';
+
+const client = generateClient<Schema>();
+
+const checkQuestionnaireCompleted = async (): Promise<boolean> => {
+  try {
+    const { userId } = await getCurrentUser();
+    const { data } = await client.models.QuestionnaireResponse.list({
+      filter: { owner: { eq: userId } },
+    });
+    return data.length > 0;
+  } catch {
+    return false;
+  }
+};
 
 type AuthMode = 'signup' | 'signin';
 
@@ -449,7 +470,8 @@ const Auth = () => {
       }
 
       if (response.isSignedIn) {
-        navigate('/questionnaire');
+        const done = await checkQuestionnaireCompleted();
+        navigate(done ? '/dashboard' : '/questionnaire');
         return;
       }
 
@@ -482,7 +504,8 @@ const Auth = () => {
       });
 
       if (response.isSignedIn) {
-        navigate('/questionnaire');
+        const done = await checkQuestionnaireCompleted();
+        navigate(done ? '/dashboard' : '/questionnaire');
         return;
       }
 

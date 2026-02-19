@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 import './Footer.css';
 
 const Footer = () => {
+=======
+import React from 'react';
+import './Footer.css';
+
+const Footer: React.FC = () => {
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -8,6 +15,7 @@ const Footer = () => {
           <h3 className="footer-logo">B2B Insights</h3>
           <p>A global professional network for B2B leaders to connect, learn, and grow with verified expertise.</p>
           <div className="social-icons">
+<<<<<<< HEAD
             <a href="#" aria-label="LinkedIn">
               <i className="fab fa-linkedin-in" />
             </a>
@@ -20,12 +28,19 @@ const Footer = () => {
             <a href="#" aria-label="Instagram">
               <i className="fab fa-instagram" />
             </a>
+=======
+            <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i className="fab fa-instagram"></i></a>
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
           </div>
         </div>
 
         <div className="footer-column">
           <h4>Explore</h4>
           <ul>
+<<<<<<< HEAD
             <li>
               <a href="/about">About Us</a>
             </li>
@@ -41,12 +56,20 @@ const Footer = () => {
             <li>
               <a href="#">Blog</a>
             </li>
+=======
+            <li><a href="/about">About Us</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#">Blog</a></li>
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
           </ul>
         </div>
 
         <div className="footer-column">
           <h4>Resources</h4>
           <ul>
+<<<<<<< HEAD
             <li>
               <a href="#">Case Studies</a>
             </li>
@@ -59,12 +82,19 @@ const Footer = () => {
             <li>
               <a href="#">Support Center</a>
             </li>
+=======
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Whitepapers</a></li>
+            <li><a href="#">Webinars</a></li>
+            <li><a href="#">Support Center</a></li>
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
           </ul>
         </div>
 
         <div className="footer-column">
           <h4>Legal</h4>
           <ul>
+<<<<<<< HEAD
             <li>
               <a href="#">Terms of Service</a>
             </li>
@@ -74,6 +104,11 @@ const Footer = () => {
             <li>
               <a href="#">Cookie Policy</a>
             </li>
+=======
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
           </ul>
         </div>
 
@@ -94,4 +129,8 @@ const Footer = () => {
   );
 };
 
+<<<<<<< HEAD
 export default Footer;
+=======
+export default Footer;
+>>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
