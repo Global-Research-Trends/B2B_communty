@@ -4,6 +4,7 @@ import {
   confirmSignUp,
   resetPassword,
   signIn,
+  signOut,
   signUp,
 } from 'aws-amplify/auth';
 import { Link, useNavigate } from 'react-router-dom';
@@ -188,18 +189,25 @@ const Auth = () => {
         if (seq !== usernameCheckSeqRef.current) return;
 
         const errorName = getAuthErrorName(error);
+        const message = error instanceof Error ? error.message : '';
 
         if (errorName === 'UserNotFoundException') {
           setUsernameAvailability('available');
           return;
         }
 
-        if (
-          errorName === 'NotAuthorizedException' ||
-          errorName === 'UserNotConfirmedException' ||
-          errorName === 'PasswordResetRequiredException'
-        ) {
+        if (errorName === 'UserNotConfirmedException' || errorName === 'PasswordResetRequiredException') {
           setUsernameAvailability('taken');
+          return;
+        }
+
+        if (/already a signed in user/i.test(message)) {
+          setUsernameAvailability('unknown');
+          return;
+        }
+
+        if (errorName === 'NotAuthorizedException') {
+          setUsernameAvailability('unknown');
           return;
         }
 
@@ -332,7 +340,12 @@ const Auth = () => {
 
         if (errorName === 'UsernameExistsException' || message.includes('UsernameExistsException')) {
           setUsernameAvailability('taken');
-          setErrorMessage('Username already taken.');
+          setErrorMessage('Username already taken. Please choose a different username.');
+          return;
+        }
+
+        if (errorName === 'AliasExistsException' || message.includes('AliasExistsException')) {
+          setErrorMessage('An account with this email already exists. Try signing in.');
           return;
         }
         throw error;
@@ -414,10 +427,26 @@ const Auth = () => {
 
     try {
       const loginIdentifier = form.email.trim();
-      const response = await signIn({
-        username: loginIdentifier,
-        password: form.password,
-      });
+      let response: Awaited<ReturnType<typeof signIn>>;
+
+      try {
+        response = await signIn({
+          username: loginIdentifier,
+          password: form.password,
+        });
+      } catch (error) {
+        const message = error instanceof Error ? error.message : '';
+
+        if (/already a signed in user/i.test(message)) {
+          await signOut();
+          response = await signIn({
+            username: loginIdentifier,
+            password: form.password,
+          });
+        } else {
+          throw error;
+        }
+      }
 
       if (response.isSignedIn) {
         navigate('/questionnaire');
@@ -637,19 +666,41 @@ const Auth = () => {
                     className="auth-password-toggle"
                     onClick={() => setShowPassword((prev) => !prev)}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    aria-pressed={showPassword}
                   >
                     {showPassword ? (
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z" />
-                        <circle cx="12" cy="12" r="3" />
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                          d="M2.2 12s3.3-6 9.8-6 9.8 6 9.8 6-3.3 6-9.8 6-9.8-6-9.8-6z"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="3"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                        />
                       </svg>
                     ) : (
-                      <svg viewBox="0 0 24 24" aria-hidden="true" style={{ transform: 'scaleY(-1)' }}>
-                        <path d="M4 14c2.2-1.9 4.8-3 8-3s5.8 1.1 8 3" />
-                        <path d="M6 11.2 4.8 9.6" />
-                        <path d="M10 10.2 9.6 8.4" />
-                        <path d="M14 10.2 14.4 8.4" />
-                        <path d="M18 11.2 19.2 9.6" />
+                      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                          d="M3.5 13.5c2.3-2.1 5.2-3.3 8.5-3.3s6.2 1.2 8.5 3.3"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path d="M6 11.2 4.8 9.6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                        <path d="M10 10.2 9.6 8.4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                        <path d="M14 10.2 14.4 8.4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                        <path d="M18 11.2 19.2 9.6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                       </svg>
                     )}
                   </button>

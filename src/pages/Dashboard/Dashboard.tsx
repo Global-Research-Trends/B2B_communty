@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
+import { fetchUserAttributes, getCurrentUser, signOut } from 'aws-amplify/auth';
 import { getUrl, list } from 'aws-amplify/storage';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
@@ -227,9 +227,11 @@ const Dashboard = () => {
   const handleLogout = async () => {
     try {
       setIsLoggingOut(true);
-      //await signOut();
-      navigate('/auth');
+      await signOut();
+      navigate('/auth', { replace: true });
     } catch {
+      // Keep user on dashboard if sign-out fails.
+    } finally {
       setIsLoggingOut(false);
     }
   };

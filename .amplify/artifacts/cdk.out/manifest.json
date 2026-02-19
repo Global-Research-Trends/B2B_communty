@@ -1,19 +1,19 @@
 {
   "version": "52.0.0",
   "artifacts": {
-    "amplify-b2b-Maisum-sandbox-2d4f59d75b.assets": {
+    "amplify-b2b-Habib-sandbox-1cd84d1817.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "amplify-b2b-Maisum-sandbox-2d4f59d75b.assets.json",
+        "file": "amplify-b2b-Habib-sandbox-1cd84d1817.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "amplify-b2b-Maisum-sandbox-2d4f59d75b": {
+    "amplify-b2b-Habib-sandbox-1cd84d1817": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://unknown-account/unknown-region",
       "properties": {
-        "templateFile": "amplify-b2b-Maisum-sandbox-2d4f59d75b.template.json",
+        "templateFile": "amplify-b2b-Habib-sandbox-1cd84d1817.template.json",
         "terminationProtection": false,
         "tags": {
           "amplify:deployment-type": "sandbox",
@@ -22,11 +22,11 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/addcc41dd3334aa526dd5d3e3e809bcebc7cc2ec3d08d8d428a84e6441d097ab.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/ef0ee6f69112cea979cdfc155cd219174408d6aa3b694819f03b10901a8044b9.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "amplify-b2b-Maisum-sandbox-2d4f59d75b.assets"
+          "amplify-b2b-Habib-sandbox-1cd84d1817.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
@@ -35,10 +35,10 @@
         }
       },
       "dependencies": [
-        "amplify-b2b-Maisum-sandbox-2d4f59d75b.assets"
+        "amplify-b2b-Habib-sandbox-1cd84d1817.assets"
       ],
       "metadata": {
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817": [
           {
             "type": "aws:cdk:stack-tags",
             "data": [
@@ -53,247 +53,247 @@
             ]
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/deploymentType": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/deploymentType": [
           {
             "type": "aws:cdk:logicalId",
             "data": "deploymentType"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/region": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/region": [
           {
             "type": "aws:cdk:logicalId",
             "data": "region"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/amplifyAuth/UserPool/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/amplifyAuth/UserPool/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyAuthUserPool4BA7F805"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/amplifyAuth/UserPoolAppClient/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/amplifyAuth/UserPoolAppClient/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyAuthUserPoolAppClient2626C6F8"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/amplifyAuth/IdentityPool": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/amplifyAuth/IdentityPool": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyAuthIdentityPool3FDE84CC"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/amplifyAuth/authenticatedUserRole/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/amplifyAuth/authenticatedUserRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyAuthauthenticatedUserRoleD8DA3689"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/amplifyAuth/unauthenticatedUserRole/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/amplifyAuth/unauthenticatedUserRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyAuthunauthenticatedUserRole2B524D9E"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/amplifyAuth/IdentityPoolRoleAttachment": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/amplifyAuth/IdentityPoolRoleAttachment": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyAuthIdentityPoolRoleAttachment045F17C8"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/CDKMetadata/Default": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/CDKMetadata/Condition": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthUserPoolA3E8CC35Ref": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/amplifyb2bHabibsandbox1cd84d1817authamplifyAuthUserPoolF912A9DDRef": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthUserPoolA3E8CC35Ref"
+            "data": "amplifyb2bHabibsandbox1cd84d1817authamplifyAuthUserPoolF912A9DDRef"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthUserPoolAppClient7A26D491Ref": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/amplifyb2bHabibsandbox1cd84d1817authamplifyAuthUserPoolAppClient079758C1Ref": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthUserPoolAppClient7A26D491Ref"
+            "data": "amplifyb2bHabibsandbox1cd84d1817authamplifyAuthUserPoolAppClient079758C1Ref"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthIdentityPool0254F416Ref": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/amplifyb2bHabibsandbox1cd84d1817authamplifyAuthIdentityPoolF41FA3B5Ref": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthIdentityPool0254F416Ref"
+            "data": "amplifyb2bHabibsandbox1cd84d1817authamplifyAuthIdentityPoolF41FA3B5Ref"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthauthenticatedUserRole0E2EE6C7Ref": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/amplifyb2bHabibsandbox1cd84d1817authamplifyAuthauthenticatedUserRole1DF61648Ref": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthauthenticatedUserRole0E2EE6C7Ref"
+            "data": "amplifyb2bHabibsandbox1cd84d1817authamplifyAuthauthenticatedUserRole1DF61648Ref"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth/amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthunauthenticatedUserRole3B713D0FRef": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth/amplifyb2bHabibsandbox1cd84d1817authamplifyAuthunauthenticatedUserRole1FA568B7Ref": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthunauthenticatedUserRole3B713D0FRef"
+            "data": "amplifyb2bHabibsandbox1cd84d1817authamplifyAuthunauthenticatedUserRole1FA568B7Ref"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/auth.NestedStack/auth.NestedStackResource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/auth.NestedStack/auth.NestedStackResource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "auth179371D7"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/userPoolId": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/userPoolId": [
           {
             "type": "aws:cdk:logicalId",
             "data": "userPoolId"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/webClientId": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/webClientId": [
           {
             "type": "aws:cdk:logicalId",
             "data": "webClientId"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/identityPoolId": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/identityPoolId": [
           {
             "type": "aws:cdk:logicalId",
             "data": "identityPoolId"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/authRegion": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/authRegion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "authRegion"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/allowUnauthenticatedIdentities": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/allowUnauthenticatedIdentities": [
           {
             "type": "aws:cdk:logicalId",
             "data": "allowUnauthenticatedIdentities"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/signupAttributes": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/signupAttributes": [
           {
             "type": "aws:cdk:logicalId",
             "data": "signupAttributes"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/usernameAttributes": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/usernameAttributes": [
           {
             "type": "aws:cdk:logicalId",
             "data": "usernameAttributes"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/verificationMechanisms": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/verificationMechanisms": [
           {
             "type": "aws:cdk:logicalId",
             "data": "verificationMechanisms"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/passwordPolicyMinLength": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/passwordPolicyMinLength": [
           {
             "type": "aws:cdk:logicalId",
             "data": "passwordPolicyMinLength"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/passwordPolicyRequirements": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/passwordPolicyRequirements": [
           {
             "type": "aws:cdk:logicalId",
             "data": "passwordPolicyRequirements"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/mfaConfiguration": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/mfaConfiguration": [
           {
             "type": "aws:cdk:logicalId",
             "data": "mfaConfiguration"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/mfaTypes": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/mfaTypes": [
           {
             "type": "aws:cdk:logicalId",
             "data": "mfaTypes"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/passwordlessOptions": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/passwordlessOptions": [
           {
             "type": "aws:cdk:logicalId",
             "data": "passwordlessOptions"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/socialProviders": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/socialProviders": [
           {
             "type": "aws:cdk:logicalId",
             "data": "socialProviders"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/oauthCognitoDomain": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/oauthCognitoDomain": [
           {
             "type": "aws:cdk:logicalId",
             "data": "oauthCognitoDomain"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/oauthScope": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/oauthScope": [
           {
             "type": "aws:cdk:logicalId",
             "data": "oauthScope"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/oauthRedirectSignIn": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/oauthRedirectSignIn": [
           {
             "type": "aws:cdk:logicalId",
             "data": "oauthRedirectSignIn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/oauthRedirectSignOut": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/oauthRedirectSignOut": [
           {
             "type": "aws:cdk:logicalId",
             "data": "oauthRedirectSignOut"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/oauthResponseType": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/oauthResponseType": [
           {
             "type": "aws:cdk:logicalId",
             "data": "oauthResponseType"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/oauthClientId": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/oauthClientId": [
           {
             "type": "aws:cdk:logicalId",
             "data": "oauthClientId"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/groups": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/groups": [
           {
             "type": "aws:cdk:logicalId",
             "data": "groups"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/GraphQLAPI/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/GraphQLAPI/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataGraphQLAPI42A6FA33"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/GraphQLAPI/TransformerSchema": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/GraphQLAPI/TransformerSchema": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataGraphQLAPITransformerSchemaFF50A789"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/GraphQLAPI/NONE_DS": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/GraphQLAPI/NONE_DS": [
           {
             "type": "graphqltransformer:resourceName",
             "data": "NONE_DS"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/GraphQLAPI/NONE_DS/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/GraphQLAPI/NONE_DS/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataGraphQLAPINONEDS684BF699"
@@ -303,139 +303,139 @@
             "data": "NONE_DS"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/AmplifyManagedTableIsCompleteRole/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/AmplifyManagedTableIsCompleteRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AmplifyManagedTableIsCompleteRoleF825222C"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/AmplifyManagedTableOnEventRole/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/AmplifyManagedTableOnEventRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AmplifyManagedTableOnEventRoleB4E71DEA"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/AmplifyManagedTableOnEventRole/DefaultPolicy/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/AmplifyManagedTableOnEventRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AmplifyManagedTableOnEventRoleDefaultPolicyF6DABCB6"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/TableManagerCustomProvider/framework-onEvent/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/TableManagerCustomProvider/framework-onEvent/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "TableManagerCustomProviderframeworkonEvent1DFC2ECC"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/TableManagerCustomProvider/framework-isComplete/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/TableManagerCustomProvider/framework-isComplete/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "TableManagerCustomProviderframeworkisComplete2E51021B"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Role/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Role/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AmplifyTableWaiterStateMachineRole470BE899"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Role/DefaultPolicy/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Role/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AmplifyTableWaiterStateMachineRoleDefaultPolicy89F3836A"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AmplifyTableWaiterStateMachine060600BC"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/CDKMetadata/Default": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/CDKMetadata/Condition": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/reference-to-amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataGraphQLAPI21C57E55ApiId": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/reference-to-amplifyb2bHabibsandbox1cd84d1817dataamplifyDataGraphQLAPIEECEDD2CApiId": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataGraphQLAPI21C57E55ApiId"
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817dataamplifyDataGraphQLAPIEECEDD2CApiId"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager/amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent03DF1492Arn": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager/amplifyb2bHabibsandbox1cd84d1817dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEventEBA65A6DArn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent03DF1492Arn"
+            "data": "amplifyb2bHabibsandbox1cd84d1817dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEventEBA65A6DArn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyTableManager.NestedStack/AmplifyTableManager.NestedStackResource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyTableManager.NestedStack/AmplifyTableManager.NestedStackResource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource86290833"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/DynamoDBModelTableReadIOPS": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/DynamoDBModelTableReadIOPS": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DynamoDBModelTableReadIOPS"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/DynamoDBModelTableWriteIOPS": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/DynamoDBModelTableWriteIOPS": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DynamoDBModelTableWriteIOPS"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/DynamoDBBillingMode": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/DynamoDBBillingMode": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DynamoDBBillingMode"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/DynamoDBEnablePointInTimeRecovery": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/DynamoDBEnablePointInTimeRecovery": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DynamoDBEnablePointInTimeRecovery"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/DynamoDBEnableServerSideEncryption": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/DynamoDBEnableServerSideEncryption": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DynamoDBEnableServerSideEncryption"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/HasEnvironmentParameter": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/HasEnvironmentParameter": [
           {
             "type": "aws:cdk:logicalId",
             "data": "HasEnvironmentParameter"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/ShouldUsePayPerRequestBilling": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/ShouldUsePayPerRequestBilling": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ShouldUsePayPerRequestBilling"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/ShouldUsePointInTimeRecovery": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/ShouldUsePointInTimeRecovery": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ShouldUsePointInTimeRecovery"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseTable": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseTable": [
           {
             "type": "graphqltransformer:resourceName",
             "data": "QuestionnaireResponse"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseTable/Default/Default": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseTable/Default/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "QuestionnaireResponseTable"
@@ -445,31 +445,31 @@
             "data": "QuestionnaireResponse"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/CustomTableQuestionnaireResponseTable": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/CustomTableQuestionnaireResponseTable": [
           {
             "type": "graphqltransformer:resourceName",
             "data": "QuestionnaireResponse"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/GetAttQuestionnaireResponseTableStreamArn": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/GetAttQuestionnaireResponseTableStreamArn": [
           {
             "type": "aws:cdk:logicalId",
             "data": "GetAttQuestionnaireResponseTableStreamArn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/GetAttQuestionnaireResponseTableName": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/GetAttQuestionnaireResponseTableName": [
           {
             "type": "aws:cdk:logicalId",
             "data": "GetAttQuestionnaireResponseTableName"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseIAMRole": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseIAMRole": [
           {
             "type": "graphqltransformer:resourceName",
             "data": "QuestionnaireResponseIAMRole"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseIAMRole/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseIAMRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "QuestionnaireResponseIAMRole34326E7F"
@@ -479,13 +479,13 @@
             "data": "QuestionnaireResponseIAMRole"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseDataSource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseDataSource": [
           {
             "type": "graphqltransformer:resourceName",
             "data": "QuestionnaireResponseTable"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseDataSource/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseDataSource/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "QuestionnaireResponseDataSource"
@@ -495,7 +495,7 @@
             "data": "QuestionnaireResponseTable"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QuerygetQuestionnaireResponseauth0Function/QuerygetQuestionnaireResponseauth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QuerygetQuestionnaireResponseauth0Function/QuerygetQuestionnaireResponseauth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "QuerygetQuestionnaireResponseauth0FunctionQuerygetQuestionnaireResponseauth0FunctionAppSyncFunctionFD4F3B34"
@@ -505,7 +505,7 @@
             "data": "QuerygetQuestionnaireResponseauth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QuerygetQuestionnaireResponsepostAuth0Function/QuerygetQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QuerygetQuestionnaireResponsepostAuth0Function/QuerygetQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "QuerygetQuestionnaireResponsepostAuth0FunctionQuerygetQuestionnaireResponsepostAuth0FunctionAppSyncFunctionB8441E3E"
@@ -515,7 +515,7 @@
             "data": "QuerygetQuestionnaireResponsepostAuth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QueryGetQuestionnaireResponseDataResolverFn/QueryGetQuestionnaireResponseDataResolverFn.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QueryGetQuestionnaireResponseDataResolverFn/QueryGetQuestionnaireResponseDataResolverFn.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "QueryGetQuestionnaireResponseDataResolverFnQueryGetQuestionnaireResponseDataResolverFnAppSyncFunctionDDDBC0FF"
@@ -525,7 +525,7 @@
             "data": "QueryGetQuestionnaireResponseDataResolverFn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/queryGetQuestionnaireResponseResolver": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/queryGetQuestionnaireResponseResolver": [
           {
             "type": "aws:cdk:logicalId",
             "data": "GetQuestionnaireResponseResolver"
@@ -535,7 +535,7 @@
             "data": "Query.getQuestionnaireResponse"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QuerylistQuestionnaireResponsesauth0Function/QuerylistQuestionnaireResponsesauth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QuerylistQuestionnaireResponsesauth0Function/QuerylistQuestionnaireResponsesauth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "QuerylistQuestionnaireResponsesauth0FunctionQuerylistQuestionnaireResponsesauth0FunctionAppSyncFunctionA0705CE4"
@@ -545,7 +545,7 @@
             "data": "QuerylistQuestionnaireResponsesauth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QuerylistQuestionnaireResponsespostAuth0Function/QuerylistQuestionnaireResponsespostAuth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QuerylistQuestionnaireResponsespostAuth0Function/QuerylistQuestionnaireResponsespostAuth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "QuerylistQuestionnaireResponsespostAuth0FunctionQuerylistQuestionnaireResponsespostAuth0FunctionAppSyncFunction4850E3FB"
@@ -555,7 +555,7 @@
             "data": "QuerylistQuestionnaireResponsespostAuth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QueryListQuestionnaireResponsesDataResolverFn/QueryListQuestionnaireResponsesDataResolverFn.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QueryListQuestionnaireResponsesDataResolverFn/QueryListQuestionnaireResponsesDataResolverFn.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "QueryListQuestionnaireResponsesDataResolverFnQueryListQuestionnaireResponsesDataResolverFnAppSyncFunctionC9D26484"
@@ -565,7 +565,7 @@
             "data": "QueryListQuestionnaireResponsesDataResolverFn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/queryListQuestionnaireResponsesResolver": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/queryListQuestionnaireResponsesResolver": [
           {
             "type": "aws:cdk:logicalId",
             "data": "ListQuestionnaireResponseResolver"
@@ -575,7 +575,7 @@
             "data": "Query.listQuestionnaireResponses"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/MutationcreateQuestionnaireResponseinit0Function/MutationcreateQuestionnaireResponseinit0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/MutationcreateQuestionnaireResponseinit0Function/MutationcreateQuestionnaireResponseinit0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "MutationcreateQuestionnaireResponseinit0FunctionMutationcreateQuestionnaireResponseinit0FunctionAppSyncFunction7151D35D"
@@ -585,7 +585,7 @@
             "data": "MutationcreateQuestionnaireResponseinit0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/MutationcreateQuestionnaireResponseauth0Function/MutationcreateQuestionnaireResponseauth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/MutationcreateQuestionnaireResponseauth0Function/MutationcreateQuestionnaireResponseauth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "MutationcreateQuestionnaireResponseauth0FunctionMutationcreateQuestionnaireResponseauth0FunctionAppSyncFunction7B1D5BC5"
@@ -595,7 +595,7 @@
             "data": "MutationcreateQuestionnaireResponseauth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/MutationcreateQuestionnaireResponsepostAuth0Function/MutationcreateQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/MutationcreateQuestionnaireResponsepostAuth0Function/MutationcreateQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "MutationcreateQuestionnaireResponsepostAuth0FunctionMutationcreateQuestionnaireResponsepostAuth0FunctionAppSyncFunction8CCEB80D"
@@ -605,7 +605,7 @@
             "data": "MutationcreateQuestionnaireResponsepostAuth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/MutationCreateQuestionnaireResponseDataResolverFn/MutationCreateQuestionnaireResponseDataResolverFn.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/MutationCreateQuestionnaireResponseDataResolverFn/MutationCreateQuestionnaireResponseDataResolverFn.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "MutationCreateQuestionnaireResponseDataResolverFnMutationCreateQuestionnaireResponseDataResolverFnAppSyncFunctionE70C7D95"
@@ -615,7 +615,7 @@
             "data": "MutationCreateQuestionnaireResponseDataResolverFn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/mutationCreateQuestionnaireResponseResolver": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/mutationCreateQuestionnaireResponseResolver": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CreateQuestionnaireResponseResolver"
@@ -625,7 +625,7 @@
             "data": "Mutation.createQuestionnaireResponse"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/MutationupdateQuestionnaireResponseinit0Function/MutationupdateQuestionnaireResponseinit0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/MutationupdateQuestionnaireResponseinit0Function/MutationupdateQuestionnaireResponseinit0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "MutationupdateQuestionnaireResponseinit0FunctionMutationupdateQuestionnaireResponseinit0FunctionAppSyncFunction989DDB95"
@@ -635,7 +635,7 @@
             "data": "MutationupdateQuestionnaireResponseinit0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/MutationupdateQuestionnaireResponseauth0Function/MutationupdateQuestionnaireResponseauth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/MutationupdateQuestionnaireResponseauth0Function/MutationupdateQuestionnaireResponseauth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "MutationupdateQuestionnaireResponseauth0FunctionMutationupdateQuestionnaireResponseauth0FunctionAppSyncFunction81A7427D"
@@ -645,7 +645,7 @@
             "data": "MutationupdateQuestionnaireResponseauth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/MutationupdateQuestionnaireResponsepostAuth0Function/MutationupdateQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/MutationupdateQuestionnaireResponsepostAuth0Function/MutationupdateQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "MutationupdateQuestionnaireResponsepostAuth0FunctionMutationupdateQuestionnaireResponsepostAuth0FunctionAppSyncFunction012FB0AA"
@@ -655,7 +655,7 @@
             "data": "MutationupdateQuestionnaireResponsepostAuth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/MutationUpdateQuestionnaireResponseDataResolverFn/MutationUpdateQuestionnaireResponseDataResolverFn.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/MutationUpdateQuestionnaireResponseDataResolverFn/MutationUpdateQuestionnaireResponseDataResolverFn.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "MutationUpdateQuestionnaireResponseDataResolverFnMutationUpdateQuestionnaireResponseDataResolverFnAppSyncFunction1BA7BF9E"
@@ -665,7 +665,7 @@
             "data": "MutationUpdateQuestionnaireResponseDataResolverFn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/mutationUpdateQuestionnaireResponseResolver": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/mutationUpdateQuestionnaireResponseResolver": [
           {
             "type": "aws:cdk:logicalId",
             "data": "UpdateQuestionnaireResponseResolver"
@@ -675,7 +675,7 @@
             "data": "Mutation.updateQuestionnaireResponse"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/MutationdeleteQuestionnaireResponseauth0Function/MutationdeleteQuestionnaireResponseauth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/MutationdeleteQuestionnaireResponseauth0Function/MutationdeleteQuestionnaireResponseauth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "MutationdeleteQuestionnaireResponseauth0FunctionMutationdeleteQuestionnaireResponseauth0FunctionAppSyncFunctionE2364389"
@@ -685,7 +685,7 @@
             "data": "MutationdeleteQuestionnaireResponseauth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/MutationdeleteQuestionnaireResponsepostAuth0Function/MutationdeleteQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/MutationdeleteQuestionnaireResponsepostAuth0Function/MutationdeleteQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "MutationdeleteQuestionnaireResponsepostAuth0FunctionMutationdeleteQuestionnaireResponsepostAuth0FunctionAppSyncFunctionE349D30C"
@@ -695,7 +695,7 @@
             "data": "MutationdeleteQuestionnaireResponsepostAuth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/MutationDeleteQuestionnaireResponseDataResolverFn/MutationDeleteQuestionnaireResponseDataResolverFn.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/MutationDeleteQuestionnaireResponseDataResolverFn/MutationDeleteQuestionnaireResponseDataResolverFn.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "MutationDeleteQuestionnaireResponseDataResolverFnMutationDeleteQuestionnaireResponseDataResolverFnAppSyncFunction827A4138"
@@ -705,7 +705,7 @@
             "data": "MutationDeleteQuestionnaireResponseDataResolverFn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/mutationDeleteQuestionnaireResponseResolver": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/mutationDeleteQuestionnaireResponseResolver": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DeleteQuestionnaireResponseResolver"
@@ -715,7 +715,7 @@
             "data": "Mutation.deleteQuestionnaireResponse"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/SubscriptiononCreateQuestionnaireResponseauth0Function/SubscriptiononCreateQuestionnaireResponseauth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/SubscriptiononCreateQuestionnaireResponseauth0Function/SubscriptiononCreateQuestionnaireResponseauth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptiononCreateQuestionnaireResponseauth0FunctionSubscriptiononCreateQuestionnaireResponseauth0FunctionAppSyncFunction97E04484"
@@ -725,7 +725,7 @@
             "data": "SubscriptiononCreateQuestionnaireResponseauth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/SubscriptiononCreateQuestionnaireResponsepostAuth0Function/SubscriptiononCreateQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/SubscriptiononCreateQuestionnaireResponsepostAuth0Function/SubscriptiononCreateQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptiononCreateQuestionnaireResponsepostAuth0FunctionSubscriptiononCreateQuestionnaireResponsepostAuth0FunctionAppSyncFunction64634922"
@@ -735,7 +735,7 @@
             "data": "SubscriptiononCreateQuestionnaireResponsepostAuth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/SubscriptionOnCreateQuestionnaireResponseDataResolverFn/SubscriptionOnCreateQuestionnaireResponseDataResolverFn.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/SubscriptionOnCreateQuestionnaireResponseDataResolverFn/SubscriptionOnCreateQuestionnaireResponseDataResolverFn.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptionOnCreateQuestionnaireResponseDataResolverFnSubscriptionOnCreateQuestionnaireResponseDataResolverFnAppSyncFunctionCAAE2EFD"
@@ -745,7 +745,7 @@
             "data": "SubscriptionOnCreateQuestionnaireResponseDataResolverFn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/subscriptionOnCreateQuestionnaireResponseResolver": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/subscriptionOnCreateQuestionnaireResponseResolver": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptiononCreateQuestionnaireResponseResolver"
@@ -755,7 +755,7 @@
             "data": "Subscription.onCreateQuestionnaireResponse"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/SubscriptiononUpdateQuestionnaireResponseauth0Function/SubscriptiononUpdateQuestionnaireResponseauth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/SubscriptiononUpdateQuestionnaireResponseauth0Function/SubscriptiononUpdateQuestionnaireResponseauth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptiononUpdateQuestionnaireResponseauth0FunctionSubscriptiononUpdateQuestionnaireResponseauth0FunctionAppSyncFunction73FC4450"
@@ -765,7 +765,7 @@
             "data": "SubscriptiononUpdateQuestionnaireResponseauth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/SubscriptiononUpdateQuestionnaireResponsepostAuth0Function/SubscriptiononUpdateQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/SubscriptiononUpdateQuestionnaireResponsepostAuth0Function/SubscriptiononUpdateQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptiononUpdateQuestionnaireResponsepostAuth0FunctionSubscriptiononUpdateQuestionnaireResponsepostAuth0FunctionAppSyncFunction5C9E502A"
@@ -775,7 +775,7 @@
             "data": "SubscriptiononUpdateQuestionnaireResponsepostAuth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/SubscriptionOnUpdateQuestionnaireResponseDataResolverFn/SubscriptionOnUpdateQuestionnaireResponseDataResolverFn.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/SubscriptionOnUpdateQuestionnaireResponseDataResolverFn/SubscriptionOnUpdateQuestionnaireResponseDataResolverFn.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptionOnUpdateQuestionnaireResponseDataResolverFnSubscriptionOnUpdateQuestionnaireResponseDataResolverFnAppSyncFunctionC16BB306"
@@ -785,7 +785,7 @@
             "data": "SubscriptionOnUpdateQuestionnaireResponseDataResolverFn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/subscriptionOnUpdateQuestionnaireResponseResolver": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/subscriptionOnUpdateQuestionnaireResponseResolver": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptiononUpdateQuestionnaireResponseResolver"
@@ -795,7 +795,7 @@
             "data": "Subscription.onUpdateQuestionnaireResponse"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/SubscriptiononDeleteQuestionnaireResponseauth0Function/SubscriptiononDeleteQuestionnaireResponseauth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/SubscriptiononDeleteQuestionnaireResponseauth0Function/SubscriptiononDeleteQuestionnaireResponseauth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptiononDeleteQuestionnaireResponseauth0FunctionSubscriptiononDeleteQuestionnaireResponseauth0FunctionAppSyncFunction59BB15BF"
@@ -805,7 +805,7 @@
             "data": "SubscriptiononDeleteQuestionnaireResponseauth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/SubscriptiononDeleteQuestionnaireResponsepostAuth0Function/SubscriptiononDeleteQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/SubscriptiononDeleteQuestionnaireResponsepostAuth0Function/SubscriptiononDeleteQuestionnaireResponsepostAuth0Function.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptiononDeleteQuestionnaireResponsepostAuth0FunctionSubscriptiononDeleteQuestionnaireResponsepostAuth0FunctionAppSyncFunctionE7F8554B"
@@ -815,7 +815,7 @@
             "data": "SubscriptiononDeleteQuestionnaireResponsepostAuth0Function"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/SubscriptionOnDeleteQuestionnaireResponseDataResolverFn/SubscriptionOnDeleteQuestionnaireResponseDataResolverFn.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/SubscriptionOnDeleteQuestionnaireResponseDataResolverFn/SubscriptionOnDeleteQuestionnaireResponseDataResolverFn.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptionOnDeleteQuestionnaireResponseDataResolverFnSubscriptionOnDeleteQuestionnaireResponseDataResolverFnAppSyncFunctionE15FAA3E"
@@ -825,7 +825,7 @@
             "data": "SubscriptionOnDeleteQuestionnaireResponseDataResolverFn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/subscriptionOnDeleteQuestionnaireResponseResolver": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/subscriptionOnDeleteQuestionnaireResponseResolver": [
           {
             "type": "aws:cdk:logicalId",
             "data": "SubscriptiononDeleteQuestionnaireResponseResolver"
@@ -835,7 +835,7 @@
             "data": "Subscription.onDeleteQuestionnaireResponse"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseOwnerDataResolverFn/QuestionnaireResponseOwnerDataResolverFn.AppSyncFunction": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/QuestionnaireResponseOwnerDataResolverFn/QuestionnaireResponseOwnerDataResolverFn.AppSyncFunction": [
           {
             "type": "aws:cdk:logicalId",
             "data": "QuestionnaireResponseOwnerDataResolverFnQuestionnaireResponseOwnerDataResolverFnAppSyncFunction5AFB2D78"
@@ -845,7 +845,7 @@
             "data": "QuestionnaireResponseOwnerDataResolverFn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/questionnaireResponseOwnerResolver": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/questionnaireResponseOwnerResolver": [
           {
             "type": "aws:cdk:logicalId",
             "data": "QuestionnaireResponseownerResolver"
@@ -855,139 +855,139 @@
             "data": "QuestionnaireResponse.owner"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/CDKMetadata/Default": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/CDKMetadata/Condition": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceFE194618Outputs.amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent03DF1492Arn": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bHabibsandbox1cd84d1817dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4BA8AD8DOutputs.amplifyb2bHabibsandbox1cd84d1817dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEventEBA65A6DArn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResourceFE194618Outputsamplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframe6E974134"
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817dataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource4BA8AD8DOutputsamplifyb2bHabibsandbox1cd84d1817dataamplifyDataAmplifyTableManagerTableManagerCustomProviderframewo66B1B56F"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataGraphQLAPI21C57E55ApiId": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bHabibsandbox1cd84d1817dataamplifyDataGraphQLAPIEECEDD2CApiId": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataGraphQLAPI21C57E55ApiId"
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817dataamplifyDataGraphQLAPIEECEDD2CApiId"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataGraphQLAPINONEDS89AA4FAEName": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bHabibsandbox1cd84d1817dataamplifyDataGraphQLAPINONEDS4610A0CCName": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataGraphQLAPINONEDS89AA4FAEName"
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817dataamplifyDataGraphQLAPINONEDS4610A0CCName"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputs.amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthauthenticatedUserRole0E2EE6C7Ref": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputs.amplifyb2bHabibsandbox1cd84d1817authamplifyAuthauthenticatedUserRole1DF61648Ref": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputsamplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthauthenticatedUserRole0E2EE6C7Ref"
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputsamplifyb2bHabibsandbox1cd84d1817authamplifyAuthauthenticatedUserRole1DF61648Ref"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputs.amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthunauthenticatedUserRole3B713D0FRef": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputs.amplifyb2bHabibsandbox1cd84d1817authamplifyAuthunauthenticatedUserRole1FA568B7Ref": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputsamplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthunauthenticatedUserRole3B713D0FRef"
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputsamplifyb2bHabibsandbox1cd84d1817authamplifyAuthunauthenticatedUserRole1FA568B7Ref"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputs.amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthIdentityPool0254F416Ref": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse/reference-to-amplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputs.amplifyb2bHabibsandbox1cd84d1817authamplifyAuthIdentityPoolF41FA3B5Ref": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputsamplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthIdentityPool0254F416Ref"
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputsamplifyb2bHabibsandbox1cd84d1817authamplifyAuthIdentityPoolF41FA3B5Ref"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/QuestionnaireResponse.NestedStack/QuestionnaireResponse.NestedStackResource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/QuestionnaireResponse.NestedStack/QuestionnaireResponse.NestedStackResource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataQuestionnaireResponseNestedStackQuestionnaireResponseNestedStackResource5E81374D"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucket9CCB4ACA"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Policy/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketPolicyF1C1C548"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/AutoDeleteObjectsCustomResource/Default": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/AutoDeleteObjectsCustomResource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketAutoDeleteObjectsCustomResource437F26F5"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/AwsCliLayer/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/AwsCliLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentAwsCliLayerE322F905"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/CustomResource-1536MiB/Default": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/CustomResource-1536MiB/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB21775929"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/DynamoDBModelTableReadIOPS": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/DynamoDBModelTableReadIOPS": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DynamoDBModelTableReadIOPS"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/DynamoDBModelTableWriteIOPS": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/DynamoDBModelTableWriteIOPS": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DynamoDBModelTableWriteIOPS"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/DynamoDBBillingMode": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/DynamoDBBillingMode": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DynamoDBBillingMode"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/DynamoDBEnablePointInTimeRecovery": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/DynamoDBEnablePointInTimeRecovery": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DynamoDBEnablePointInTimeRecovery"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/DynamoDBEnableServerSideEncryption": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/DynamoDBEnableServerSideEncryption": [
           {
             "type": "aws:cdk:logicalId",
             "data": "DynamoDBEnableServerSideEncryption"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
           {
             "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
             "data": true
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB": [
           {
             "type": "aws:cdk:is-custom-resource-handler-singleton",
             "data": true
@@ -1005,200 +1005,296 @@
             "data": 2
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleA41FC8C2"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/DefaultPolicy/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/DefaultPolicy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleDefaultPolicyFF1C635B"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBC5D8AB21"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/modelIntrospectionSchemaBucket/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/modelIntrospectionSchemaBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "modelIntrospectionSchemaBucketF566B665"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/modelIntrospectionSchemaBucket/Policy/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/modelIntrospectionSchemaBucket/Policy/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "modelIntrospectionSchemaBucketPolicy4DAB0D15"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/modelIntrospectionSchemaBucket/AutoDeleteObjectsCustomResource/Default": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/modelIntrospectionSchemaBucket/AutoDeleteObjectsCustomResource/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "modelIntrospectionSchemaBucketAutoDeleteObjectsCustomResourceFE57309F"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/modelIntrospectionSchemaBucketDeployment/AwsCliLayer/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/modelIntrospectionSchemaBucketDeployment/AwsCliLayer/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "modelIntrospectionSchemaBucketDeploymentAwsCliLayer13C432F7"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/modelIntrospectionSchemaBucketDeployment/CustomResource-1536MiB/Default": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/modelIntrospectionSchemaBucketDeployment/CustomResource-1536MiB/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "modelIntrospectionSchemaBucketDeploymentCustomResource1536MiB104B97EC"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/AMPLIFY_DATA_GRAPHQL_ENDPOINTParameter/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/AMPLIFY_DATA_GRAPHQL_ENDPOINTParameter/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AMPLIFYDATAGRAPHQLENDPOINTParameter1C2CBB16"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_BUCKET_NAMEParameter/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_BUCKET_NAMEParameter/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AMPLIFYDATAMODELINTROSPECTIONSCHEMABUCKETNAMEParameter47BF4F44"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_KEYParameter/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/AMPLIFY_DATA_MODEL_INTROSPECTION_SCHEMA_KEYParameter/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AMPLIFYDATAMODELINTROSPECTIONSCHEMAKEYParameterB6AEAE8A"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/AMPLIFY_DATA_DEFAULT_NAMEParameter/Resource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/AMPLIFY_DATA_DEFAULT_NAMEParameter/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "AMPLIFYDATADEFAULTNAMEParameterE7C23CC4"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/CDKMetadata/Default": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/CDKMetadata/Condition": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/reference-to-amplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputs.amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthUserPoolA3E8CC35Ref": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/reference-to-amplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputs.amplifyb2bHabibsandbox1cd84d1817authamplifyAuthUserPoolF912A9DDRef": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputsamplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthUserPoolA3E8CC35Ref"
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputsamplifyb2bHabibsandbox1cd84d1817authamplifyAuthUserPoolF912A9DDRef"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/reference-to-amplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputs.amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthauthenticatedUserRole0E2EE6C7Ref": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/reference-to-amplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputs.amplifyb2bHabibsandbox1cd84d1817authamplifyAuthauthenticatedUserRole1DF61648Ref": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputsamplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthauthenticatedUserRole0E2EE6C7Ref"
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputsamplifyb2bHabibsandbox1cd84d1817authamplifyAuthauthenticatedUserRole1DF61648Ref"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/reference-to-amplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputs.amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthunauthenticatedUserRole3B713D0FRef": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/reference-to-amplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputs.amplifyb2bHabibsandbox1cd84d1817authamplifyAuthunauthenticatedUserRole1FA568B7Ref": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputsamplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthunauthenticatedUserRole3B713D0FRef"
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputsamplifyb2bHabibsandbox1cd84d1817authamplifyAuthunauthenticatedUserRole1FA568B7Ref"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/reference-to-amplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputs.amplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthIdentityPool0254F416Ref": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/reference-to-amplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputs.amplifyb2bHabibsandbox1cd84d1817authamplifyAuthIdentityPoolF41FA3B5Ref": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "referencetoamplifyb2bMaisumsandbox2d4f59d75bauthNestedStackauthNestedStackResourceB1EB8F99Outputsamplifyb2bMaisumsandbox2d4f59d75bauthamplifyAuthIdentityPool0254F416Ref"
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputsamplifyb2bHabibsandbox1cd84d1817authamplifyAuthIdentityPoolF41FA3B5Ref"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataGraphQLAPI21C57E55ApiId": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyb2bHabibsandbox1cd84d1817dataamplifyDataGraphQLAPIEECEDD2CApiId": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataGraphQLAPI21C57E55ApiId"
+            "data": "amplifyb2bHabibsandbox1cd84d1817dataamplifyDataGraphQLAPIEECEDD2CApiId"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataGraphQLAPI21C57E55GraphQLUrl": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyb2bHabibsandbox1cd84d1817dataamplifyDataGraphQLAPIEECEDD2CGraphQLUrl": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataGraphQLAPI21C57E55GraphQLUrl"
+            "data": "amplifyb2bHabibsandbox1cd84d1817dataamplifyDataGraphQLAPIEECEDD2CGraphQLUrl"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data/amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB32A3F252DestinationBucketArn": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data/amplifyb2bHabibsandbox1cd84d1817dataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB052323D7DestinationBucketArn": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "amplifyb2bMaisumsandbox2d4f59d75bdataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB32A3F252DestinationBucketArn"
+            "data": "amplifyb2bHabibsandbox1cd84d1817dataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB052323D7DestinationBucketArn"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/data.NestedStack/data.NestedStackResource": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/data.NestedStack/data.NestedStackResource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "data7552DF31"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/awsAppsyncApiId": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/awsAppsyncApiId": [
           {
             "type": "aws:cdk:logicalId",
             "data": "awsAppsyncApiId"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/awsAppsyncApiEndpoint": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/awsAppsyncApiEndpoint": [
           {
             "type": "aws:cdk:logicalId",
             "data": "awsAppsyncApiEndpoint"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/awsAppsyncAuthenticationType": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/awsAppsyncAuthenticationType": [
           {
             "type": "aws:cdk:logicalId",
             "data": "awsAppsyncAuthenticationType"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/awsAppsyncRegion": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/awsAppsyncRegion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "awsAppsyncRegion"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/amplifyApiModelSchemaS3Uri": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/amplifyApiModelSchemaS3Uri": [
           {
             "type": "aws:cdk:logicalId",
             "data": "amplifyApiModelSchemaS3Uri"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/awsAppsyncAdditionalAuthenticationTypes": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/awsAppsyncAdditionalAuthenticationTypes": [
           {
             "type": "aws:cdk:logicalId",
             "data": "awsAppsyncAdditionalAuthenticationTypes"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/CDKMetadata/Default": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/b2bProfileImages/Bucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "b2bProfileImagesBucket3D726F30"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/b2bProfileImages/Bucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "b2bProfileImagesBucketPolicy9D2CD6B7"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/b2bProfileImages/Bucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "b2bProfileImagesBucketAutoDeleteObjectsCustomResource64134045"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/B_2_B_PROFILE_IMAGES_BUCKET_NAMEParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "B2BPROFILEIMAGESBUCKETNAMEParameterC93DD32F"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/amplify-b2b-Habib-sandbox-1cd84d1817--storageAccess3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyb2bHabibsandbox1cd84d1817storageAccess3633CE528"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/CDKMetadata/Condition": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/CDKMetadata/Condition": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadataAvailable"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/BootstrapVersion": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/reference-to-amplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputs.amplifyb2bHabibsandbox1cd84d1817authamplifyAuthauthenticatedUserRole1DF61648Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifyb2bHabibsandbox1cd84d1817authNestedStackauthNestedStackResource6C582D15Outputsamplifyb2bHabibsandbox1cd84d1817authamplifyAuthauthenticatedUserRole1DF61648Ref"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage/amplifyb2bHabibsandbox1cd84d1817storageb2bProfileImagesBucketB0C44591Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyb2bHabibsandbox1cd84d1817storageb2bProfileImagesBucketB0C44591Ref"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storage.NestedStack/storage.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "storage0EC3F24A"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/storageRegion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "storageRegion"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/bucketName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "bucketName"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/buckets": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "buckets"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/amplify-b2b-Maisum-sandbox-2d4f59d75b/CheckBootstrapVersion": [
+        "/amplify-b2b-Habib-sandbox-1cd84d1817/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "amplify-b2b-Maisum-sandbox-2d4f59d75b"
+      "displayName": "amplify-b2b-Habib-sandbox-1cd84d1817"
     },
     "Tree": {
       "type": "cdk:tree",
