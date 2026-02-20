@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Header from '../../components/Header/Header.tsx';
-import Footer from '../../components/Footer/Footer.tsx';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import './About.css';
 
 const About: React.FC = () => {
@@ -19,9 +19,11 @@ const About: React.FC = () => {
       },
       { threshold: 0.08 }
     );
+
     Object.values(sectionRefs.current).forEach((ref) => {
       if (ref) observer.observe(ref);
     });
+
     return () => observer.disconnect();
   }, []);
 
@@ -97,7 +99,7 @@ const About: React.FC = () => {
             </a>
           </div>
         </div>
-        <div className="ap-hero__stats">
+        <div id="stats" ref={(el) => { sectionRefs.current['stats'] = el; }} className={`ap-hero__stats ${isVisible['stats'] ? 'ap-visible' : ''}`}>
           {numbers.map((n, i) => (
             <div className="ap-hero__stat" key={i}>
               <strong>{n.value}</strong>

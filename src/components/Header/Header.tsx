@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 
-const Header = () => {
+const Header: React.FC = () => {
   const [isNavHidden, setIsNavHidden] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
   const isNavHiddenRef = useRef(isNavHidden);
   const downAccum = useRef(0);
@@ -28,19 +29,21 @@ const Header = () => {
             if (isNavHiddenRef.current) setIsNavHidden(false);
             downAccum.current = 0;
             upAccum.current = 0;
-          } else if (delta > 0) {
-            downAccum.current += delta;
-            upAccum.current = 0;
-            if (!isNavHiddenRef.current && downAccum.current > THRESHOLD) {
-              setIsNavHidden(true);
-              downAccum.current = 0;
-            }
-          } else if (delta < 0) {
-            upAccum.current += -delta;
-            downAccum.current = 0;
-            if (isNavHiddenRef.current && upAccum.current > THRESHOLD) {
-              setIsNavHidden(false);
+          } else {
+            if (delta > 0) {
+              downAccum.current += delta;
               upAccum.current = 0;
+              if (!isNavHiddenRef.current && downAccum.current > THRESHOLD) {
+                setIsNavHidden(true);
+                downAccum.current = 0;
+              }
+            } else if (delta < 0) {
+              upAccum.current += -delta;
+              downAccum.current = 0;
+              if (isNavHiddenRef.current && upAccum.current > THRESHOLD) {
+                setIsNavHidden(false);
+                upAccum.current = 0;
+              }
             }
           }
 
@@ -69,32 +72,33 @@ const Header = () => {
           <span className="nav-logo__text">B2B Insights</span>
         </Link>
 
-        <ul className="nav-menu">
-          <li>
-            <a href="/about">About</a>
-          </li>
-          <li>
-            <a href="#features">Features</a>
-          </li>
-          <li>
-            <a href="#how-it-works">How It Works</a>
-          </li>
-          <li>
-            <a href="#pricing">Pricing</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
+        <ul className={`nav-menu ${isMenuOpen ? 'menu-open' : ''}`}>
+          <li><a href="/about" onClick={() => setIsMenuOpen(false)}>About</a></li>
+          <li><a href="#features" onClick={() => setIsMenuOpen(false)}>Features</a></li>
+          <li><a href="#how-it-works" onClick={() => setIsMenuOpen(false)}>How It Works</a></li>
+          <li><a href="#pricing" onClick={() => setIsMenuOpen(false)}>Pricing</a></li>
+          <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
         </ul>
 
-        <div className="nav-actions">
-          <Link to="/auth" className="nav-btn nav-login">
+        <div className={`nav-actions ${isMenuOpen ? 'menu-open' : ''}`}>
+          <Link to="/auth" className="nav-btn nav-login" onClick={() => setIsMenuOpen(false)}>
             Sign In
           </Link>
-          <Link to="/auth" className="nav-btn nav-signup">
+          <Link to="/auth" className="nav-btn nav-signup" onClick={() => setIsMenuOpen(false)}>
             Request Access
           </Link>
         </div>
+
+        <button
+          className={`hamburger-menu ${isMenuOpen ? 'active' : ''}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMenuOpen}
+        >
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+        </button>
       </div>
     </nav>
   );
