@@ -2,11 +2,7 @@ import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import {
   confirmResetPassword,
   confirmSignUp,
-<<<<<<< HEAD
-=======
   getCurrentUser,
-  resendSignUpCode,
->>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
   resetPassword,
   signIn,
   signOut,

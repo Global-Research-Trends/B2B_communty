@@ -208,18 +208,6 @@ const languagesList = [
   'Other',
 ];
 
-const consentOptions = [
-  'Yes, I am willing to participate',
-  'No, I do not wish to participate',
-  'I need more information before deciding',
-];
-
-const contactOptions = [
-  'Email',
-  'Phone call',
-  'Both email and phone',
-];
-
 const hobbiesList = [
   'Skills & Micro-Learning (How-to guides & productivity)',
   'Career Pathing (Advancement & management tips)',
@@ -286,8 +274,8 @@ const Questionnaire = ({ testMode = false }: { testMode?: boolean }) => {
   /* ── Step 5: Preferences & Consent ── */
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
-  const [participationConsent, setParticipationConsent] = useState('');
-  const [contactPreference, setContactPreference] = useState('');
+  const [participationConsent] = useState('');
+  const [contactPreference] = useState('');
 
   /* ── auth guard + questionnaire completion check ── */
   useEffect(() => {
@@ -422,8 +410,6 @@ const Questionnaire = ({ testMode = false }: { testMode?: boolean }) => {
       case 4: // Preferences & Consent
         if (selectedLanguages.length === 0) { setErrorMessage('Please select at least one language.'); return false; }
         if (selectedHobbies.length === 0) { setErrorMessage('Please select at least one interest.'); return false; }
-        if (!participationConsent) { setErrorMessage('Please select a participation option.'); return false; }
-        // if (!contactPreference) { setErrorMessage('Please select a contact preference.'); return false; }
         return true;
       default:
         return true;
@@ -495,8 +481,8 @@ const Questionnaire = ({ testMode = false }: { testMode?: boolean }) => {
         // Step 5
         languages: JSON.stringify(resolveMulti(selectedLanguages, 'languages')),
         hobbies: JSON.stringify(resolveMulti(selectedHobbies, 'hobbies')),
-        participationConsent,
-        contactPreference,
+        participationConsent: participationConsent || undefined,
+        contactPreference: contactPreference || undefined,
         completedAt: new Date().toISOString(),
       };
 
