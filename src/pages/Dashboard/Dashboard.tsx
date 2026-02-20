@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-<<<<<<< HEAD
-import { fetchUserAttributes, getCurrentUser, signOut } from 'aws-amplify/auth';
-=======
-import { fetchAuthSession, fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
->>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
+import { 
+  fetchAuthSession, 
+  fetchUserAttributes, 
+  getCurrentUser, 
+  signOut 
+} from 'aws-amplify/auth';
 import { getUrl, list } from 'aws-amplify/storage';
 import { generateClient } from 'aws-amplify/data';
 import type { Schema } from '../../../amplify/data/resource';

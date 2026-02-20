@@ -13,7 +13,7 @@
   margin: 0 auto;
   /* Fixed 5-column layout: about gets more room, nav cols are equal, subscribe stretches */
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr minmax(320px, 2fr);
   gap: 48px;
   padding-bottom: 60px;
   align-items: start;
@@ -104,11 +104,7 @@
 
 .subscribe-form input {
   flex-grow: 1;
-<<<<<<< HEAD
-  min-width: 0;
-=======
   min-width: 0; /* prevents overflow in grid */
->>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
   padding: 12px;
   border: 1px solid var(--dim-grey);
   background-color: var(--dim-grey);
@@ -116,11 +112,12 @@
   border-radius: 6px 0 0 6px;
   outline: none;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.9rem;
+  font-size: clamp(0.72rem, 0.65rem + 0.35vw, 0.9rem);
 }
 
 .subscribe-form input::placeholder {
   color: var(--slate-grey);
+  font-size: inherit;
 }
 
 .subscribe-form button {
@@ -128,6 +125,10 @@
   border: none;
   background-color: var(--classic-crimson);
   color: var(--porcelain);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   border-radius: 0 6px 6px 0;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
@@ -154,21 +155,17 @@
   color: var(--dim-grey);
 }
 
-<<<<<<< HEAD
-=======
 /* ── Responsive ───────────────────────────────────────────────────────────── */
 
-<<<<<<< HEAD:B2B/src/components/Footer/Footer.css
 /* Extra Large - 1600px+ */
 @media (min-width: 1600px) {
   .footer {
     padding: 100px 6% 0;
   }
+}
 
-=======
->>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
+/* Wide Screens - up to 1100px */
 @media (max-width: 1100px) {
->>>>>>> 091c557f930e55a7b771df9acbea33238ddace4d:src/components/Footer/Footer.css
   .footer-container {
     gap: 56px;
     padding-bottom: 80px;
@@ -256,7 +253,6 @@
   .footer-subscribe {
     grid-column: 1 / -1;
   }
-<<<<<<< HEAD:B2B/src/components/Footer/Footer.css
 
   .footer-column h4,
   .footer-logo {
@@ -464,10 +460,3 @@
     font-size: 0.7rem;
   }
 }
-=======
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> 34433ffab3211f9f3ee13bcc8d767277ed52e10a
->>>>>>> 091c557f930e55a7b771df9acbea33238ddace4d:src/components/Footer/Footer.css
